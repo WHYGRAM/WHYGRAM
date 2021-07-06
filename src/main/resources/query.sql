@@ -50,7 +50,7 @@ CREATE TABLE cmt (
     cmt_regdt VARCHAR(50) NOT NULL,
     FOREIGN KEY(feed_id) references feed(feed_id),
     FOREIGN KEY(users_id) references users(users_id)
-);
+) COMMENT'게시물 댓글';
 
 CREATE TABLE image (
     image_id INT UNSIGNED AUTO_INCREMENT,
@@ -62,7 +62,7 @@ CREATE TABLE video (
     video_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     feed_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     video_ctnt VARCHAR(36) NOT NULL COMMENT'영상'
-);
+) COMMENT'게시물 영상';
 
 CREATE TABLE fav (
     feed_id INT UNSIGNED AUTO_INCREMENT,
