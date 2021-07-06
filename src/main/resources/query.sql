@@ -14,7 +14,7 @@ CREATE TABLE users (
 
 CREATE TABLE auth (
     user_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    auth_code CHAR(5) commnet'회원가입 인증코드, null이면 인증받은 상태, 값이 있으면 인증해야 되는 상태',
+    auth_code CHAR(5) comment '회원가입 인증코드, null이면 인증받은 상태, 값이 있으면 인증해야 되는 상태',
     auth_quit TINYINT(1) UNSIGNED NOT NULL comment'회원탈퇴 여부 0-회원 1-탈퇴',
     FOREIGN KEY(user_id) references users(users_id)
 
@@ -24,7 +24,7 @@ CREATE TABLE mypage (
     mypage_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     mypage_img VARCHAR(50),
-    mypage_introduction(150),
+    mypage_introduction VARCHAR(150),
     FOREIGN KEY(user_id) references users(users_id)
 ) comment'마이 페이지';
 
@@ -55,7 +55,7 @@ CREATE TABLE cmt (
 
 CREATE TABLE img (
     image_id INT UNSIGNED AUTO_INCREMENT,
-    feed_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    feed_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT
 );
 
 CREATE TABLE fav (
