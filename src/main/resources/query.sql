@@ -12,10 +12,10 @@ CREATE TABLE users (
 ) COMMENT'회원가입 정보';
 
 CREATE TABLE auth (
-  user_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  auth_code CHAR(5) comment '회원가입 인증코드, null이면 인증받은 상태, 값이 있으면 인증해야 되는 상태',
-  auth_quit TINYINT(1) UNSIGNED NOT NULL comment'회원탈퇴 여부 0-회원 1-탈퇴',
-  FOREIGN KEY(user_id) references users(users_id)
+    user_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    auth_code CHAR(5) comment '회원가입 인증코드, null이면 인증받은 상태, 값이 있으면 인증해야 되는 상태',
+    auth_quit TINYINT(1) UNSIGNED NOT NULL comment'회원탈퇴 여부 0-회원 1-탈퇴',
+    FOREIGN KEY(user_id) references users(users_id)
 
 ) COMMENT'회원 권한';
 
@@ -28,18 +28,18 @@ CREATE TABLE mypage (
 ) COMMENT'마이 페이지';
 
 CREATE TABLE feed (
-  feed_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-  users_id INT NOT NULL AUTO_INCREMENT,
-  fedd_ctnt VARCHAR(2200) NOT NULL,
-  user_regdt DATETIME DEFAULT NOW(),
-  FOREIGN KEY(users_id) references users(users_id)
+    feed_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    users_id INT NOT NULL AUTO_INCREMENT,
+    fedd_ctnt VARCHAR(2200) NOT NULL,
+    user_regdt DATETIME DEFAULT NOW(),
+    FOREIGN KEY(users_id) references users(users_id)
 ) COMMENT'게시물';
 
 CREATE TABLE video(
-  video_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-  feed_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  video_ctnt VARCHAR(50) NOT NULL comment'영상',
-  FOREIGN KEY(feed_id) references feed(feed_id)
+    video_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    feed_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    video_ctnt VARCHAR(50) NOT NULL comment'영상',
+    FOREIGN KEY(feed_id) references feed(feed_id)
 ) COMMENT'게시물 영상';
 
 CREATE TABLE cmt (
