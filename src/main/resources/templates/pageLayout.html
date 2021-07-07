@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">WHYGRAM</title>
+    <th:block layout:fragment="css"></th:block>
+    <th:block layout:fragment="js"></th:block>
+</head>
+<body>
+    <div id="container">
+        <th:block th:replace="commonHeader :: header"></th:block>
+
+        <section>
+            <th:block layout:fragment="content"></th:block>
+        </section>
+
+        <th:block th:replace="commonFooter :: footer"></th:block>
+    </div>
+</body>
+</html>
