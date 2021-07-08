@@ -1,11 +1,12 @@
 package com.koreait.whygram.mapper;
 
+import com.koreait.whygram.model.user.UserDomain;
 import com.koreait.whygram.model.user.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserMapper {
     int insUsers(UserEntity param);
-    UserEntity selIdChk(UserEntity param);
+    UserDomain selIdChk(UserEntity param);
     UserEntity selUsers(UserEntity param);
 }

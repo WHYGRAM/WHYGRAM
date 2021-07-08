@@ -17,8 +17,8 @@
     </insert>
 
     <!--아이디 중복체크-->
-    <select id="selIdChk" resultType="UserEntity">
-        SELECT COUNT(user_email) FROM users
+    <select id="selIdChk" resultType="UserDomain">
+        SELECT COUNT(user_email) AS idChk FROM users
         WHERE user_email = #{user_email}
     </select>
 
