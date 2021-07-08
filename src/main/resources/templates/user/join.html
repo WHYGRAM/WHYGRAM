@@ -4,8 +4,8 @@
         <a th:href="@{login}">로그인</a> | <a th:href="@{join}">회원가입</a>
     </div>
 
-    <form th:action="@{join}" method="post" th:object="${userEntity}">
-        <div><input type="email" th:field="*{users_email}" placeholder="이메일" autofocus required></div>
+    <form th:action="@{join}" method="post" th:object="${userEntity}" id="joinForm">
+        <div><input type="email" th:field="*{users_email}" placeholder="이메일" id="email" autofocus required></div>
         <div><input type="text" th:field="*{users_name}" placeholder="이름" required></div>
         <div>
             <label>남자 : <input type="radio" th:field="*{users_gender}" value="0" checked></label>
@@ -17,7 +17,9 @@
         <div><input type="password" th:field="*{users_password}" placeholder="비밀번호" required></div>
         <div><input type="password" name="pwchk" placeholder="비밀번호 확인" required></div>
         <div>
-            <input id="joinBtn" type="submit" value="회원가입">
+            <input id="joinBtn" type="button" value="회원가입">
         </div>
     </form>
+
+<script></script>
 </html>
