@@ -22,7 +22,9 @@ public class UserController {
     public void getJoin(UserEntity userEntity) {}
 
     @PostMapping("/join")
-    public void postJoin(UserEntity userEntity, @RequestParam String pwchk) {
+    public String postJoin(UserEntity userEntity, @RequestParam String pwchk) {
 
+       service.insUsers(userEntity, pwchk);
+        return null;
     }
 }

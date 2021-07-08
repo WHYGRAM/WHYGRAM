@@ -15,4 +15,10 @@
             #{ users_date_birth}, #{users_nickname}, #{users_password}
         )
     </insert>
+
+    <select id="selUsers" resultType="UserEntity">
+        SELECT * FROM t_user
+        WHERE users_email = #{users_email}
+        --AND authCd IS NULL
+    </select>
 </mapper>
