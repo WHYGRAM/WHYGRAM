@@ -5,13 +5,14 @@ spring:
     suffix: .html
     mode: HTML
     cache: false
+
   datasource:
     url: jdbc:mysql://localhost:3308/whygram
     username: root
     password: koreait
     driver-class-name: org.mariadb.jdbc.Driver
-  mybatis:
-    mapper-locations: mybatis-mapper/**/*.xml
-    type-aliases-package: com.koreait.whygram
+mybatis:
+  mapper-locations: mybatis-mapper/**/*.xml
+  type-aliases-package: com.koreait.whygram
 server:
   port: 8090
