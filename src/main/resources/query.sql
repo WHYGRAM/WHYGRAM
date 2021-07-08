@@ -2,13 +2,13 @@
 
 CREATE TABLE users (
    users_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-   user_email VARCHAR(30) NOT NULL UNIQUE,
-   user_password VARCHAR(100) NOT NULL,
-   user_name VARCHAR(5) NOT NULL,
-   user_gender TINYINT(1) UNSIGNED,
-   user_date_birth DATE NOT NULL,
-   user_nickname VARCHAR(12) NOT NULL UNIQUE,
-   user_regdt DATETIME DEFAULT NOW()
+   users_email VARCHAR(30) NOT NULL UNIQUE,
+   users_password VARCHAR(100) NOT NULL,
+   users_name VARCHAR(5) NOT NULL,
+   users_gender TINYINT(1) UNSIGNED,
+   users_date_birth DATE NOT NULL,
+   users_nickname VARCHAR(12) NOT NULL UNIQUE,
+   users_regdt DATETIME DEFAULT NOW()
 ) COMMENT'회원가입 정보';
 
 CREATE TABLE auth (
