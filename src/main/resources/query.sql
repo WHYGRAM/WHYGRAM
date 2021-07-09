@@ -1,31 +1,22 @@
 -- 테이블 생성
 
 CREATE TABLE users (
-   users_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-   users_email VARCHAR(30) NOT NULL UNIQUE,
-   users_password VARCHAR(100) NOT NULL,
-   users_name VARCHAR(5) NOT NULL,
-   users_gender TINYINT(1) UNSIGNED,
-   users_date_birth DATE NOT NULL,
-   users_nickname VARCHAR(12) NOT NULL UNIQUE,
-   users_regdt DATETIME DEFAULT NOW()
+    users_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    users_email VARCHAR(30) NOT NULL UNIQUE,
+    users_password VARCHAR(100) NOT NULL,
+    users_name VARCHAR(5) NOT NULL,
+    users_gender TINYINT(1) UNSIGNED,
+    users_date_birth DATE NOT NULL,
+    users_nickname VARCHAR(12) NOT NULL UNIQUE,
+    users_regdt DATETIME DEFAULT NOW(),
+
+    users_ctnt VARCHAR(150) COMMENT '소개글',
+    users_auth_code CHAR(5) comment '회원가입 인증코드, null이면 인증받은 상태, 값이 있으면 인증해야 되는 상태',
+    users_auth_quit TINYINT(1) UNSIGNED NOT NULL comment'회원탈퇴 여부 0-회원 1-탈퇴',
+    users_feed_count INT UNSIGNED COMMENT '피드글 개수',
+    users_follower_count INT UNSIGNED COMMENT '피드글 개수',
+    users_follow_count INT UNSIGNED COMMENT '피드글 개수'
 ) COMMENT'회원가입 정보';
-
-CREATE TABLE auth (
-    user_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    auth_code CHAR(5) comment '회원가입 인증코드, null이면 인증받은 상태, 값이 있으면 인증해야 되는 상태',
-    auth_quit TINYINT(1) UNSIGNED NOT NULL comment'회원탈퇴 여부 0-회원 1-탈퇴',
-    FOREIGN KEY(user_id) references users(users_id)
-
-) COMMENT'회원 권한';
-
-CREATE TABLE mypage (
-    mypage_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    mypage_img VARCHAR(50),
-    mypage_introduction VARCHAR(150),
-    FOREIGN KEY(user_id) references users(users_id)
-) COMMENT'마이 페이지';
 
 CREATE TABLE feed (
     feed_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -52,17 +43,12 @@ CREATE TABLE cmt (
     FOREIGN KEY(users_id) references users(users_id)
 ) COMMENT'게시물 댓글';
 
-CREATE TABLE image (
-    image_id INT UNSIGNED AUTO_INCREMENT,
+CREATE TABLE contents (
+    contents_id INT UNSIGNED AUTO_INCREMENT,
     feed_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    image_ctnt VARCHAR(36) NOT NULL COMMENT'사진'
+    contents_img VARCHAR(36) NOT NULL COMMENT'사진',
+    contents_video VARCHAR(36) NOT NULL COMMENT'영상'
 ) COMMENT'게시물 사진';
-
-CREATE TABLE video (
-    video_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    feed_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    video_ctnt VARCHAR(36) NOT NULL COMMENT'영상'
-) COMMENT'게시물 영상';
 
 CREATE TABLE fav (
     feed_id INT UNSIGNED AUTO_INCREMENT,
@@ -70,3 +56,10 @@ CREATE TABLE fav (
     FOREIGN KEY(feed_id) references feed(feed_id),
     FOREIGN KEY(cmt_id) references cmt(cmt_id)
 ) COMMENT'게시물과 댓글 좋아요';
+
+CREATE TABLE follow (
+    users_id INT NOT NULL AUTO_INCREMENT,
+    follow_follower INT UNSIGNED AUTO_INCREMENT COMMENT '팔로우를 누른 사람',
+    follow_follow INT UNSIGNED AUTO_INCREMENT COMMENT '팔로우대상',
+    FOREIGN KEY(users_id) references users(users_id)
+) COMMENT '팔로우와 팔로워';

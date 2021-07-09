@@ -38,9 +38,10 @@ public class UserController {
 
         int result = service.insUsers(param, pwchk);
         switch (result) {
-            case 0: return "redirect:user/login"; // 완료
-            case 1: return "redirect:user/join?err=1"; // 가입 실패
-            case 2: return "redirect:user/join?err=2"; // 검사 실패
+            case 0: return "redirect:login"; // 메일전송
+            case 2: return "redirect:join?err=2"; // 아이디 중복
+            case 3: return "redirect:join?err=3"; // 아이디 중복 확인, 비밀번호 일치 확인, auth인증 실패
+            case 4: return "redirect:join?err=4"; // 아이디 검사o, 비밀번호 일치x
         }
         return null;
 
