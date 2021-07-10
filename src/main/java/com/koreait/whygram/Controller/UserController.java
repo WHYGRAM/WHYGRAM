@@ -20,11 +20,13 @@ public class UserController {
 
 
     @GetMapping("/join")
-    public void getJoin(UserEntity userEntity, @RequestParam(defaultValue = "") String err, Model model) {
-        switch (err) {
-            case "wrongAccess" : model.addAttribute("errMsg", "잘못된 접근입니다."); break;
-            case "joinErr" : model.addAttribute("errMsg", "회원가입 처리 중 오류가 발생했습니다."); break;
+    public void getJoin(UserEntity userEntity, @RequestParam(defaultValue = "") String msg, Model model) {
+        String errMsg = "";
+        switch (msg) {
+            case "wrongAccess" :  errMsg = "잘못된 접근입니다."; break;
+            case "joinErr" : errMsg = "회원가입 처리 중 오류가 발생했습니다."; break;
         }
+        model.addAttribute("errMsg", errMsg);
     }
 
     @PostMapping("/join")
@@ -34,12 +36,21 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public void getLogin() {}
+    public void getLogin(UserEntity userEntity, @RequestParam(defaultValue = "") String msg, Model model) {
+        String errMsg = "";
+        switch (msg) {
+            case "authCode" : errMsg = "이메일 인증을 해주세요."; break;
+            case "authDone" : errMsg = "인증 되었습니다."; break;
+            case "authErr" : errMsg = "인증 실패되었습니다."; break;
+            case "loginErr" : errMsg = "로그인 실패했습니다."; break;
+        }
+        model.addAttribute("errMsg", errMsg);
+    }
 
     @GetMapping("/auth")
     public String auth(UserEntity param) {
-        int result = service.auth(param);
-        return "redirect:login?auth=" + result;
+        String msg = service.auth(param);
+        return "redirect:login?msg=" + msg;
     }
 
 
