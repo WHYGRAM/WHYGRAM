@@ -1,3 +1,8 @@
+-- 데이터베이스 생성
+CREATE DATABASE whygram;
+
+USE whygram;
+
 -- 테이블 생성
 
 CREATE TABLE users (
@@ -5,14 +10,14 @@ CREATE TABLE users (
     users_email VARCHAR(30) NOT NULL UNIQUE,
     users_password VARCHAR(100) NOT NULL,
     users_name VARCHAR(5) NOT NULL,
-    users_gender TINYINT(1) UNSIGNED,
+    users_gender TINYINT(1) UNSIGNED NOT NULL ,
     users_date_birth DATE NOT NULL,
     users_nickname VARCHAR(12) NOT NULL UNIQUE,
-    users_regdt DATETIME DEFAULT NOW(),
+    users_regdt DATETIME DEFAULT NOW() NOT NULL ,
 
     users_ctnt VARCHAR(150) COMMENT '소개글',
     users_auth_code CHAR(5) comment '회원가입 인증코드, null이면 인증받은 상태, 값이 있으면 인증해야 되는 상태',
-    users_is_quit TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 comment'회원탈퇴 여부 0-회원 1-탈퇴',
+    users_is_quit TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 comment'회원탈퇴 여부 0-회원 ,  1-탈퇴',
     users_feed_count INT UNSIGNED COMMENT '피드글 개수',
     users_follower_count INT UNSIGNED COMMENT '피드글 개수',
     users_follow_count INT UNSIGNED COMMENT '피드글 개수'

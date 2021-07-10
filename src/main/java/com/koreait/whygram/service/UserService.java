@@ -52,9 +52,9 @@ public class UserService {
         //회원가입 처리
         int result = mapper.insUsers(param);
 
-        if(result > 0) {
+        if(result == 1) {
             String subject = "[WHYGRAM] 인증메일입니다.";
-            String txt = String.format("<a href=\"http://localhost:8090/user/auth?email=%s&authCd=%s\">인증하기</a>"
+            String txt = String.format("<a href=\"http://localhost:8090/user/auth?users_email=%s&users_auth_code=%s\">인증하기</a>"
                     , param.getUsers_email(), authCd);
             email.sendMimeMessage(param.getUsers_email(), subject, txt);
             return "login?msg=authCode";
