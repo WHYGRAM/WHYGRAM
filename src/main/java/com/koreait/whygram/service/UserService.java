@@ -3,9 +3,7 @@ package com.koreait.whygram.service;
 import com.koreait.whygram.common.EmailService;
 import com.koreait.whygram.common.MySecurityUtils;
 import com.koreait.whygram.mapper.UserMapper;
-import com.koreait.whygram.model.user.UserDomain;
 import com.koreait.whygram.model.user.UserEntity;
-import org.apache.catalina.User;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,45 +15,53 @@ public class UserService {
     @Autowired private MySecurityUtils mySecurityUtils;
     @Autowired private EmailService email;
 
-    // 중복체크
-    public int idChk(UserEntity param, String pwchk) {
+    // 아이디 중복 검사 & 비밀번호 확인 검사
+    public String idPwChk(UserEntity param, String pwchk) {
         int idChk = mapper.selIdChk(param).getIdChk();
 
-        // 아이디 중복 검사
-       if (idChk == 0) {
-           // 중복값 없음
-           if (param.getUsers_password().equals(pwchk)) {
-               // 비밀번호 일치
-               return 0;
+       if (idChk == 0) { // 아이디 중복값 없음
+           if (param.getUsers_password().equals(pwchk)) { // 비밀번호 서로 일치
+               return "ok"; // 아이디 비밀번호 모두 통과
            }
-           // 비밀번호 불일치치
-           return 0;
+           // 비밀번호 불일치
+           return "pw";
        }
-       // 중복값 있음
-       return 0;
+       // 아이디 중복값 있음
+       return "id";
     }
 
     // 회원가입
-    public int insUsers(UserEntity param) {
+    public String insUsers(UserEntity param, String pwchk) {
 
-        // 인증번호 길이
+        // 아이디 중복 검사 & 비밀번호 확인 검사
+        String idPwChk = this.idPwChk(param, pwchk);
+        if (idPwChk.equals("pw") || idPwChk.equals("id")) {
+            return "join?err=wrongAccess";
+        }
+
+        // 인증번호
         String authCd = mySecurityUtils.getRandomCode(5);
 
         // 비밀번호 암호화
         String hashedPw = BCrypt.hashpw(param.getUsers_password(), BCrypt.gensalt());
+
+        // UserEntity 설정
         param.setUsers_password(hashedPw);
         param.setUsers_auth_code(authCd);
 
+        //회원가입 처리
         int result = mapper.insUsers(param);
 
-        if(result == 1) {
-            // 수정필요!
+        if(result > 0) {
             String subject = "[WHYGRAM] 인증메일입니다.";
             String txt = String.format("<a href=\"http://localhost:8090/user/auth?email=%s&authCd=%s\">인증하기</a>"
-                    , param.getUsers_password(), authCd);
-            email.sendMimeMessage(param.getUsers_password(), subject, txt);
+                    , param.getUsers_email(), authCd);
+            email.sendMimeMessage(param.getUsers_email(), subject, txt);
+            return "login?msg=authCode";
         }
-        return result;
+
+        //회원가입 처리 중 에러 발생
+        return "join?err=joinErr";
     }
 
     //이메일 인증 처리
