@@ -9,4 +9,5 @@ public interface UserMapper {
     int insUsers(UserEntity param);
     UserDomain selIdChk(UserEntity param);
     UserEntity selUsers(UserEntity param);
+    int auth(UserEntity param);
 }
