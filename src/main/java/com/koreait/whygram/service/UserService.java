@@ -21,7 +21,7 @@ public class UserService {
 
        if (idChk == 0) { // 아이디 중복값 없음
            if (param.getUsers_password().equals(pwchk)) { // 비밀번호 서로 일치
-               return "ok"; // 아이디 비밀번호 모두 통과
+               return "done"; // 아이디 비밀번호 모두 통과
            }
            // 비밀번호 불일치
            return "pw";
@@ -36,7 +36,7 @@ public class UserService {
         // 아이디 중복 검사 & 비밀번호 확인 검사
         String idPwChk = this.idPwChk(param, pwchk);
         if (idPwChk.equals("pw") || idPwChk.equals("id")) {
-            return "join?err=wrongAccess";
+            return "join?msg=wrongAccess";
         }
 
         // 인증번호
@@ -61,11 +61,15 @@ public class UserService {
         }
 
         //회원가입 처리 중 에러 발생
-        return "join?err=joinErr";
+        return "join?msg=joinErr";
     }
 
     //이메일 인증 처리
-    public int auth(UserEntity param) {
-        return mapper.auth(param);
+    public String auth(UserEntity param) {
+        int result = mapper.auth(param);
+        if (result == 1) {
+            return "authDone";
+        }
+        return "authErr";
     }
 }

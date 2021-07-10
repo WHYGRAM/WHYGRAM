@@ -1,16 +1,9 @@
 <!DOCTYPE html>
+<meta charset="UTF-8">
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title></title>
-</head>
-<body>
-    <div>
-        <a th:href="@{login}">로그인</a> | <a th:href="@{join}">회원가입</a>
-    </div>
-    <div th:if="${param.msg != null and param.msg[0] == 'authCode'}">이메일 인증을 시도해 주세요.</div>
-    <div th:if="${param.auth != null and param.auth[0] == '1'}">인증되었습니다.</div>
-    <div th:if="${param.auth != null and param.auth[0] == '0'}">인증에 실패하였습니다.</div>
-    <div th:if="${param.error}">로그인에 실패하였습니다.</div>
+
+    <div th:text="${errMsg}"></div>
+
     <form th:action="@{login}" method="post" th:object="${userEntity}">
         <div><input type="email" th:field="*{users_email}" placeholder="email" autofocus required></div>
         <div><input type="password" th:field="*{users_password}" placeholder="password" required></div>
@@ -18,5 +11,5 @@
             <input type="submit" value="로그인">
         </div>
     </form>
-</body>
+
 </html>
