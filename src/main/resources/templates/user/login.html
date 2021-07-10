@@ -3,6 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
     <div th:text="${errMsg}"></div>
+    <div th:if="${param.error}">로그인에 실패하였습니다.</div>
 
     <form th:action="@{login}" method="post" th:object="${userEntity}">
         <div><input type="email" th:field="*{users_email}" placeholder="email" autofocus required></div>

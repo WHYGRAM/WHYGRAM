@@ -41,7 +41,6 @@ public class UserController {
             case "authCode" : errMsg = "이메일 인증을 해주세요."; break;
             case "authDone" : errMsg = "인증 되었습니다."; break;
             case "authErr" : errMsg = "인증 실패되었습니다."; break;
-            case "loginErr" : errMsg = "로그인 실패했습니다."; break;
         }
         model.addAttribute("errMsg", errMsg);
     }

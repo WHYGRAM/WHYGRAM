@@ -4,8 +4,8 @@ import com.koreait.whygram.common.EmailService;
 import com.koreait.whygram.common.MySecurityUtils;
 import com.koreait.whygram.mapper.UserMapper;
 import com.koreait.whygram.model.user.UserEntity;
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +14,7 @@ public class UserService {
     @Autowired private UserMapper mapper;
     @Autowired private MySecurityUtils mySecurityUtils;
     @Autowired private EmailService email;
+    @Autowired private PasswordEncoder passwordEncoder;
 
     // 아이디 중복 검사 & 비밀번호 확인 검사
     public String idPwChk(UserEntity param, String pwchk) {
@@ -43,7 +44,7 @@ public class UserService {
         String authCd = mySecurityUtils.getRandomCode(5);
 
         // 비밀번호 암호화
-        String hashedPw = BCrypt.hashpw(param.getUsers_password(), BCrypt.gensalt());
+        String hashedPw = passwordEncoder.encode(param.getUsers_password());
 
         // UserEntity 설정
         param.setUsers_password(hashedPw);
