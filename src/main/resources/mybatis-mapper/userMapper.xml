@@ -6,12 +6,12 @@
     <insert id="insUsers">
         INSERT INTO users
         (
-            users_email, users_name, users_gender,
+            users_email, users_name, users_gender, users_auth_code,
             users_date_birth, users_nickname, users_password
         )
         VALUES
         (
-            #{users_email}, #{users_name}, #{users_gender},
+            #{users_email}, #{users_name}, #{users_gender}, #{users_auth_code},
             #{users_date_birth}, #{users_nickname}, #{users_password}
         )
     </insert>
@@ -28,16 +28,16 @@
     <select id="selUsers" resultType="UserEntity">
         SELECT * FROM users
         WHERE users_email = #{users_email}
-          AND authCd IS NULL
+          AND users_auth_code IS NULL
           AND users_is_quit = 0
     </select>
 
     <!--이메일 인증-->
     <update id="auth">
-        UPDATE t_user
-        SET authCd = null
-        WHERE email = #{email}
-          AND authCd = #{authCd}
+        UPDATE users
+        SET users_auth_code = null
+        WHERE users_email = #{users_email}
+          AND users_auth_code = #{users_auth_code}
           AND users_is_quit = 0
     </update>
 </mapper>
