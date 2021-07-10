@@ -20,13 +20,21 @@ public class UserController {
 
 
     @GetMapping("/join")
-    public void getJoin(UserEntity userEntity) {}
+    public void getJoin(UserEntity userEntity, @RequestParam(defaultValue = "") String err, Model model) {
+        switch (err) {
+            case "wrongAccess" : model.addAttribute("errMsg", "잘못된 접근입니다."); break;
+            case "joinErr" : model.addAttribute("errMsg", "회원가입 처리 중 오류가 발생했습니다."); break;
+        }
+    }
 
     @PostMapping("/join")
-    public String postJoin(UserEntity userEntity) {
-        service.insUsers(userEntity);
-        return "redirect:login?needEmail=1";
+    public String postJoin(UserEntity userEntity, @RequestParam String pwchk) {
+        String path = service.insUsers(userEntity, pwchk);
+        return "redirect:" + path;
     }
+
+    @GetMapping("/login")
+    public void getLogin() {}
 
     @GetMapping("/auth")
     public String auth(UserEntity param) {
@@ -34,6 +42,5 @@ public class UserController {
         return "redirect:login?auth=" + result;
     }
 
-    @GetMapping("/login")
-    public void getLogin() {}
+
 }
