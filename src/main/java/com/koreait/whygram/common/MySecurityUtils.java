@@ -7,7 +7,7 @@ import java.util.Random;
 @Component
 public class MySecurityUtils {
 
-    public String getRandomNumber(int len) {
+    public String getRandomCode(int len) {
 
         StringBuffer key = new StringBuffer();
         Random rnd = new Random();

@@ -39,7 +39,7 @@ public class UserService {
     public int insUsers(UserEntity param) {
 
         // 인증번호 길이
-        String authCd = mySecurityUtils.getRandomNumber(5);
+        String authCd = mySecurityUtils.getRandomCode(5);
 
         // 비밀번호 암호화
         String hashedPw = BCrypt.hashpw(param.getUsers_password(), BCrypt.gensalt());
