@@ -52,8 +52,8 @@ public class UserService {
             // 수정필요!
             String subject = "[WHYGRAM] 인증메일입니다.";
             String txt = String.format("<a href=\"http://localhost:8090/user/auth?email=%s&authCd=%s\">인증하기</a>"
-                    , param.getUsers_password(), authCd);
-            email.sendMimeMessage(param.getUsers_password(), subject, txt);
+                    , param.getUsers_email(), authCd);
+            email.sendMimeMessage(param.getUsers_email(), subject, txt);
         }
         return result;
     }
