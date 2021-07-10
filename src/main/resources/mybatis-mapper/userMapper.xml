@@ -2,17 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.koreait.whygram.model.user.UserMapper">
+<mapper namespace="com.koreait.whygram.mapper.UserMapper">
     <insert id="insUsers">
-        INSERT INTO
+        INSERT INTO users
         (
             users_email, users_name, users_gender,
             users_date_birth, users_nickname, users_password
         )
         VALUES
         (
-            #{users_email}, #{users_name,}, #{users_gender},
-            #{ users_date_birth}, #{users_nickname}, #{users_password}
+            #{users_email}, #{users_name}, #{users_gender},
+            #{users_date_birth}, #{users_nickname}, #{users_password}
         )
     </insert>
+
+    <!--이메일 인증-->
+    <update id="auth">
+        UPDATE t_user
+        SET authCd = null
+        WHERE email = #{email} AND authCd = #{authCd}
+    </update>
+
+    <!--아이디 중복체크-->
+    <select id="selIdChk" resultType="UserDomain">
+        SELECT COUNT(users_email) AS idChk FROM users
+        WHERE users_email = #{users_email}
+    </select>
+
+    <!--로그인-->
+    <select id="selUsers" resultType="UserEntity">
+        SELECT * FROM users
+        WHERE users_email = #{users_email}
+        -- AND authCd IS NULL
+    </select>
 </mapper>

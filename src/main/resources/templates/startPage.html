@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>WHYGRAM - start page</title>
+</head>
+<body>
+    <h1>WHYGRAM 로고</h1>
+
+    <section>
+        <p> 왜 그램? <br>  무슨 일이램? <br>  너의 일상이야기를 보여줄램~?! </p>
+    </section>
+
+    <section>
+        <a>로그인</a>  |  <a>회원가입</a>
+    </section>
+
+    <section>
+        <form action="login" method="post"  id="loginForm">
+            <div><input type="email" placeholder="email" autofocus required></div>
+            <div><input type="password" placeholder="password" required></div>
+            <div><input type="submit" value="로그인"></div>
+        </form>
+        <div><a>비밀번호 찾기</a></div>
+
+        <form action="" id="joinForm"></form>
+    </section>
+</body>
+</html>

@@ -4,6 +4,15 @@
     <title></title>
 </head>
 <body>
-
+    <div>
+        <a th:href="@{login}">로그인</a> | <a th:href="@{join}">회원가입</a>
+    </div>
+    <form th:action="@{login}" method="post" th:object="${userEntity}">
+        <div><input type="email" th:field="*{users_email}" placeholder="email" autofocus required></div>
+        <div><input type="password" th:field="*{users_password}" placeholder="password" required></div>
+        <div>
+            <input type="submit" value="로그인">
+        </div>
+    </form>
 </body>
 </html>

@@ -1,17 +1,30 @@
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: # 아이디
+    password: # 비밀번호
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
   thymeleaf:
     check-template-location: true
     prefix: classpath:templates/
     suffix: .html
     mode: HTML
     cache: false
+
   datasource:
     url: jdbc:mysql://localhost:3308/whygram
     username: root
     password: koreait
     driver-class-name: org.mariadb.jdbc.Driver
-  mybatis:
-    mapper-locations: mybatis-mapper/**/*.xml
-    type-aliases-package: com.koreait.whygram
+mybatis:
+  mapper-locations: mybatis-mapper/**/*.xml
+  type-aliases-package: com.koreait.whygram
 server:
   port: 8090
