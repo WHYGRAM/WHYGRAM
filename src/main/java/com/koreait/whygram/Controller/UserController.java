@@ -17,7 +17,7 @@ public class UserController {
 
     @Autowired private UserService service;
 
-
+    /*
     @GetMapping("/join")
     public void getJoin(UserEntity userEntity, @RequestParam(defaultValue = "") String msg, Model model) {
         String errMsg = "";
@@ -27,6 +27,7 @@ public class UserController {
         }
         model.addAttribute("errMsg", errMsg);
     }
+    */
 
     @PostMapping("/join")
     public String postJoin(UserEntity userEntity, @RequestParam String pwchk) {
@@ -34,6 +35,7 @@ public class UserController {
         return "redirect:" + path;
     }
 
+    /*
     @GetMapping("/login")
     public void getLogin(UserEntity userEntity, @RequestParam(defaultValue = "") String msg, Model model) {
         String errMsg = "";
@@ -44,11 +46,12 @@ public class UserController {
         }
         model.addAttribute("errMsg", errMsg);
     }
+    */
 
     @GetMapping("/auth")
     public String auth(UserEntity param) {
         String msg = service.auth(param);
-        return "redirect:login?msg=" + msg;
+        return "redirect:/whygram?msg=" + msg;
     }
 
 
