@@ -1,24 +1,30 @@
 //msg와 form과 input elem
 const warnMsgDiv = document.querySelector('.warnMsg');
 const joinFrmElem = document.querySelector('#joinFrm');
-const emailElem = joinFrmElem.email;
+const emailIdElem = joinFrmElem.emailId;
+const emailAdrsElem = joinFrmElem.emailAdrs;
 const nmElem = joinFrmElem.nm;
-const birthDtElem = joinFrmElem.birthDt; //아직 하지말기
+const yearSelElem = joinFrmElem.yearSel;
+const monSelElem = joinFrmElem.monSel;
+const daySelElem = joinFrmElem.daySel;
 const nickNmElem = joinFrmElem.nickNm;
 const pwElem = joinFrmElem.pw;
 const pw2Elem = joinFrmElem.pw2;
 const joinBtnElem = joinFrmElem.joinBtn;
 
+
 //input 색깔
-function ok(strElem) {
+function ok(strElem, strMsg) {
     strElem.style.backgroundColor = "green";
-    warnMsgDiv.innerText = "";
+    warnMsgDiv.innerText = strMsg;
 }
 function warn(strElem, strMsg) {
     strElem.style.backgroundColor = "pink";
     warnMsgDiv.innerText = strMsg;
 }
 
+//regExp 설정과 함수
+const emailExp = "^[a-zA-z0-9가-힣]{2,20}$";
 const nmExp = "^[가-힣]{2,5}$";
 const nickNmExp = "^[a-zA-z0-9가-힣]{2,12}$";
 const pwExp = "^[a-zA-z0-9!@#$%^&*]{8,16}$";
@@ -27,16 +33,14 @@ const nmMsg = "이름은 한글로 2~5자 이내로 입력해주세요.";
 const nickNmMsg = "닉네임은 영문대소문자, 한글로 2~12자 이내로 입력해주세요.";
 const pwMsg = "비밀번호는 영문대소문자, 특수문자(!@#$%^&*)로 8~16자 이내로 입력해주세요.";
 
-//regExp 설정과 함수
-function isvalid(strElem, strExp, strMsg) {
+function isvalid(strElem, strExp, strMsg, okMsg) {
     let exp = new RegExp(strExp, "g");
     if (exp.exec(strElem.value) !== null && isNotEmpty(strElem)) {
-        ok(strElem);
+        ok(strElem, okMsg);
         return true;
     }
     warn(strElem, strMsg);
     return false;
-
 }
 
 //빈값 체크
@@ -47,9 +51,19 @@ function isNotEmpty(strElem) {
     return false;
 }
 
-//email AJAX 중복 검사
-function emailCheck(strElem) {
-    const param = {users_email : emailElem.value};
+//email 완성 함수 AJAX 중복 검사
+function email() {
+    let emailId = emailIdElem.value;
+    let emailAdrs = emailAdrsElem.value;
+    let joinEmail = emailId + emailAdrs;
+    return joinEmail;
+}
+
+const joinEmailElem = document.querySelector('.joinEmail');
+joinEmailElem.value = email();
+
+function emailCheck() {
+    const param = {users_email : joinEmailElem.value};
     const init = {
         method : 'POST',
         headers : { 'Content-Type' : 'application/json' },
@@ -61,11 +75,11 @@ function emailCheck(strElem) {
         .then(myJson => {
           console.log(myJson);
           if(myJson.result === 0) { //중복검사 통과
-              ok(strElem);
+              ok(emailIdElem, "사용가능한 이메일입니다. 이메일 인증이 필요한 점 유의해 주세요.");
           } else { //아이디 중복됨
-              warn(strElem, "중복된 이메일입니다.");
+              warn(emailIdElem, "중복된 이메일입니다.");
           }
-        });
+    });
 }
 
 //비번검사
@@ -85,20 +99,54 @@ function pwCheck(pwElem, pw2Elem, pwExp, pwMsg) {
     }
 }
 
-//input과 이벤트 연결
-emailElem.addEventListener("blur", e => {}); //중복검사만
+//생년월일 완성 함수
+function birth() {
+    let year = yearSelElem.value;
+    let mon = monSelElem.value;
+    let day = daySelElem.value;
 
-nmElem.addEventListener('click', () => {});
-nmElem.addEventListener('input', e => {});
+    if (mon < 10) {
+        mon = "0" + mon.toString();
+    }
+    if (day < 10) {
+        day = "0" + day.toString();
+    }
+    let birthDate = year.toString() + mon.toString() + day.toString();
+    return  birthDate;
+}
+
+const birthElem = document.querySelector('#users_date_birth');
+birthElem.value = birth();
+
+
+//input과 이벤트 연결
+emailIdElem.addEventListener("input", () => {
+    isvalid(emailIdElem, emailExp, "이메일을 입력해주세요", "");
+    emailCheck();
+});
+
+emailIdElem.addEventListener("click", () => {
+    isvalid(emailIdElem, emailExp, "이메일을 입력해주세요", "");
+    emailCheck();
+});
+
+nmElem.addEventListener('click', () => {
+    isvalid(nmElem, nmExp, nmMsg);
+});
+nmElem.addEventListener('input', () => {
+    isvalid(nmElem, nmExp, nmMsg);
+});
 
 nickNmElem.addEventListener('click', () => {});
-nickNmElem.addEventListener('input', e => {});
+nickNmElem.addEventListener('input', () => {});
 
 pwElem.addEventListener('click', () => {}); //일치검사 추가
-pwElem.addEventListener('input', e => {});
+pwElem.addEventListener('input', () => {});
 
 pw2Elem.addEventListener('click', () => {});
-pw2Elem.addEventListener('input', e => {});
+pw2Elem.addEventListener('input', () => {});
 
+//전체검사 -> 셀렉트 검사 , input 검사 ->
 
 //let txt = e.target.value;
+
