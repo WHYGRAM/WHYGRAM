@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>WHYGRAM - start page</title>
+
+    <link rel="stylesheet" th:href="@{/css/startPage.css}">
 </head>
 <body>
     <h1>WHYGRAM 로고</h1>
@@ -14,15 +16,69 @@
     </section>
 
     <section>
-        <a>로그인</a>  |  <a>회원가입</a>
+        <span class="loginSpn">로그인</span>  |  <span class="joinSpn">회원가입</span>
     </section>
 
-    <section>
-        <form action="" id="loginForm">
+    <p th:text="${errMsg}"></p>
+    <div th:if="${param.error}">로그인에 실패하였습니다.</div>
+
+    <section class="loginSectn" style="display: none">
+        <h1>LOGIN</h1>
+
+        <form th:action="@{/whygram}" method="post" th:object="${userEntity}">
+            <div><input type="email" th:field="*{users_email}" placeholder="email" autofocus required></div>
+            <div><input type="password" th:field="*{users_password}" placeholder="password" required></div>
+            <div>
+                <input type="submit" value="로그인">
+            </div>
         </form>
-        <div><a>비밀번호 찾기</a></div>
-
-        <form action="" id="joinForm"></form>
     </section>
+
+    <section class="joinSectn" style="display: none">
+        <h1>JOIN</h1>
+
+        <div class="warnMsg"></div>
+
+        <form th:action="@{/user/join}" method="post" th:object="${userEntity}" id="joinFrm">
+            <div th:field="*{users_email}">
+                <input type="text" placeholder="이메일" id="email" autofocus required> @
+                <select>
+                    <option value="@naver.com">naver.com</option>
+                    <option value="@gmail.com">gmail.com</option>
+                    <option value="@daum.net">daum.net</option>
+                </select>
+            </div>
+            <div><input type="text" th:field="*{users_name}" placeholder="이름" id="nm" required></div>
+            <div>
+                <label><input type="radio" th:field="*{users_gender}" value="0" checked>남자</label>
+                <label><input type="radio"th:field="*{users_gender}" value="1" >여자</label>
+                <label><input type="radio" th:field="*{users_gender}" value="2">비공개</label>
+            </div>
+            <div th:field="*{users_date_birth}" id="birthDt">
+                <select>
+                    <option value="null">년</option>
+                    <option th:each="num : ${#numbers.sequence(1960, 2020)}" th:text="${num}" th:value="${num}"></option>
+                </select>
+                <select>
+                    <option value="null">월</option>
+                    <option th:each="num : ${#numbers.sequence(1, 12)}" th:text="${num}" th:value="${num}"></option>
+                </select>
+                <select>
+                    <option value="null">일</option>
+                    <option th:each="num : ${#numbers.sequence(1, 31)}" th:text="${num}" th:value="${num}"></option>
+                </select>
+            </div>
+            <div><input type="text" th:field="*{users_nickname}" placeholder="닉네임" id="nickNm" required></div>
+            <div><input type="password" th:field="*{users_password}" placeholder="비밀번호" id="pw" required></div>
+            <div><input type="password" name="pwchk" placeholder="비밀번호 확인" id="pw2" required></div>
+            <div>
+                <input type="submit" value="회원가입" id="joinBtn">
+            </div>
+        </form>
+
+        <script defer th:src="@{/js/user/join.js}"></script>
+    </section>
+
+    <script defer th:src="@{/js/startPage.js}"></script>
 </body>
 </html>

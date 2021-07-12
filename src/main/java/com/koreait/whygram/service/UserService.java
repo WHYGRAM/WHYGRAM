@@ -37,7 +37,7 @@ public class UserService {
         // 아이디 중복 검사 & 비밀번호 확인 검사
         String idPwChk = this.idPwChk(param, pwchk);
         if (idPwChk.equals("pw") || idPwChk.equals("id")) {
-            return "join?msg=wrongAccess";
+            return "/whygram?msg=wrongAccess";
         }
 
         // 인증번호
@@ -58,11 +58,11 @@ public class UserService {
             String txt = String.format("<a href=\"http://localhost:8090/user/auth?users_email=%s&users_auth_code=%s\">인증하기</a>"
                     , param.getUsers_email(), authCd);
             email.sendMimeMessage(param.getUsers_email(), subject, txt);
-            return "login?msg=authCode";
+            return "/whygram?msg=authCode";
         }
 
         //회원가입 처리 중 에러 발생
-        return "join?msg=joinErr";
+        return "/whygram?msg=joinErr";
     }
 
     //이메일 인증 처리
