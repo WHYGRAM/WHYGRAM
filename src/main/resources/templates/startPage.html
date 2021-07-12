@@ -7,6 +7,7 @@
     <title>WHYGRAM - start page</title>
 
     <link rel="stylesheet" th:href="@{/css/startPage.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <h1>WHYGRAM 로고</h1>
@@ -16,7 +17,7 @@
     </section>
 
     <section>
-        <span class="loginSpn">로그인</span>  |  <span class="joinSpn">회원가입</span>
+        <span class="loginSpn pointer">로그인</span>  |  <span class="joinSpn pointer">회원가입</span>
     </section>
 
     <p th:text="${errMsg}"></p>
@@ -32,6 +33,30 @@
                 <input type="submit" value="로그인">
             </div>
         </form>
+
+        <span id="findPw" class="pointer">비밀번호 찾기</span>
+        <div>
+            <div class="modal hid">
+                <div>
+                    <div class="modal_child">
+                    <div class="modal_close_icon"><i class=" pointer fas fa-times"></i></div>
+                        <div class="inputData">
+                            <form>
+                                <div class="textSize textchk">
+                                    <input type="text" placeholder="이메일">
+                                </div>
+                                <div class="textSize textchk">
+                                    <input type="text" placeholder="이름">
+                                </div>
+                                <div class="inputSize">
+                                    <input class="chkbtn" type="submit" value="비밀번호 찾기">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="joinSectn" style="display: none">
@@ -57,7 +82,7 @@
             <div th:field="*{users_date_birth}" id="birthDt">
                 <select>
                     <option value="null">년</option>
-                    <option th:each="num : ${#numbers.sequence(1960, 2020)}" th:text="${num}" th:value="${num}"></option>
+                    <option th:each="num : ${#numbers.sequence(1960, 2020)}" th:text="${num}" value="${num}"></option>
                 </select>
                 <select>
                     <option value="null">월</option>
@@ -78,6 +103,7 @@
 
         <script defer th:src="@{/js/user/join.js}"></script>
     </section>
+
 
     <script defer th:src="@{/js/startPage.js}"></script>
 </body>

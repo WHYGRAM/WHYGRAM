@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="basicLayout">
 
-<h1>home</h1>
-
+<title>home</title>
+<th:block layout:fragment="content">
+    <div>test</div>
+</th:block>
 </html>

@@ -1,2 +1,11 @@
-span:hover { background-color: yellow; }
-span { cursor: pointer; }
+.pointer:hover { background-color: yellow; }
+
+.pointer { cursor: pointer; }
+.hide { display: none !important; }
+
+/* 모달창 */
+.modal { height: 100%; width: 100%; position: fixed; left:0; top: 0; z-index: 100; background-color: rgba(128, 128, 128, 0.87);}
+.modal > div { height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; }
+.modal .modal_child { position: relative; height: 400px; width: 400px; background-color: white; border-radius: 10px; }
+.modal .modal_child i { position: absolute; right: 15px; top: 15px; font-size: 25px; color: #5a5959; }
+.inputData { display: flex; justify-content: center; vertical-align: center; top: 30px;  }
