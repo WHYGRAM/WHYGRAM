@@ -29,7 +29,7 @@
             <div><input type="email" th:field="*{users_email}" placeholder="email" autofocus required></div>
             <div><input type="password" th:field="*{users_password}" placeholder="password" required></div>
             <div>
-                <input type="submit" value="로그인">
+                <input type="submit" value="로그인" id="loginBtn" disabled>
             </div>
         </form>
         <div><span>비밀번호 찾기</span></div>
@@ -47,7 +47,7 @@
             <div>
                 <input type="text" placeholder="이메일" id="emailId" autofocus required> @
                 <select id="emailAdrs">
-                    <option value="null">이메일 선택</option>
+                    <option value="">주소 선택</option>
                     <option value="@naver.com">naver.com</option>
                     <option value="@gmail.com">gmail.com</option>
                     <option value="@daum.net">daum.net</option>
@@ -64,15 +64,15 @@
 
             <div>
                 <select id="yearSel">
-                    <option value="null">년</option>
+                    <option value="">년</option>
                     <option th:each="num : ${#numbers.sequence(1960, 2020)}" th:text="${num}" th:value="${num}"></option>
                 </select>
                 <select id="monSel">
-                    <option value="null">월</option>
+                    <option value="">월</option>
                     <option th:each="num : ${#numbers.sequence(1, 12)}" th:text="${num}" th:value="${num}"></option>
                 </select>
                 <select id="daySel">
-                    <option value="null">일</option>
+                    <option value="">일</option>
                     <option th:each="num : ${#numbers.sequence(1, 31)}" th:text="${num}" th:value="${num}"></option>
                 </select>
             </div>
@@ -81,11 +81,12 @@
             <div><input type="password" th:field="*{users_password}" placeholder="비밀번호" id="pw" required></div>
             <div><input type="password" name="pwchk" placeholder="비밀번호 확인" id="pw2" required></div>
             <div>
-                <input type="submit" value="회원가입" id="joinBtn">
+                <input type="submit" value="회원가입" id="joinBtn" disabled>
             </div>
         </form>
 
         <script defer th:src="@{/js/user/join.js}"></script>
+        <script defer th:src="@{/js/user/joinProc.js}"></script>
     </section>
 
     <script defer th:src="@{/js/startPage.js}"></script>

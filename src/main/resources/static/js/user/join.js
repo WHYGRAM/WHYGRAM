@@ -1,17 +1,22 @@
 //msg와 form과 input elem
 const warnMsgDiv = document.querySelector('.warnMsg');
+
 const joinFrmElem = document.querySelector('#joinFrm');
+const joinBtnElem = joinFrmElem.joinBtn;
+
+const joinEmailElem = document.querySelector('.joinEmail');
 const emailIdElem = joinFrmElem.emailId;
 const emailAdrsElem = joinFrmElem.emailAdrs;
+
 const nmElem = joinFrmElem.nm;
-const yearSelElem = joinFrmElem.yearSel;
-const monSelElem = joinFrmElem.monSel;
-const daySelElem = joinFrmElem.daySel;
 const nickNmElem = joinFrmElem.nickNm;
 const pwElem = joinFrmElem.pw;
 const pw2Elem = joinFrmElem.pw2;
-const joinBtnElem = joinFrmElem.joinBtn;
 
+const birthElem = document.querySelector('#users_date_birth');
+const yearSelElem = joinFrmElem.yearSel;
+const monSelElem = joinFrmElem.monSel;
+const daySelElem = joinFrmElem.daySel;
 
 //input 색깔
 function ok(strElem, strMsg) {
@@ -24,7 +29,7 @@ function warn(strElem, strMsg) {
 }
 
 //regExp 설정과 함수
-const emailExp = "^[a-zA-z0-9가-힣]{2,20}$";
+const emailExp = "^[a-zA-z0-9가-힣]{1,50}$";
 const nmExp = "^[가-힣]{2,5}$";
 const nickNmExp = "^[a-zA-z0-9가-힣]{2,12}$";
 const pwExp = "^[a-zA-z0-9!@#$%^&*]{8,16}$";
@@ -33,14 +38,21 @@ const nmMsg = "이름은 한글로 2~5자 이내로 입력해주세요.";
 const nickNmMsg = "닉네임은 영문대소문자, 한글로 2~12자 이내로 입력해주세요.";
 const pwMsg = "비밀번호는 영문대소문자, 특수문자(!@#$%^&*)로 8~16자 이내로 입력해주세요.";
 
-function isvalid(strElem, strExp, strMsg, okMsg) {
+function isvalid(strElem, strExp) {
+    let exp = new RegExp(strExp, "g");
+    if (exp.exec(strElem.value) !== null && isNotEmpty(strElem)) {
+        return true;
+    }
+    return false;
+}
+
+function isvalid2(strElem, strExp, strMsg, okMsg) {   // +ok()+warn()-boolean
     let exp = new RegExp(strExp, "g");
     if (exp.exec(strElem.value) !== null && isNotEmpty(strElem)) {
         ok(strElem, okMsg);
-        return true;
+    } else {
+        warn(strElem, strMsg);
     }
-    warn(strElem, strMsg);
-    return false;
 }
 
 //빈값 체크
@@ -51,18 +63,24 @@ function isNotEmpty(strElem) {
     return false;
 }
 
+function isNotEmpty2(strElem, strMsg, okMsg) { // +ok()+warn()-boolean
+    if (strElem.value) {
+        ok(strElem, okMsg);
+    } else {
+        warn(strElem, strMsg);
+    }
+}
+
 //email 완성 함수 AJAX 중복 검사
-function email() {
+function completeEmail() {
     let emailId = emailIdElem.value;
     let emailAdrs = emailAdrsElem.value;
     let joinEmail = emailId + emailAdrs;
     return joinEmail;
 }
 
-const joinEmailElem = document.querySelector('.joinEmail');
-joinEmailElem.value = email();
-
 function emailCheck() {
+    joinEmailElem.value = completeEmail();
     const param = {users_email : joinEmailElem.value};
     const init = {
         method : 'POST',
@@ -84,23 +102,28 @@ function emailCheck() {
 
 //비번검사
 function pwCheck(pwElem, pw2Elem, pwExp, pwMsg) {
-    if (isvalid(pwElem, pwExp, pwMsg) && isNotEmpty(pw2Elem)) { // 둘 다 빈값이 아니고
-        if (pwElem.value === pw2Elem.value) { // 서로 일치하면
-            ok(pwElem);
-            ok(pw2Elem);
-        } else { // 둘 다 빈값은 아니지만 서로 일치하지 않으면
-            warn(pwElem, "");
+    if (isvalid(pwElem)) {  // 둘 다 유효성 합격이다
+        if (pwElem.value === pw2Elem.value) { // 비번 서로 일치한다.
+            ok(pwElem, "");
+            ok(pw2Elem, "");
+        } else { //비번 일치하지 않는다.
             warn(pw2Elem, "비밀번호가 일치하지 않습니다.");
         }
-    } else if (!isvalid(pwElem, pwExp, pwMsg)){ // pw가 유효성 검사 탈락
+    } else { // pw가 유효성 불합격이거나 pw2가 비어있다.
         warn(pwElem, pwMsg);
-    } else if(!isNotEmpty(pw2Elem)) { //pw2가 빈값
         warn(pw2Elem, "비밀번호를 확인해주세요.");
     }
 }
 
+function pwCheck2(pwElem, pw2Elem) { // 둘 다 유효성 합격이고 일치한다
+    if (isvalid(pwElem) && (pwElem.value === pw2Elem.value)) {
+        return true;
+    }
+    return false;
+}
+
 //생년월일 완성 함수
-function birth() {
+function completeBirth() {
     let year = yearSelElem.value;
     let mon = monSelElem.value;
     let day = daySelElem.value;
@@ -111,42 +134,17 @@ function birth() {
     if (day < 10) {
         day = "0" + day.toString();
     }
-    let birthDate = year.toString() + mon.toString() + day.toString();
+    const birthDate = year.toString() + mon.toString() + day.toString();
     return  birthDate;
 }
 
-const birthElem = document.querySelector('#users_date_birth');
-birthElem.value = birth();
-
-
-//input과 이벤트 연결
-emailIdElem.addEventListener("input", () => {
-    isvalid(emailIdElem, emailExp, "이메일을 입력해주세요", "");
-    emailCheck();
-});
-
-emailIdElem.addEventListener("click", () => {
-    isvalid(emailIdElem, emailExp, "이메일을 입력해주세요", "");
-    emailCheck();
-});
-
-nmElem.addEventListener('click', () => {
-    isvalid(nmElem, nmExp, nmMsg);
-});
-nmElem.addEventListener('input', () => {
-    isvalid(nmElem, nmExp, nmMsg);
-});
-
-nickNmElem.addEventListener('click', () => {});
-nickNmElem.addEventListener('input', () => {});
-
-pwElem.addEventListener('click', () => {}); //일치검사 추가
-pwElem.addEventListener('input', () => {});
-
-pw2Elem.addEventListener('click', () => {});
-pw2Elem.addEventListener('input', () => {});
-
-//전체검사 -> 셀렉트 검사 , input 검사 ->
-
-//let txt = e.target.value;
-
+// 버튼 활성화 함수
+function pushJoinBtn() {
+    joinEmailElem.value = completeEmail();
+    birthElem.value = completeBirth();
+    if (isvalid(emailIdElem, emailExp) && isNotEmpty(emailAdrsElem) && isvalid(nmElem, nmExp)
+    && isNotEmpty(yearSelElem) && isNotEmpty(monSelElem) && isNotEmpty(daySelElem) && isvalid(nickNmElem, nickNmExp)
+    && pwCheck2(pwElem, pw2Elem)) {
+        joinBtnElem.disabled = false;
+    }
+}
