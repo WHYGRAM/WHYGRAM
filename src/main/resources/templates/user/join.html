@@ -7,12 +7,30 @@
     <div id="msg"></div>
 
     <form th:action="@{join}" method="post" th:object="${userEntity}" id="joinFrm">
-        <div><input type="email" th:field="*{users_email}" placeholder="이메일" id="email" autofocus required></div>
+        <div th:field="*{users_email}">
+            <input type="text" placeholder="이메일" id="email" autofocus required> @
+            <select>
+                <option value="@naver.com">naver.com</option>
+                <option value="@google.com">google.com</option>
+                <option value="@daum.net">daum.net</option>
+            </select>
+        </div>
         <div><input type="text" th:field="*{users_name}" placeholder="이름" id="nm" required></div>
         <div>
             <label><input type="radio" th:field="*{users_gender}" value="0" checked>남자</label>
             <label><input type="radio"th:field="*{users_gender}" value="1" >여자</label>
             <label><input type="radio" th:field="*{users_gender}" value="2">비공개</label>
+        </div>
+        <div th:field="*{users_date_birth}" id="birthDt">
+            <select>
+                <option th:each="num : ${#numbers.sequence(1960, 2020)}" th:text="${num}" th:value="${num}"></option>
+            </select>
+            <select>
+                <option th:each="num : ${#numbers.sequence(1, 12)}" th:text="${num}" th:value="${num}"></option>
+            </select>
+            <select>
+                <option th:each="num : ${#numbers.sequence(1, 31)}" th:text="${num}" th:value="${num}"></option>
+            </select>
         </div>
         <div><input type="text" th:field="*{users_date_birth}" placeholder="생년월일" id="birthDt" required></div>
         <div><input type="text" th:field="*{users_nickname}" placeholder="닉네임" id="nickNm" required></div>
