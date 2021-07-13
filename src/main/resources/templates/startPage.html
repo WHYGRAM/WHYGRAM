@@ -26,30 +26,30 @@
     <section class="loginSectn" style="display: none">
         <h1>LOGIN</h1>
 
-        <form th:action="@{/whygram}" method="post" th:object="${userEntity}">
-            <div><input type="email" th:field="*{users_email}" placeholder="email" autofocus required></div>
-            <div><input type="password" th:field="*{users_password}" placeholder="password" required></div>
+        <form th:action="@{/whygram}" method="post" th:object="${userEntity}" id="loginFrm">
+            <div><input type="email" th:field="*{users_email}" placeholder="email"  autofocus required></div>
+            <div><input type="password" th:field="*{users_password}" placeholder="password"  required></div>
             <div>
-                <input type="submit" value="로그인" id="loginBtn">
+                <input type="submit" value="로그인" id="loginBtn" disabled>
             </div>
         </form>
 
         <span id="findPw" class="pointer">비밀번호 찾기</span>
         <div>
-            <div class="modal hid">
+            <div class="modal hide">
                 <div>
                     <div class="modal_child">
                         <div class="modal_close_icon"><i class=" pointer fas fa-times"></i></div>
                         <div class="inputData">
                             <form>
                                 <div class="textSize textchk">
-                                    <input type="text" placeholder="이메일">
+                                    <input type="email" placeholder="이메일" class="findPwEmail">
                                 </div>
                                 <div class="textSize textchk">
-                                    <input type="text" placeholder="이름">
+                                    <input type="text" placeholder="이름" class="findPwNm">
                                 </div>
                                 <div class="inputSize">
-                                    <input class="chkbtn" type="submit" value="비밀번호 찾기">
+                                    <input class="chkbtn" type="submit" value="비밀번호 찾기" disabled>
                                 </div>
                             </form>
                         </div>
@@ -109,11 +109,14 @@
             </div>
         </form>
 
-        <script defer th:src="@{/js/user/join.js}"></script>
-        <script defer th:src="@{/js/user/joinProc.js}"></script>
+
     </section>
 
-    <script defer th:src="@{/user/findPw.js}"></script>
     <script defer th:src="@{/js/startPage.js}"></script>
+    <script defer th:src="@{/js/user/login.js}"></script>
+    <script defer th:src="@{/js/user/findPw.js}"></script>
+    <script defer th:src="@{/js/user/join.js}"></script>
+    <script defer th:src="@{/js/user/joinProc.js}"></script>
+
 </body>
 </html>

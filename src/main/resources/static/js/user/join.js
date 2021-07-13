@@ -18,17 +18,7 @@ const yearSelElem = joinFrmElem.yearSel;
 const monSelElem = joinFrmElem.monSel;
 const daySelElem = joinFrmElem.daySel;
 
-//input 색깔
-function ok(strElem, strMsg) {
-    strElem.style.backgroundColor = "LightGreen ";
-    warnMsgDiv.innerText = strMsg;
-}
-function warn(strElem, strMsg) {
-    strElem.style.backgroundColor = "pink";
-    warnMsgDiv.innerText = strMsg;
-}
-
-//regExp 설정과 함수
+//regExp 설정과 유효성 검사 함수
 const emailExp = "^[a-zA-z0-9가-힣]{1,50}$";
 const nmExp = "^[가-힣]{2,5}$";
 const nickNmExp = "^[a-zA-z0-9가-힣]{2,12}$";
@@ -49,22 +39,6 @@ function isvalid(strElem, strExp) {
 function isvalid2(strElem, strExp, strMsg, okMsg) {   // +ok()+warn()-boolean
     let exp = new RegExp(strExp, "g");
     if (exp.exec(strElem.value) !== null && isNotEmpty(strElem)) {
-        ok(strElem, okMsg);
-    } else {
-        warn(strElem, strMsg);
-    }
-}
-
-//빈값 체크
-function isNotEmpty(strElem) {
-    if (strElem.value) {
-        return true;
-    }
-    return false;
-}
-
-function isNotEmpty2(strElem, strMsg, okMsg) { // +ok()+warn()-boolean
-    if (strElem.value) {
         ok(strElem, okMsg);
     } else {
         warn(strElem, strMsg);
@@ -148,5 +122,7 @@ function pushJoinBtn() {
     && isNotEmpty(yearSelElem) && isNotEmpty(monSelElem) && isNotEmpty(daySelElem) && isvalid(nickNmElem, nickNmExp)
     && pwCheck2(pwElem, pw2Elem, pwExp)) {
         joinBtnElem.disabled = false;
+    } else {
+        joinBtnElem.disabled = true;
     }
 }
