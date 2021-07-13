@@ -1,10 +1,11 @@
 /********* 비밀번호 모달창 ********/
 //const findPwElem = document.querySelector('#findPw'); -> startPage.js에 이미 있는 전역변수
 const modalFindPwElem = document.querySelector('.modal');
+const findPwFrmElem = document.querySelector('.findPwFrm');
 const modalCloseIcon = document.querySelector('.modal_close_icon');
-const chkbtnElem = document.querySelector('.chkbtn');
-const findPwEmailElem = document.querySelector('.findPwEmail');
-const findPwNmElem = document.querySelector('.findPwNm');
+const chkbtnElem = findPwFrmElem.chkbtn;
+const findPwEmailElem = findPwFrmElem.findPwEmail;
+const findPwNmElem = findPwFrmElem.findPwNm;
 
 // 모달창 열기
 findPwElem.addEventListener('click', () => {
@@ -37,5 +38,5 @@ findPwNmElem.addEventListener('input', () => {
 
 // 모달창 비밀번호 찾기 누르면 이메일 보내기 ajax 처리
 chkbtnElem.addEventListener('click', () => {
-
+    findPw();
 });
