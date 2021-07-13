@@ -16,7 +16,7 @@ function clicked(strSpnChked, strSpn, strSpn2, strSectnChecked, strSectn) {
 loginSpn.addEventListener('click', () => {clicked(loginSpn, joinSpn, findPwElem, loginSectn, joinSectn);});
 joinSpn.addEventListener('click', () => {clicked(joinSpn, loginSpn, findPwElem, joinSectn, loginSectn);});
 findPwElem.addEventListener('click', () => {
-    clicked(findPwElem, loginSpn, joinSpn, "", "");
+    clicked(findPwElem, loginSpn, joinSpn, loginSectn, joinSectn);
 });
 
 //input 색깔
