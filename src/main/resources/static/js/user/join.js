@@ -20,7 +20,7 @@ const daySelElem = joinFrmElem.daySel;
 
 //input 색깔
 function ok(strElem, strMsg) {
-    strElem.style.backgroundColor = "green";
+    strElem.style.backgroundColor = "LightGreen ";
     warnMsgDiv.innerText = strMsg;
 }
 function warn(strElem, strMsg) {
@@ -79,6 +79,7 @@ function completeEmail() {
     return joinEmail;
 }
 
+/*
 function emailCheck() {
     joinEmailElem.value = completeEmail();
     const param = {users_email : joinEmailElem.value};
@@ -99,10 +100,11 @@ function emailCheck() {
           }
     });
 }
+ */
 
 //비번검사
 function pwCheck(pwElem, pw2Elem, pwExp, pwMsg) {
-    if (isvalid(pwElem)) {  // 둘 다 유효성 합격이다
+    if (isvalid(pwElem, pwExp)) {  // 둘 다 유효성 합격이다
         if (pwElem.value === pw2Elem.value) { // 비번 서로 일치한다.
             ok(pwElem, "");
             ok(pw2Elem, "");
@@ -115,8 +117,8 @@ function pwCheck(pwElem, pw2Elem, pwExp, pwMsg) {
     }
 }
 
-function pwCheck2(pwElem, pw2Elem) { // 둘 다 유효성 합격이고 일치한다
-    if (isvalid(pwElem) && (pwElem.value === pw2Elem.value)) {
+function pwCheck2(pwElem, pw2Elem, pwExp) { // 둘 다 유효성 합격이고 일치한다
+    if (isvalid(pwElem, pwExp) && (pwElem.value === pw2Elem.value)) {
         return true;
     }
     return false;
@@ -144,7 +146,7 @@ function pushJoinBtn() {
     birthElem.value = completeBirth();
     if (isvalid(emailIdElem, emailExp) && isNotEmpty(emailAdrsElem) && isvalid(nmElem, nmExp)
     && isNotEmpty(yearSelElem) && isNotEmpty(monSelElem) && isNotEmpty(daySelElem) && isvalid(nickNmElem, nickNmExp)
-    && pwCheck2(pwElem, pw2Elem)) {
+    && pwCheck2(pwElem, pw2Elem, pwExp)) {
         joinBtnElem.disabled = false;
     }
 }
