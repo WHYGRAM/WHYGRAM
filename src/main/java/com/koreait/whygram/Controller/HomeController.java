@@ -1,8 +1,6 @@
 package com.koreait.whygram.Controller;
 
 import com.koreait.whygram.model.user.UserEntity;
-import com.koreait.whygram.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +22,6 @@ public class HomeController {
             case "authErr" : errMsg = "인증 실패되었습니다."; break; //로그인
         }
         model.addAttribute("errMsg", errMsg);
-        return "startPage";
+        return "/common/startPage";
     }
 }
