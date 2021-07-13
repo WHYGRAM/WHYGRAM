@@ -16,7 +16,7 @@
     </section>
 
     <section>
-        <span class="loginSpn">로그인</span>  |  <span class="joinSpn">회원가입</span>
+        <span class="loginSpn pointer">로그인</span>  |  <span class="joinSpn pointer">회원가입</span>
     </section>
 
     <p th:text="${errMsg}"></p>
@@ -29,10 +29,10 @@
             <div><input type="email" th:field="*{users_email}" placeholder="email" autofocus required></div>
             <div><input type="password" th:field="*{users_password}" placeholder="password" required></div>
             <div>
-                <input type="submit" value="로그인" id="loginBtn" disabled>
+                <input type="submit" value="로그인" id="loginBtn">
             </div>
         </form>
-        <div><span>비밀번호 찾기</span></div>
+        <div><span class="findPwSpn pointer">비밀번호 찾기</span></div>
     </section>
 
     <section class="joinSectn" style="display: none">

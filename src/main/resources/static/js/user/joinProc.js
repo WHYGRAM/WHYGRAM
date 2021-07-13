@@ -63,8 +63,4 @@ pw2Elem.addEventListener('input', () => {
     pushJoinBtn();
 });
 
-//전체검사 -> 셀렉트 검사 , input 검사 ->
-// birthElem.value = completeBirth();
-
-//let txt = e.target.value;
 
