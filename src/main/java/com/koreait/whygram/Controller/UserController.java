@@ -57,6 +57,6 @@ public class UserController {
 
     @PostMapping("/mypage")
     public String mypage(MultipartFile[] imgArr) {
-
+        return "";
     }
 }
