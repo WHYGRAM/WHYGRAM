@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/pic/**" ,"/css/**", "/js/**", "/img/**", "/error", "favicon.ico", "/resources/**");
+        web.ignoring().antMatchers("/pic/**" ,"/css/**", "/js/**", "/img/**", "/error", "favicon.ico");
     }
 
     @Override
@@ -39,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/whygram")
                 .usernameParameter("users_email")
                 .passwordParameter("users_password")
+                .loginProcessingUrl("/whygram")
                 .defaultSuccessUrl("/feed/home")
                 .failureUrl("/whygram?error=true");
 

@@ -1,4 +1,4 @@
-package com.koreait.whygram.Controller;
+package com.koreait.whygram.controller;
 
 import com.koreait.whygram.model.user.UserEntity;
 import org.springframework.stereotype.Controller;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping("/")
 public class HomeController {
     @GetMapping("/whygram")
     public String home(UserEntity userEntity, @RequestParam(defaultValue = "") String msg, Model model) {
