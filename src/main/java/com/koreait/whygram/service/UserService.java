@@ -4,9 +4,14 @@ import com.koreait.whygram.common.EmailService;
 import com.koreait.whygram.common.MySecurityUtils;
 import com.koreait.whygram.mapper.UserMapper;
 import com.koreait.whygram.model.user.UserEntity;
+import com.koreait.whygram.security.IAuthenticationFacade;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Map;
 
 @Service
 public class UserService {
@@ -15,6 +20,7 @@ public class UserService {
     @Autowired private MySecurityUtils mySecurityUtils;
     @Autowired private EmailService email;
     @Autowired private PasswordEncoder passwordEncoder;
+    @Autowired private IAuthenticationFacade auth;
 
     // 아이디 중복 검사 & 비밀번호 확인 검사
     public String idPwChk(UserEntity param, String pwchk) {
@@ -72,5 +78,13 @@ public class UserService {
             return "authDone";
         }
         return "authErr";
+    }
+
+    // 프로필 이미지 변경
+    public void profileImg(MultipartFile[] imgArr) {
+        UserEntity loginUser = auth.getLoginUser();
+        int iuser = loginUser.getUsers_id();
+
+
     }
 }
