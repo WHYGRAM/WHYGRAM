@@ -3,6 +3,20 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <header th:fragment="header">
-    <h1>headerTest</h1>
+    <nav>
+        <span class="siteLogo">
+            <i class="fab fa-instagram-square fa-4x"></i>
+        </span>
+        <span class="header__right">
+            <div class="right__icon">
+                <a th:href="@{/feed/home}">
+                <i class="fas fa-home fa-2x"></i>
+            </a>
+            <a th:href="@{/feed/mypage}">
+                <i class="fas fa-user fa-2x"></i>
+            </a>
+            </div>
+        </span>
+    </nav>
 </header>
 </html>
