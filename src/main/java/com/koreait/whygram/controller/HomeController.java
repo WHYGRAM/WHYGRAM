@@ -1,8 +1,6 @@
-package com.koreait.whygram.Controller;
+package com.koreait.whygram.controller;
 
 import com.koreait.whygram.model.user.UserEntity;
-import com.koreait.whygram.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
