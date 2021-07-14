@@ -38,5 +38,5 @@ findPwNmElem.addEventListener('input', () => {
 
 // 모달창 비밀번호 찾기 누르면 이메일 보내기 ajax 처리
 chkbtnElem.addEventListener('click', () => {
-    findPw();
+    //findPw();
 });
