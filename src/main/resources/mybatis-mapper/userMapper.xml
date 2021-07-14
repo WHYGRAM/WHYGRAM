@@ -6,13 +6,17 @@
     <insert id="insUsers">
         INSERT INTO users
         (
-            users_email, users_name, users_gender, users_auth_code,
-            users_date_birth, users_nickname, users_password
+            users_email, users_password,
+            users_name, users_gender,
+            users_date_birth, users_auth_code,
+            users_nickname
         )
         VALUES
         (
-            #{users_email}, #{users_name}, #{users_gender}, #{users_auth_code},
-            #{users_date_birth}, #{users_nickname}, #{users_password}
+            #{users_email}, #{users_password},
+            #{users_name}, #{users_gender},
+            #{users_date_birth}, #{users_auth_code},
+            #{users_nickname}
         )
     </insert>
 
@@ -39,5 +43,28 @@
         WHERE users_email = #{users_email}
           AND users_auth_code = #{users_auth_code}
           AND users_is_quit = 0
+    </update>
+
+    <!-- 프로필 수정 -->
+    <update id="updUsers">
+        UPDATE t_user
+        <set>
+            <if test="users_img != null and users_img != ''">
+                users_img = #{users_img}
+            </if>
+            <if test="users_nickname != null and users_nickname != ''">
+                users_nickname = #{users_nickname}
+            </if>
+            <if test="users_password != null and users_password != ''">
+                users_password = #{users_password}
+            </if>
+            <if test="users_password != null and users_password != ''">
+                users_gender = #{users_gender}
+            </if>
+            <if test="users_password != null and users_password != ''">
+                users_ctnt = #{users_ctnt}
+            </if>
+        </set>
+        WHERE users_id = #{users_id}
     </update>
 </mapper>

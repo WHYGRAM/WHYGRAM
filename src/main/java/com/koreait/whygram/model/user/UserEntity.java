@@ -2,7 +2,7 @@ package com.koreait.whygram.model.user;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+
 
 @Data
 @NoArgsConstructor
