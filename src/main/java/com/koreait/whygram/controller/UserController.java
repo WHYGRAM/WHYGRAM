@@ -34,4 +34,5 @@ public class UserController {
     public String mypage(MultipartFile[] imgArr) {
         return "";
     }
+
 }

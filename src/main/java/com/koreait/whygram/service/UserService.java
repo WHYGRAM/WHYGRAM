@@ -37,6 +37,11 @@ public class UserService {
        return "id";
     }
 
+    public int selEmail(UserEntity param) {
+        int result = 0;
+        return result;
+    }
+
     // 회원가입
     public String insUsers(UserEntity param, String pwchk) {
 

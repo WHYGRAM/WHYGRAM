@@ -49,21 +49,16 @@ function isvalid2(strElem, strExp, strMsg, okMsg) {   // +ok()+warn()-boolean
 function completeEmail() {
     let emailId = emailIdElem.value;
     let emailAdrs = emailAdrsElem.value;
-    let joinEmail = emailId + emailAdrs;
-    return joinEmail;
+    let users_email = emailId + emailAdrs;
+    return users_email;
 }
 
-/*
 function emailCheck() {
     joinEmailElem.value = completeEmail();
-    const param = {users_email : joinEmailElem.value};
-    const init = {
-        method : 'POST',
-        headers : { 'Content-Type' : 'application/json' },
-        body : JSON.stringify(param)
-    };
+    const users_email = joinEmailElem.value;
+    console.log(users_email);
 
-    fetch('/user/emailCheck',init) //컨트롤러, 서비스 작업 해야함
+    fetch('/ajax/emailCheck' + users_email)
         .then(res => res.json())
         .then(myJson => {
           console.log(myJson);
@@ -74,7 +69,7 @@ function emailCheck() {
           }
     });
 }
- */
+
 
 //비번검사
 function pwCheck(pwElem, pw2Elem, pwExp, pwMsg) {
