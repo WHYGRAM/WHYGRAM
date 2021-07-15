@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">>
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      >
 
 <head>
     <title>mypage</title>
 </head>
 <th:block th:fragment="content" th:with="auth=${#authentication.getPrincipal().getUser}">
-    <div th:attr="data-iuser=${profile.iuser}"></div>
-    <form th:if="${auth.iuser eq profile.iuser}" th:action="profileImg" method="posst" enctype="multipart/form-data">
-        <input type="file" name="users_img" multiple accept="image/**">
-        <input type="submit" value="업로드">
-    </form>
+    <div>
+        <form th:action="mypage" method="post" enctype="multipart/form-data">
+            <input type="file" name="imgArr" multiple accept="image/**">
+            <input type="submit" value="업로드">
+        </form>
+    </div>
 </th:block>
 </html>

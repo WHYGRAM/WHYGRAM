@@ -1,6 +1,7 @@
 package com.koreait.whygram.service;
 
 import com.koreait.whygram.common.EmailService;
+import com.koreait.whygram.common.FileUtils;
 import com.koreait.whygram.common.MySecurityUtils;
 import com.koreait.whygram.mapper.UserMapper;
 import com.koreait.whygram.model.user.UserEntity;
@@ -21,6 +22,7 @@ public class UserService {
     @Autowired private EmailService email;
     @Autowired private PasswordEncoder passwordEncoder;
     @Autowired private IAuthenticationFacade auth;
+    @Autowired private FileUtils fileUtils;
 
     // 아이디 중복 검사 & 비밀번호 확인 검사
     public String idPwChk(UserEntity param, String pwchk) {
@@ -83,8 +85,25 @@ public class UserService {
     // 프로필 이미지 변경
     public void profileImg(MultipartFile[] imgArr) {
         UserEntity loginUser = auth.getLoginUser();
-        int iuser = loginUser.getUsers_id();
+        int iuser = loginUser.getUsers_id(); //11
 
+        System.out.println("iuser : " + iuser);
+        String target = "mypage/" + iuser;
 
+        UserEntity param = new UserEntity();
+        param.setUsers_id(iuser);
+
+        for(MultipartFile img : imgArr) {
+            String saveFileNm = fileUtils.transferTo(img, target);
+            if(saveFileNm != null) {
+                param.setUsers_img(saveFileNm);
+                if(mapper.updUserImg(param) == 1 && loginUser.getUsers_img() == null) {
+                    param.setUsers_id(iuser);
+                    if(mapper.updUserImg(param) == 1) {
+                        loginUser.setUsers_img(saveFileNm);
+                    }
+                }
+            }
+        }
     }
 }

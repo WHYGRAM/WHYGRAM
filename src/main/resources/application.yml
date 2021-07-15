@@ -23,6 +23,11 @@ spring:
     username: root
     password: koreait
     driver-class-name: org.mariadb.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 30MB
+      location: C:/whygram
 mybatis:
   mapper-locations: mybatis-mapper/**/*.xml
   type-aliases-package: com.koreait.whygram
