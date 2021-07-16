@@ -4,7 +4,7 @@ const warnMsgDiv = document.querySelector('.warnMsg');
 const joinFrmElem = document.querySelector('#joinFrm');
 const joinBtnElem = joinFrmElem.joinBtn;
 
-const joinEmailElem = document.querySelector('.joinEmail');
+const joinEmailElem = document.querySelector('#joinEmail');
 const emailIdElem = joinFrmElem.emailId;
 const emailAdrsElem = joinFrmElem.emailAdrs;
 
@@ -17,6 +17,16 @@ const birthElem = document.querySelector('#users_date_birth');
 const yearSelElem = joinFrmElem.yearSel;
 const monSelElem = joinFrmElem.monSel;
 const daySelElem = joinFrmElem.daySel;
+
+//input 색깔
+function ok(strElem, strMsg) {
+    strElem.style.backgroundColor = "LightGreen ";
+    warnMsgDiv.innerText = strMsg;
+}
+function warn(strElem, strMsg) {
+    strElem.style.backgroundColor = "pink";
+    warnMsgDiv.innerText = strMsg;
+}
 
 //regExp 설정과 유효성 검사 함수
 const emailExp = "^[a-zA-z0-9가-힣]{1,50}$";
@@ -58,11 +68,13 @@ function emailCheck() {
     const users_email = joinEmailElem.value;
     console.log(users_email);
 
-    fetch('/ajax/emailCheck' + users_email)
+    if (!isvalid(emailIdElem, emailExp) || !isNotEmpty(emailAdrsElem)) { return; }
+
+    fetch('/user/emailCheck/' + users_email)
         .then(res => res.json())
         .then(myJson => {
-          console.log(myJson);
-          if(myJson.result === 0) { //중복검사 통과
+            console.log(myJson);
+          if(myJson.result == 0) { //중복검사 통과
               ok(emailIdElem, "사용가능한 이메일입니다. 이메일 인증이 필요한 점 유의해 주세요.");
           } else { //아이디 중복됨
               warn(emailIdElem, "중복된 이메일입니다.");
@@ -71,18 +83,38 @@ function emailCheck() {
 }
 
 
+//닉네임 AJAX 중복 검사
+function nickNmCheck() {
+    const nickNm = nickNmElem.value;
+    console.log(nickNm);
+
+    if (!isvalid(nickNmElem, nickNmExp)) { return; }
+
+    fetch('/user/nickNmCheck/' + nickNm)
+        .then(res => res.json())
+        .then(myJson => {
+            console.log(myJson);
+            if(myJson.result == 0) { //중복검사 통과
+                ok(emailIdElem, "사용가능한 닉네임입니다.");
+            } else { //아이디 중복됨
+                warn(emailIdElem, "중복된 닉네임입니다.");
+            }
+        });
+}
+
+
 //비번검사
 function pwCheck(pwElem, pw2Elem, pwExp, pwMsg) {
-    if (isvalid(pwElem, pwExp)) {  // 둘 다 유효성 합격이다
+    if (isvalid(pwElem, pwExp)) {  //비밀번호는 ok
         if (pwElem.value === pw2Elem.value) { // 비번 서로 일치한다.
             ok(pwElem, "");
             ok(pw2Elem, "");
         } else { //비번 일치하지 않는다.
-            warn(pw2Elem, "비밀번호가 일치하지 않습니다.");
+            warn(pw2Elem, "비밀번호가 일치하지 않습니다. 비밀번호를 확인해주세요.");
         }
-    } else { // pw가 유효성 불합격이거나 pw2가 비어있다.
+    } else { // pw나 pw2가 비어있다. 유효성 지키라고 한다.
         warn(pwElem, pwMsg);
-        warn(pw2Elem, "비밀번호를 확인해주세요.");
+        warn(pw2Elem, pwMsg);
     }
 }
 

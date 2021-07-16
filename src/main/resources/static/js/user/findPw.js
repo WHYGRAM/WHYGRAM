@@ -35,9 +35,36 @@ findPwNmElem.addEventListener('input', () => {
     btn(findPwEmailElem, findPwNmElem, chkbtnElem);
 });
 
-/*
 // 모달창 비밀번호 찾기 누르면 이메일 보내기 ajax 처리
+function findPw() {
+    const email = findPwEmailElem.value;
+    const nm = findPwNmElem.value;
+    let param = {
+        users_email: email,
+        users_nickname: nm
+    };
+
+    fetch('/user/findPw', init(param))
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(myJson) {
+            console.log(myJson);
+
+            switch(myJson.result) {
+                case 0: //이메일 보내기 실패
+                    alert('해당 사용자가 없습니다.');
+                    break;
+                case 1: //이메일 보내기 성공
+                    alert('이메일로 임시비밀번호를 보내드렸습니다.');
+                    break;
+            }
+        });
+}
+
 chkbtnElem.addEventListener('click', () => {
-    //findPw();
+    findPwEmailElem.value = "";
+    findPwNmElem.value = "";
+    modalFindPwElem.classList.remove('hide');
+    findPw();
 });
- */

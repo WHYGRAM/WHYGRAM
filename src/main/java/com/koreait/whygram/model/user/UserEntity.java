@@ -17,7 +17,6 @@ public class UserEntity {
     private int users_gender;
     private String users_date_birth;
     private String users_nickname;
-    private String pwchk;
 
     // 프로필, 인증 관련
     private String users_regdt;

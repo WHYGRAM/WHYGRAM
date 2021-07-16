@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class UserDomain extends UserEntity{
-    private int idChk;
+    private int emailCheck;
+    private int nickNmCheck;
 }
