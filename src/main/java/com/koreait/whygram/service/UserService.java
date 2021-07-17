@@ -50,7 +50,7 @@ public class UserService {
     }
 
     // 회원가입
-    public String insUsers(UserEntity param, String pwchk, String joinEmail) {
+    public String insUsers(UserEntity param, String pwchk) {
 
         // 아이디, 비밀번호 검사
         String idPwChk = this.idPwChk(param, pwchk);
@@ -65,7 +65,6 @@ public class UserService {
         String hashedPw = passwordEncoder.encode(param.getUsers_password());
 
         // UserEntity 설정
-        param.setUsers_email(joinEmail);
         param.setUsers_password(hashedPw);
         param.setUsers_auth_code(authCd);
 
@@ -104,9 +103,10 @@ public class UserService {
         String hashedPw = passwordEncoder.encode(authCd);
         param.setUsers_password(hashedPw);
         //임시비밀번호 설정 성공 && 입력된 정보와 일치하는 사용자
-        if (mapper.updPw(param) == 1 && (mapper.selEmail(param).getEmailCheck()*mapper.selNickNm(param).getNickNmCheck()) == 1) {
+        if (mapper.updPw(param) == 1 && mapper.selEmail(param).getEmailCheck() == 1 && mapper.selNickNm(param).getNickNmCheck() == 1) {
             String subject = "[WHYGRAM] 임시비밀번호 입니다.";
-            String txt = String.format("<p>임시비밀번호 : %s<p><a href=\"http://localhost:8090/whygram\">다시 로그인하러 가기</a>", authCd);
+            String txt = String.format("<p>%s님의 임시비밀번호 : %s<p><a href=\"http://localhost:8090/whygram\">다시 로그인하러 가기</a>",
+                    param.getUsers_nickname(), authCd);
             email.sendMimeMessage(param.getUsers_email(), subject, txt);
             return 1;
         }

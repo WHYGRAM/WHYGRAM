@@ -5,7 +5,7 @@ const findPwFrmElem = document.querySelector('.findPwFrm');
 const modalCloseIcon = document.querySelector('.modal_close_icon');
 const chkbtnElem = findPwFrmElem.chkbtn;
 const findPwEmailElem = findPwFrmElem.findPwEmail;
-const findPwNmElem = findPwFrmElem.findPwNm;
+const findPwNickNmElem = findPwFrmElem.findPwNickNm;
 
 // 모달창 열기
 findPwElem.addEventListener('click', () => {
@@ -22,26 +22,26 @@ if(findPwElem) {
 //모달창 input 빈값 검사와 버튼 활성화
 
 findPwEmailElem.addEventListener('click', () => {
-    btn(findPwEmailElem, findPwNmElem, chkbtnElem);
+    btn(findPwEmailElem, findPwNickNmElem, chkbtnElem);
 });
 findPwEmailElem.addEventListener('input', () => {
-    btn(findPwEmailElem, findPwNmElem, chkbtnElem);
+    btn(findPwEmailElem, findPwNickNmElem, chkbtnElem);
 });
 
-findPwNmElem.addEventListener('click', () => {
-    btn(findPwEmailElem, findPwNmElem, chkbtnElem);
+findPwNickNmElem.addEventListener('click', () => {
+    btn(findPwEmailElem, findPwNickNmElem, chkbtnElem);
 });
-findPwNmElem.addEventListener('input', () => {
-    btn(findPwEmailElem, findPwNmElem, chkbtnElem);
+findPwNickNmElem.addEventListener('input', () => {
+    btn(findPwEmailElem, findPwNickNmElem, chkbtnElem);
 });
 
 // 모달창 비밀번호 찾기 누르면 이메일 보내기 ajax 처리
 function findPw() {
     const email = findPwEmailElem.value;
-    const nm = findPwNmElem.value;
+    const nickNm = findPwNickNmElem.value;
     let param = {
         users_email: email,
-        users_nickname: nm
+        users_nickname: nickNm
     };
 
     fetch('/user/findPw', init(param))
@@ -63,8 +63,8 @@ function findPw() {
 }
 
 chkbtnElem.addEventListener('click', () => {
-    findPwEmailElem.value = "";
-    findPwNmElem.value = "";
-    modalFindPwElem.classList.remove('hide');
     findPw();
+    findPwEmailElem.value = "";
+    findPwNickNmElem.value = "";
+    modalFindPwElem.classList.add('hide');
 });

@@ -18,8 +18,8 @@ public class UserController {
 
 
     @PostMapping("/join")
-    public String postJoin(UserEntity userEntity, @RequestParam String pwchk, @RequestParam String joinEmail) {
-        String path = service.insUsers(userEntity, pwchk, joinEmail);
+    public String postJoin(UserEntity userEntity, @RequestParam String pwchk) {
+        String path = service.insUsers(userEntity, pwchk);
         return "redirect:" + path;
     }
 
