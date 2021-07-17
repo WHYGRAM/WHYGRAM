@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      >
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      <!--layout:decorator="pageLayout"-->
 
 <head>
     <title>mypage</title>
 </head>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/user/mypage.css}">
+</th:block>
+<th:block layout:fragment="js">
+    <script defer th:src="@{/js/user/mypage.js}"></script>
+</th:block>
+
+</th:block>
 <th:block th:fragment="content" th:with="auth=${#authentication.getPrincipal().getUser}">
     <div>
         <form th:action="mypage" method="post" enctype="multipart/form-data">
-            <input type="file" name="imgArr" multiple accept="image/**">
-            <input type="submit" value="업로드">
+            <button id="profileImgBtn"><img class="profileImg" th:src="@{/img/defaultProfile.png}"></button>
+            <input id="profileInput" type="file" name="imgArr" accept="image/**" style="display: none" t>
         </form>
     </div>
 </th:block>
+
+
 </html>
