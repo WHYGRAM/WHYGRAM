@@ -83,7 +83,7 @@ public class UserService {
     }
 
     // 프로필 이미지 변경
-    public void profileImg(MultipartFile[] imgArr) {
+    public void profileImg(MultipartFile img) {
         UserEntity loginUser = auth.getLoginUser();
         int iuser = loginUser.getUsers_id(); //11
 
@@ -93,17 +93,16 @@ public class UserService {
         UserEntity param = new UserEntity();
         param.setUsers_id(iuser);
 
-        for(MultipartFile img : imgArr) {
-            String saveFileNm = fileUtils.transferTo(img, target);
-            if(saveFileNm != null) {
-                param.setUsers_img(saveFileNm);
-                if(mapper.updUserImg(param) == 1 && loginUser.getUsers_img() == null) {
-                    param.setUsers_id(iuser);
-                    if(mapper.updUserImg(param) == 1) {
-                        loginUser.setUsers_img(saveFileNm);
-                    }
+        String saveFileNm = fileUtils.transferTo(img, target);
+        if(saveFileNm != null) {
+            param.setUsers_img(saveFileNm);
+            if(mapper.updUserImg(param) == 1 && loginUser.getUsers_img() == null) {
+                param.setUsers_id(iuser);
+                if(mapper.updUserImg(param) == 1) {
+                    loginUser.setUsers_img(saveFileNm);
                 }
             }
         }
+
     }
 }

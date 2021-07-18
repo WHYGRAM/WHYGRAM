@@ -34,14 +34,12 @@ public class UserController {
     }
 
     @PostMapping("/mypage")
-    public String postMypage(MultipartFile[] imgArr) {
+    public String postMypage(MultipartFile imgArr) {
         service.profileImg(imgArr);
         return "redirect:mypage";
     }
 
     @GetMapping("/mypage")
-    public void getMypage(Model model, UserEntity param, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-
-    }
+    public void getMypage(UserEntity param) { }
 
 }
