@@ -4,7 +4,9 @@ import com.koreait.whygram.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
@@ -15,4 +17,12 @@ public class FeedController {
 
     @GetMapping("/home")
     public void home() {}
+
+    @GetMapping("/profile")
+    public void profile() { }
+
+    @PostMapping("/profile")
+    public String profile(MultipartFile[] imgArr) {
+        return "";
+    }
 }
