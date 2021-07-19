@@ -3,6 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.koreait.whygram.mapper.UserMapper">
+    <!--회원가입-->
     <insert id="insUsers">
         INSERT INTO users
         (
@@ -20,19 +21,19 @@
         )
     </insert>
 
-    <!--아이디 중복체크-->
-    <select id="selIdChk" resultType="UserDomain">
-        SELECT COUNT(users_email) AS idChk
+    <!--이메일 중복체크-->
+    <select id="selEmail" resultType="UserDomain">
+        SELECT COUNT(users_email) AS emailCheck
         FROM users
         WHERE users_email = #{users_email}
           AND users_is_quit = 0
     </select>
 
-    <!--로그인-->
-    <select id="selUsers" resultType="UserEntity">
-        SELECT * FROM users
-        WHERE users_email = #{users_email}
-          AND users_auth_code IS NULL
+    <!--닉네임 중복체크-->
+    <select id="selNickNm" resultType="UserDomain">
+        SELECT COUNT(users_nickname) AS nickNmCheck
+        FROM users
+        WHERE users_nickname = #{users_nickname}
           AND users_is_quit = 0
     </select>
 
@@ -44,6 +45,23 @@
           AND users_auth_code = #{users_auth_code}
           AND users_is_quit = 0
     </update>
+
+    <!--임시비밀번호 설정-->
+    <update id="updPw">
+        UPDATE users
+        SET users_password = #{users_password}
+        WHERE users_email = #{users_email}
+          AND users_nickname = #{users_nickname}
+          AND users_is_quit = 0
+    </update>
+
+    <!--로그인-->
+    <select id="selUsers" resultType="UserEntity">
+        SELECT * FROM users
+        WHERE users_email = #{users_email}
+          AND users_auth_code IS NULL
+          AND users_is_quit = 0
+    </select>
 
     <!-- 프로필 수정 -->
     <update id="updUsers">

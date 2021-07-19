@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-public class HomeController {
+public class WhygramController {
     @GetMapping("/whygram")
     public String home(UserEntity userEntity, @RequestParam(defaultValue = "") String msg, Model model) {
         String errMsg = "";

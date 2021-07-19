@@ -64,8 +64,9 @@ CREATE TABLE fav (
 ) COMMENT'게시물과 댓글 좋아요';
 
 CREATE TABLE follow (
-    users_id INT NOT NULL AUTO_INCREMENT,
     follow_follower INT UNSIGNED AUTO_INCREMENT COMMENT '팔로우를 누른 사람',
     follow_follow INT UNSIGNED AUTO_INCREMENT COMMENT '팔로우대상',
-    FOREIGN KEY(users_id) references users(users_id)
+    FOREIGN KEY(follow_follower) references users(users_id),
+    FOREIGN KEY(follow_follow) references users(users_id),
+    PRIMARY KEY (follow_follower, follow_follow)
 ) COMMENT '팔로우와 팔로워';

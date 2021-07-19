@@ -1,15 +1,16 @@
 //이벤트 연결
 emailIdElem.addEventListener("input", () => {
+    if (isvalid(emailIdElem, emailExp) && isNotEmpty(emailAdrsElem)) {emailCheck();}
     isvalid2(emailIdElem, emailExp, "이메일을 입력해주세요", "");
-    //emailCheck();
     pushJoinBtn();
 });
 emailIdElem.addEventListener("click", () => {
+    if (isvalid(emailIdElem, emailExp) && isNotEmpty(emailAdrsElem)) {emailCheck();}
     isvalid2(emailIdElem, emailExp, "이메일을 입력해주세요", "");
-    //emailCheck();
     pushJoinBtn();
 });
 emailAdrsElem.addEventListener("click", () => {
+    if (isvalid(emailIdElem, emailExp) && isNotEmpty(emailAdrsElem)) {emailCheck();}
     isNotEmpty2(emailAdrsElem, "이메일 주소를 선택해주세요.", "");
     pushJoinBtn();
 });
@@ -37,10 +38,12 @@ daySelElem.addEventListener('click', () => {
 });
 
 nickNmElem.addEventListener('click', () => {
+    if (isvalid(nickNmElem, nickNmExp)) {nickNmCheck();}
     isvalid2(nickNmElem, nickNmExp, nickNmMsg, "");
     pushJoinBtn();
 });
 nickNmElem.addEventListener('input', () => {
+    if (isvalid(nickNmElem, nickNmExp)) {nickNmCheck();}
     isvalid2(nickNmElem, nickNmExp, nickNmMsg, "");
     pushJoinBtn();
 });
