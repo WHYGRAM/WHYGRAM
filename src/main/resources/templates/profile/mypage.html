@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="pageLayout">
+
+<head>
+    <title>mypage</title>
+</head>
+<th:block layout:fragment="js">
+    <script defer th:src="@{/css/user/mypage.css}"></script>
+</th:block>
+<th:block layout:fragment="js">
+    <script defer th:src="@{/js/user/mypage.js}"></script>
+</th:block>
+
+<th:block layout:fragment="content" th:with="profile=${#authentication.getPrincipal().getUser()}">
+    <form th:action="mypage" method="post" enctype="multipart/form-data">
+        <button id="profileImgBtn">
+            <th:if>
+
+            </th:if>
+            <img class="profileImg pointer" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${profile.users_id}, users_img=${profile.users_img})}"
+                                        onerror="this.style.display='none';">
+        </button>
+        <input id="profileInput" type="file" name="users_img" accept="image/**" style="display: none;">
+    </form>
+
+
+</th:block>
+
+</html>

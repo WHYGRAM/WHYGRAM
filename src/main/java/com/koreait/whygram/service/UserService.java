@@ -1,6 +1,7 @@
 package com.koreait.whygram.service;
 
 import com.koreait.whygram.common.EmailService;
+import com.koreait.whygram.common.FileUtils;
 import com.koreait.whygram.common.MySecurityUtils;
 import com.koreait.whygram.mapper.UserMapper;
 import com.koreait.whygram.model.user.UserEntity;
@@ -21,6 +22,7 @@ public class UserService {
     @Autowired private EmailService email;
     @Autowired private PasswordEncoder passwordEncoder;
     @Autowired private IAuthenticationFacade auth;
+    @Autowired private FileUtils fileUtils;
 
     // 이메일 중복확인
     public int selEmail(UserEntity param) {
@@ -116,8 +118,26 @@ public class UserService {
     }
 
     // 프로필 이미지 변경
-    public void profileImg(MultipartFile[] imgArr) {
+    public void profileImg(MultipartFile users_img) {
         UserEntity loginUser = auth.getLoginUser();
         int iuser = loginUser.getUsers_id();
+        String target = "profile/" + iuser;
+        UserEntity param = new UserEntity();
+        param.setUsers_id(iuser);
+
+        String saveFileNm = fileUtils.transferTo(users_img, target);
+        if(saveFileNm != null) {
+            param.setUsers_img(saveFileNm);
+            if (mapper.updUserImg(param) == 1 && loginUser.getUsers_img() == null) {
+                param.setUsers_id(iuser);
+                if (mapper.updUserImg(param) == 1) {
+                    loginUser.setUsers_img(saveFileNm);
+                }
+            }
+        }
+    }
+
+    public UserEntity selUserImg(UserEntity param) {
+        return mapper.selUserImg(param);
     }
 }

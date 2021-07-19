@@ -39,7 +39,7 @@ public class FileUtils {
         return getRandomFileNm(file.getOriginalFilename());
     }
 
-    //확장자 얻기               "aaa.jpg"
+    //확장자 얻기
     public String getExt(String fileNm) {
         return fileNm.substring(fileNm.lastIndexOf(".") + 1);
     }

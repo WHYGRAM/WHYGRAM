@@ -21,6 +21,7 @@ public interface UserMapper {
     // 마이페이지 업데이트
     int insUserImg(UserEntity param);
     int updUserImg(UserEntity param);
+    UserEntity selUserImg(UserEntity param);
     //int updUsers(UserEntity param);
 
 }

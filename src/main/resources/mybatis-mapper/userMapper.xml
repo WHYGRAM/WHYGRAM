@@ -86,13 +86,12 @@
         WHERE users_id = #{users_id}
     </update>
 
-    <insert id="insUserImg">
-        INSERT INTO users
-            ( users_id, users_img )
-        VALUES
-            ( #{users_id}, #{users_img} )
-    </insert>
-
+    <!-- 이미지 띄우기 -->
+    <select id="selUserImg" resultType="UserEntity">
+        SELECT users_img, users_id FROM users
+        WHERE users_id = #{users_id}
+    </select>
+    <!-- 프로필 이미지 변경 -->
     <update id="updUserImg">
         UPDATE users
         SET users_img = #{users_img}
