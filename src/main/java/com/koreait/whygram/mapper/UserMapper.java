@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserMapper {
+
     // 회원가입
     int insUsers(UserEntity param);
     UserDomain selEmail(UserEntity param);
