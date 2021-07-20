@@ -1,7 +1,12 @@
-const profileInputElem = document.querySelector('#profileInput');
-const profileImgBtnElem = document.querySelector('#profileImgBtn');
-const profileUploadElem = document.querySelector('#profileUpload');
+const profileInputElem = document.querySelector('.profileInput');
+const profileImgElem = document.querySelector('.profileImg');
 
-profileImgBtnElem.addEventListener('click', () => {
+profileImgElem.addEventListener('click', () => {
     profileInputElem.click();
+    imgChange()
 });
+
+function imgChange(target) {
+
+}
+
