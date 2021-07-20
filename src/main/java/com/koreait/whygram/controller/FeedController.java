@@ -17,12 +17,4 @@ public class FeedController {
 
     @GetMapping("/home")
     public void home() {}
-
-    @GetMapping("/profile")
-    public void profile() { }
-
-    @PostMapping("/profile")
-    public String profile(MultipartFile[] imgArr) {
-        return "";
-    }
 }
