@@ -2,20 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="pageLayout">
-<!--
-css, js 적용파일 추가
-<th:block layout:fragment="css">
 
-</th:block>
-<th:block layout:fragment="js">
-
-</th:block>
--->
 <head>
     <title>home</title>
 </head>
-
+<th:block layout:fragment="js">
+    <script defer th:src="@{/js/feed/home.js}"></script>
+</th:block>
+<th:block layout:fragment="css">
+    <script defer th:src="@{/css/feed/home.css}"></script>
+</th:block>
 <th:block layout:fragment="content">
-    <h1>homeTest</h1>
+
 </th:block>
 </html>
