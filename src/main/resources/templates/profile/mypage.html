@@ -14,12 +14,9 @@
 </th:block>
 
 <th:block layout:fragment="content" th:with="profile=${#authentication.getPrincipal().getUser()}">
-    <form th:action="mypage" method="post" enctype="multipart/form-data">
-        <img th:if="${profile.users_img == null}"  class="profileImg pointer" th:src="@{/img/defaultProfile.png}">
-        <img th:unless="${profile.users_img == null}" class="profileImg pointer" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${profile.users_id}, users_img=${profile.users_img})}">
-        <input class="profileInput" type="file" name="users_img" accept="image/**">
-        <input type="submit" value="업로드">
-    </form>
+    <img th:if="${profile.users_img == null}"  class="profileImg pointer" th:src="@{/img/defaultProfile.png}">
+    <img th:unless="${profile.users_img == null}" class="profileImg pointer" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${profile.users_id}, users_img=${profile.users_img})}">
+    <div><input class="profileInput" type="file" accept="image/**" style="display: none"></div>
 </th:block>
 
 </html>

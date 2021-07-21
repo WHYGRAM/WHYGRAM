@@ -26,23 +26,23 @@ CREATE TABLE users (
 
 CREATE TABLE feed (
     feed_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    users_id INT NOT NULL AUTO_INCREMENT,
-    fedd_ctnt VARCHAR(2200) NOT NULL,
+    users_id INT UNSIGNED AUTO_INCREMENT,
+    feed_ctnt VARCHAR(2200) NOT NULL,
     user_regdt DATETIME DEFAULT NOW(),
     FOREIGN KEY(users_id) references users(users_id)
 ) COMMENT'게시물';
 
 CREATE TABLE video(
     video_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    feed_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    feed_id INT UNSIGNED,
     video_ctnt VARCHAR(50) NOT NULL comment'영상',
     FOREIGN KEY(feed_id) references feed(feed_id)
 ) COMMENT'게시물 영상';
 
 CREATE TABLE cmt (
     cmt_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    feed_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    users_id INT NOT NULL AUTO_INCREMENT,
+    feed_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    users_id INT UNSIGNED,
     cmt_ctnt VARCHAR(50) NOT NULL comment'댓글',
     cmt_regdt VARCHAR(50) NOT NULL,
     FOREIGN KEY(feed_id) references feed(feed_id),
@@ -51,7 +51,7 @@ CREATE TABLE cmt (
 
 CREATE TABLE contents (
     contents_id INT UNSIGNED AUTO_INCREMENT,
-    feed_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    feed_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     contents_img VARCHAR(36) NOT NULL COMMENT'사진',
     contents_video VARCHAR(36) NOT NULL COMMENT'영상'
 ) COMMENT'게시물 사진';
