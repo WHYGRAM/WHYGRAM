@@ -26,7 +26,6 @@ public class ProfileController {
     public Map<String, Integer> postMypage(MultipartFile users_img) {
         Map<String, Integer> res = new HashMap();
         res.put("result", service.profileImg(users_img));
-        System.out.println(res);
         return res;
     }
 
