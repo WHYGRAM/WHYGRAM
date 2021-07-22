@@ -1,4 +1,4 @@
-//msg, form, input elem
+//msg, form, input, span elem
 const warnMsgDiv = document.querySelector('.warnMsg');
 
 const joinFrmElem = document.querySelector('#joinFrm');
@@ -7,9 +7,11 @@ const joinBtnElem = joinFrmElem.joinBtn;
 const joinEmailElem = document.querySelector('#joinEmail');
 const emailIdElem = joinFrmElem.emailId;
 const emailAdrsElem = joinFrmElem.emailAdrs;
+const emSpanElem = document.querySelector('.chkSpan.emSpan');
 
 const nmElem = joinFrmElem.nm;
 const nickNmElem = joinFrmElem.nickNm;
+const nickNmSpanElem = document.querySelector('.chkSpan.nickNmSpan');
 const pwElem = joinFrmElem.pw;
 const pw2Elem = joinFrmElem.pw2;
 
@@ -79,10 +81,14 @@ function emailCheck() {
         .then(myJson => {
             console.log(myJson);
           if(myJson.result == 0) { //중복검사 통과
+              emSpanElem.innerHTML = '<i class="fas fa-check-circle"></i>';
               isEmailChk = true;
+              pushJoinBtn();
               ok(emailIdElem, "사용가능한 이메일입니다. 이메일 인증이 필요한 점 유의해 주세요.");
           } else { //아이디 중복됨
+              emSpanElem.innerHTML='<i class="fas fa-exclamation-triangle"></i>';
               isEmailChk = false;
+              pushJoinBtn();
               warn(emailIdElem, "중복된 이메일입니다.");
           }
     });
@@ -101,10 +107,14 @@ function nickNmCheck() {
         .then(myJson => {
             console.log(myJson);
             if(myJson.result == 0) { //중복검사 통과
+                nickNmSpanElem.innerHTML = '<i class="fas fa-check-circle"></i>';
                 isNickChk = true;
+                pushJoinBtn();
                 ok(nickNmElem, "사용가능한 닉네임입니다.");
             } else { //닉네임 중복됨
+                nickNmSpanElem.innerHTML='<i class="fas fa-exclamation-triangle"></i>';
                 isNickChk = false;
+                pushJoinBtn();
                 warn(nickNmElem, "중복된 닉네임입니다.");
             }
         });
@@ -156,18 +166,11 @@ function pushJoinBtn() {
     if (isvalid(emailIdElem, emailExp) && isNotEmpty(emailAdrsElem) && isvalid(nmElem, nmExp)
     && isNotEmpty(yearSelElem) && isNotEmpty(monSelElem) && isNotEmpty(daySelElem) && isvalid(nickNmElem, nickNmExp)
     && pwCheck2(pwElem, pw2Elem, pwExp)) {
-        if (!isEmailChk) {
+        if (!isEmailChk || !isNickChk) {
             joinBtnElem.disabled = true;
-            warn(emailIdElem, "중복된 이메일입니다.");
-        } else if (!isNickChk) {
-            joinBtnElem.disabled = true;
-            warn(nickNmElem, "중복된 닉네임입니다.");
-        } else if (!isEmailChk && !isNickChk) {
-            joinBtnElem.disabled = true;
-            warn(emailIdElem, "");
-            warn(nickNmElem, "중복된 이메일과 닉네임입니다.");
+        } else {
+            joinBtnElem.disabled = false;
         }
-        joinBtnElem.disabled = false;
     } else {
         joinBtnElem.disabled = true;
     }
