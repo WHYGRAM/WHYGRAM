@@ -42,27 +42,22 @@ public class UserService {
         return result;
     }
 
-    // 아이디 중복 검사 & 비밀번호 확인 검사
-    public String idPwChk(UserEntity param, String pwchk) {
-        int idChk = mapper.selEmail(param).getEmailCheck();
-
-        if (idChk == 0) { // 아이디 중복값 없음
-            if (param.getUsers_password().equals(pwchk)) { // 비밀번호 서로 일치
-                return "done"; // 아이디 비밀번호 모두 통과
-            }
-            // 비밀번호 불일치
-            return "pw";
+    // 이메일 중복 검사 & 닉네임 중복 검사 & 비밀번호 확인 검사
+    public boolean isEmNickPwChk(UserEntity param, String pwchk) {
+        int emChk = mapper.selEmail(param).getEmailCheck();
+        int nickChk = mapper.selNickNm(param).getNickNmCheck();
+        boolean pwChk = param.getUsers_password().equals(pwchk);
+        if(emChk == 0 && nickChk == 0 && pwChk) {
+            return true;
         }
-        // 아이디 중복값 있음
-        return "id";
+        return false;
     }
 
     // 회원가입
     public String insUsers(UserEntity param, String pwchk) {
 
-        // 아이디, 비밀번호 검사
-        String idPwChk = this.idPwChk(param, pwchk);
-        if (idPwChk.equals("pw") || idPwChk.equals("id")) {
+        // 이메일, 닉네임, 비밀번호 검사
+        if (!this.isEmNickPwChk(param, pwchk)) {
             return "/whygram?msg=wrongAccess";
         }
 
