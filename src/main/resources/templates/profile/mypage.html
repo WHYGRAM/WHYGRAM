@@ -7,10 +7,10 @@
     <title>mypage</title>
 </head>
 <th:block layout:fragment="js">
-    <script defer th:src="@{/css/user/mypage.css}"></script>
+    <script defer th:src="@{/css/profile/mypage.css}"></script>
 </th:block>
 <th:block layout:fragment="js">
-    <script defer th:src="@{/js/user/mypage.js}"></script>
+    <script defer th:src="@{/js/profile/mypage.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content" th:with="profile=${#authentication.getPrincipal().getUser()}">

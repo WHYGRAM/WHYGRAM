@@ -25,10 +25,6 @@ public class UserService {
     private EmailService email;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired
-    private IAuthenticationFacade auth;
-    @Autowired
-    private FileUtils fileUtils;
 
     // 이메일 중복확인
     public int selEmail(UserEntity param) {
@@ -121,31 +117,5 @@ public class UserService {
 
         //임시비밀번호 설정 실패 또는 이메일과 닉네임이 없다
         return 0;
-    }
-
-    // 프로필 이미지 변경
-    public int profileImg(MultipartFile users_img) {
-        UserEntity loginUser = auth.getLoginUser();
-        int iuser = loginUser.getUsers_id();
-        String target = "profile/" + iuser;
-        UserEntity param = new UserEntity();
-        String saveFileNm = fileUtils.transferTo(users_img, target);
-
-        param.setUsers_id(iuser);
-        param.setUsers_img(saveFileNm);
-        if (saveFileNm != null) {
-            int result = mapper.updUserImg(param);
-            if (result == 1) {
-                loginUser.setUsers_img(saveFileNm);
-                return result;
-            }
-        }
-        return 0;
-    }
-
-
-
-    public UserEntity selUserImg(UserEntity param) {
-        return mapper.selUserImg(param);
     }
 }
