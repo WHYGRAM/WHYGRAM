@@ -1,7 +1,9 @@
 package com.koreait.whygram.controller;
 
+import com.koreait.whygram.mapper.ProfileMapper;
 import com.koreait.whygram.mapper.UserMapper;
 import com.koreait.whygram.model.user.UserEntity;
+import com.koreait.whygram.service.ProfileService;
 import com.koreait.whygram.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +20,14 @@ import java.util.Map;
 @RequestMapping("/profile")
 public class ProfileController {
 
-    @Autowired UserService service;
-    @Autowired UserMapper mapper;
+    @Autowired
+    ProfileService service;
 
     @ResponseBody
     @PostMapping("/mypage")
     public Map<String, Integer> postMypage(MultipartFile users_img) {
         Map<String, Integer> res = new HashMap();
         res.put("result", service.profileImg(users_img));
-        System.out.println(res);
         return res;
     }
 

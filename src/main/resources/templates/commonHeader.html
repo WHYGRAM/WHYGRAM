@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org">
-
 <header th:fragment="header">
     <nav>
         <span class="siteLogo">
-            <i class="fab fa-instagram-square fa-4x"></i>
+            <a th:href="@{/feed/home}">
+                <i class="bi bi-instagram" style="font-size: 3rem; color: black;"></i>
+            </a>
             왜그램
             Whygram
 
@@ -13,14 +14,16 @@
         <span class="header__right">
             <div class="right__icon">
                 <a th:href="@{/feed/home}">
-                <i class="fas fa-home fa-2x"></i>
-            </a>
-            <a th:href="@{/profile/mypage}">
-                <i class="fas fa-user fa-2x"></i>
-            </a>
+                    <i class="bi bi-house-fill" style="font-size: 2.5rem; color: black;"></i>
+                </a>
+                <a th:href="@{/profile/mypage}">
+                    <i class="bi bi-person-circle" style="font-size: 2.5rem; color: black;"></i>
+                </a>
+                <a th:href="@{/user/logout}">
+                    <i class="bi bi-door-closed-fill" style="font-size: 2.5rem; color: black;"></i>
+                </a>
             </div>
         </span>
-        <li><a th:href="@{/user/logout}">로그아웃</a></li>
     </nav>
 </header>
 </html>

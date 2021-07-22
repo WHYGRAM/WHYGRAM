@@ -28,7 +28,7 @@ function changeImg() {
         .then(myJson => {
             switch(myJson.result) {
                 case 0:
-                    alert('피드 등록에 실패하였습니다.');
+                    alert('프로필이미지 등록에 실패하였습니다.');
                     break;
                 case 1:
                     location.href = '/profile/mypage';

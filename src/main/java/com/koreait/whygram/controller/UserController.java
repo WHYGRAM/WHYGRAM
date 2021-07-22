@@ -16,7 +16,6 @@ public class UserController {
 
     @Autowired private UserService service;
 
-
     @PostMapping("/join")
     public String postJoin(UserEntity userEntity, @RequestParam String pwchk) {
         String path = service.insUsers(userEntity, pwchk);
