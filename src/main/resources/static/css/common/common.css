@@ -31,3 +31,6 @@ right__icon {
 section {margin-top: 80px}
 
 .pointer { cursor: pointer; }
+/* 모달창 */
+.hide { display: none !important; }
+
