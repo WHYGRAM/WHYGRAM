@@ -10,14 +10,14 @@
             users_email, users_password,
             users_name, users_gender,
             users_date_birth, users_auth_code,
-            users_nickname, provider
+            users_nickname, users_provider
         )
         VALUES
         (
             #{users_email}, #{users_password},
             #{users_name}, #{users_gender},
             #{users_date_birth}, #{users_auth_code},
-            #{users_nickname}, #{provider}
+            #{users_nickname}, #{users_provider}
         )
     </insert>
 
@@ -59,7 +59,7 @@
     <select id="selUsers" resultType="UserEntity">
         SELECT * FROM users
         WHERE users_email = #{users_email}
-          AND provider = #{provider}
+          AND users_provider = #{users_provider}
           AND users_auth_code IS NULL
           AND users_is_quit = 0
     </select>
