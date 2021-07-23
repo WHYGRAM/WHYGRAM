@@ -1,11 +1,7 @@
 package com.koreait.whygram.controller;
 
-import com.koreait.whygram.mapper.ProfileMapper;
-import com.koreait.whygram.mapper.UserMapper;
 import com.koreait.whygram.model.user.UserEntity;
 import com.koreait.whygram.service.ProfileService;
-import com.koreait.whygram.service.UserService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
