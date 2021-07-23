@@ -13,7 +13,7 @@ public class UserEntity {
 
     // 로그인에 사용
     private int users_id;
-    private String provider;
+    private String users_provider;
     private String users_email;
     private String users_password;
     private String users_name;
