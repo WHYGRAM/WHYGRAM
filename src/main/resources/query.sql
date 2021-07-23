@@ -10,7 +10,7 @@ CREATE TABLE users (
     users_email VARCHAR(50) UNIQUE,
     users_password VARCHAR(100),
     users_provider VARCHAR(10) DEFAULT 'local',
-    users_name VARCHAR(5),
+    users_name VARCHAR(20),
     users_gender TINYINT(1) UNSIGNED,
     users_date_birth DATE,
     users_nickname VARCHAR(12) UNIQUE,
