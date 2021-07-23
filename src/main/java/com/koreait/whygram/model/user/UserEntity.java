@@ -1,16 +1,19 @@
 package com.koreait.whygram.model.user;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
-@Data
+@Getter
+@Setter
+@ToString
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity {
 
     // 로그인에 사용
     private int users_id;
-
+    private String provider;
     private String users_email;
     private String users_password;
     private String users_name;
