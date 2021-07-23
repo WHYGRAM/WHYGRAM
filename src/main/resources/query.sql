@@ -7,13 +7,14 @@ USE whygram;
 
 CREATE TABLE users (
     users_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    users_email VARCHAR(30) NOT NULL UNIQUE,
-    users_password VARCHAR(100) NOT NULL,
-    users_name VARCHAR(5) NOT NULL,
-    users_gender TINYINT(1) UNSIGNED NOT NULL ,
-    users_date_birth DATE NOT NULL,
-    users_nickname VARCHAR(12) NOT NULL UNIQUE,
-    users_regdt DATETIME DEFAULT NOW() NOT NULL ,
+    users_email VARCHAR(50) UNIQUE,
+    users_password VARCHAR(100),
+    users_provider VARCHAR(10) DEFAULT 'local',
+    users_name VARCHAR(5),
+    users_gender TINYINT(1) UNSIGNED,
+    users_date_birth DATE,
+    users_nickname VARCHAR(12) UNIQUE,
+    users_regdt DATETIME DEFAULT NOW(),
 
     users_img VARCHAR(50) COMMENT '프로필사진',
     users_ctnt VARCHAR(150) COMMENT '소개글',
@@ -24,45 +25,6 @@ CREATE TABLE users (
     users_follow_count INT UNSIGNED COMMENT '피드글 개수'
 ) COMMENT'회원가입 정보';
 
-CREATE TABLE feed (
-    feed_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    users_id INT UNSIGNED AUTO_INCREMENT,
-    feed_ctnt VARCHAR(2200) NOT NULL,
-    user_regdt DATETIME DEFAULT NOW(),
-    FOREIGN KEY(users_id) references users(users_id)
-) COMMENT'게시물';
-
-CREATE TABLE video(
-    video_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    feed_id INT UNSIGNED,
-    video_ctnt VARCHAR(50) NOT NULL comment'영상',
-    FOREIGN KEY(feed_id) references feed(feed_id)
-) COMMENT'게시물 영상';
-
-CREATE TABLE cmt (
-    cmt_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    feed_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    users_id INT UNSIGNED,
-    cmt_ctnt VARCHAR(50) NOT NULL comment'댓글',
-    cmt_regdt VARCHAR(50) NOT NULL,
-    FOREIGN KEY(feed_id) references feed(feed_id),
-    FOREIGN KEY(users_id) references users(users_id)
-) COMMENT'게시물 댓글';
-
-CREATE TABLE contents (
-    contents_id INT UNSIGNED AUTO_INCREMENT,
-    feed_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    contents_img VARCHAR(36) NOT NULL COMMENT'사진',
-    contents_video VARCHAR(36) NOT NULL COMMENT'영상'
-) COMMENT'게시물 사진';
-
-CREATE TABLE fav (
-    feed_id INT UNSIGNED AUTO_INCREMENT,
-    cmt_id INT UNSIGNED AUTO_INCREMENT,
-    FOREIGN KEY(feed_id) references feed(feed_id),
-    FOREIGN KEY(cmt_id) references cmt(cmt_id)
-) COMMENT'게시물과 댓글 좋아요';
-
 CREATE TABLE follow (
     follow_follower INT UNSIGNED AUTO_INCREMENT COMMENT '팔로우를 누른 사람',
     follow_follow INT UNSIGNED AUTO_INCREMENT COMMENT '팔로우대상',
@@ -70,3 +32,47 @@ CREATE TABLE follow (
     FOREIGN KEY(follow_follow) references users(users_id),
     PRIMARY KEY (follow_follower, follow_follow)
 ) COMMENT '팔로우와 팔로워';
+
+CREATE TABLE feed (
+    feed_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    users_id INT UNSIGNED,
+    feed_ctnt VARCHAR(2200) NOT NULL COMMENT '글',
+    feed_regdt DATETIME DEFAULT NOW(),
+    FOREIGN KEY(users_id) references users(users_id)
+) COMMENT'게시물';
+
+CREATE TABLE contents (
+    contents_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    feed_id INT UNSIGNED,
+    contents_img VARCHAR(36) comment'사진',
+    contents_video VARCHAR(36) comment'영상',
+    FOREIGN KEY(feed_id) references feed(feed_id)
+) COMMENT'게시물 컨텐츠';
+
+CREATE TABLE cmt (
+    cmt_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    feed_id INT UNSIGNED,
+    users_id INT UNSIGNED,
+    cmt_cmt VARCHAR(50) NOT NULL comment'댓글',
+    cmt_regdt DATETIME DEFAULT NOW(),
+    FOREIGN KEY(feed_id) references feed(feed_id),
+    FOREIGN KEY(users_id) references users(users_id
+) COMMENT'게시물 댓글';
+
+CREATE TABLE feed_fav (
+    users_id INT UNSIGNED,
+    feed_id INT UNSIGNED,
+    FOREIGN KEY(feed_id) references feed(feed_id),
+    FOREIGN KEY(users_id) references users(users_id),
+    PRIMARY KEY (users_id, feed_id)
+) COMMENT'게시물 좋아요';
+
+CREATE TABLE cmt_fav (
+    users_id INT UNSIGNED,
+    feed_id INT UNSIGNED,
+    cmt_id INT UNSIGNED,
+    FOREIGN KEY(users_id) references users(users_id),
+    FOREIGN KEY(feed_id) references feed(feed_id),
+    FOREIGN KEY(cmt_id) references cmt(cmt_id),
+    PRIMARY KEY (users_id, feed_id, cmt_id)
+) COMMENT'댓글 좋아요';
