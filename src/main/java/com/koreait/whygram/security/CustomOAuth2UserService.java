@@ -27,7 +27,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         OAuth2UserInfo userInfo = getOauth2UserInfo(registrationId, modifyAttributes);
         UserEntity user = convertOauthToUserEntity(userInfo);
-        UserEntity chkUser = myUserService.loadUserByUsernameAndProvider(user.getUsers_email(), user.getProvider());
+        UserEntity chkUser = myUserService.loadUserByUsernameAndProvider(user.getUsers_email(), user.getUsers_provider());
         //DB에 값 있나 체크 없으면 insert
         if(chkUser == null) {
             myUserService.insUsers(user);
@@ -40,7 +40,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         UserEntity user = UserEntity.builder()
                             .users_email(userInfo.getId()) //social 사이트의 pk값을 우리 user테이블에 email에 저장함.
                             .users_name(userInfo.getName())
-                            .provider(userInfo.getProvider())
+                            .users_provider(userInfo.getProvider())
                             .build();
         return user;
     }

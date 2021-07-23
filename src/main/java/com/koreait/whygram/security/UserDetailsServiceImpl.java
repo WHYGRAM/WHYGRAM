@@ -21,7 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public UserEntity loadUserByUsernameAndProvider(String id, String provider) throws UsernameNotFoundException {
         UserEntity param = new UserEntity();
-        param.setProvider(provider);
+        param.setUsers_provider(provider);
         param.setUsers_email(id);
         return mapper.selUsers(param);
     }
