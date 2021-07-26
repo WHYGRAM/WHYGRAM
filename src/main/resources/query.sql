@@ -26,7 +26,7 @@ CREATE TABLE users (
 
 CREATE TABLE feed (
     feed_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    users_id INT UNSIGNED AUTO_INCREMENT,
+    users_id INT UNSIGNED,
     feed_ctnt VARCHAR(2200) NOT NULL,
     user_regdt DATETIME DEFAULT NOW(),
     FOREIGN KEY(users_id) references users(users_id)

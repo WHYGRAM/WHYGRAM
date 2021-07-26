@@ -27,12 +27,16 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-body">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
+                    <!--
+                    <img th:if="${profile.users_img == null}"  class="profileImg pointer" th:src="@{/img/profile/defaultProfile.png}">
+                    <img th:unless="${profile.users_img == null}" class="profileImg pointer" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${profile.users_id}, users_img=${profile.users_img})}">
+                    -->
+                    <div><input class="boardImg" type="file" accept="image/**" style="display: none"></div>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary boardInputBtn" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">글등록</button>
                 </div>
             </div>
         </div>

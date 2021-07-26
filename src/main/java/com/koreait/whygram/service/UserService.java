@@ -55,7 +55,7 @@ public class UserService {
 
     // 회원가입
     public String insUsers(UserEntity param, String pwchk) {
-
+        System.out.println(param);
         // 아이디, 비밀번호 검사
         String idPwChk = this.idPwChk(param, pwchk);
         if (idPwChk.equals("pw") || idPwChk.equals("id")) {
@@ -67,7 +67,6 @@ public class UserService {
 
         // 비밀번호 암호화
         String hashedPw = passwordEncoder.encode(param.getUsers_password());
-
         // UserEntity 설정
         param.setUsers_password(hashedPw);
         param.setUsers_auth_code(authCd);
