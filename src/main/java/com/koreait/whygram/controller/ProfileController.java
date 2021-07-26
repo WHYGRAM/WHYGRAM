@@ -1,6 +1,7 @@
 package com.koreait.whygram.controller;
 
 import com.koreait.whygram.model.user.UserEntity;
+import com.koreait.whygram.security.IAuthenticationFacade;
 import com.koreait.whygram.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +17,7 @@ import java.util.Map;
 @RequestMapping("/profile")
 public class ProfileController {
 
-    @Autowired
-    ProfileService service;
+    @Autowired private ProfileService service;
 
     @ResponseBody
     @PostMapping("/mypage")
@@ -30,6 +30,7 @@ public class ProfileController {
 
     @GetMapping("/mypage")
     public void getMypage(Model model, UserEntity param) {
+
         model.addAttribute("profile", service.selUserImg(param));
     }
 

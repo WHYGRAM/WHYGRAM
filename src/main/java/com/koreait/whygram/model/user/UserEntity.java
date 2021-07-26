@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 public class UserEntity {
 
-    // 로그인에 사용
+    // 로그인, 회원가입에 사용
     private int users_id;
     private String users_provider;
     private String users_email;
