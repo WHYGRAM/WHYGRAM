@@ -1,2 +1,4 @@
-const logoutElem = document.querySelector('.header__right.right__icon .logout');
-logoutElem.addEventListener('hover', () => {logoutElem.innerHTML = '<i class="bi bi-door-open-fill"></i>'});
+/*
+const logoutElem = document.querySelector('.logout');
+logoutElem.addEventListener('mouseover', () => {logoutElem.innerHTML = '<i class="bi bi-door-open-fill"></i>'});
+ */

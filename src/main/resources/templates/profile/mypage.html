@@ -15,7 +15,7 @@
 
 <th:block layout:fragment="content" th:with="auth=${#authentication.getPrincipal().getUser()}">
     <img th:if="${auth.users_img == null}"  class="profileImg pointer" th:src="@{/img/profile/defaultProfile.png}">
-    <img th:unless="${auth.users_img == null}" class="profileImg pointer" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${profile.users_id}, users_img=${profile.users_img})}">
+    <img th:unless="${auth.users_img == null}" class="profileImg pointer" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${auth.users_id}, users_img=${auth.users_img})}">
     <div><input class="profileInput" type="file" accept="image/**" style="display: none"></div>
 </th:block>
 

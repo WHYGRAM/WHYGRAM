@@ -17,7 +17,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </th:block>
 
-<th:block layout:fragment="content">
+<th:block layout:fragment="content" th:object="${feedEntity}">
     <!-- Button trigger modal -->
     <div class="btn text-center" data-bs-toggle="modal" data-target="#myModal" data-bs-target="#staticBackdrop">
         <i class="bi bi-plus-circle pointer" style="font-size: 2rem;"></i>
@@ -27,16 +27,17 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-body">
-                    <!--
-                    <img th:if="${profile.users_img == null}"  class="profileImg pointer" th:src="@{/img/profile/defaultProfile.png}">
-                    <img th:unless="${profile.users_img == null}" class="profileImg pointer" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${profile.users_id}, users_img=${profile.users_img})}">
-                    -->
-                    <div><input class="boardImg" type="file" accept="image/**" style="display: none"></div>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <img class="feedImg pointer" th:src="@{/img/feed/feedDefaultImg.png}">
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <!-- <img th:unless="${auth.users_img == null}" class="feedImg pointer" src="@{/pic/feed/{feed_id}/{feed_img}(users_id=${auth.users_id}, users_img=${auth.users_img})}">-->
+                        <div id="displayImgList"></div>
+                    </div>
+                    <div><input class="feedSelectImg" name="contents_img" type="file" multiple accept="image/**" style="display: none"></div>
+                    <textarea class="form-control feedCtnt" id="exampleFormControlTextarea1" th:field="*{feed_ctnt}" rows="5" style="resize: none"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary boardInputBtn" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">글등록</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary feedInputBtn">글등록</button>
                 </div>
             </div>
         </div>

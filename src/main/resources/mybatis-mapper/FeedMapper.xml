@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koreait.whygram.mapper.FeedMapper">
+    <!-- 글, 사진 등록 -->
+    <insert id="insFeed" useGeneratedKeys="true" keyProperty="feed_id">
+        INSERT INTO feed
+        (feed_ctnt, users_id)
+        VALUES
+        ( #{feed_ctnt}, ${users_id} )
+    </insert>
+    <insert id="insFeedImg">
+        INSERT INTO contents
+        (feed_id, contents_img)
+        VALUES
+        ( #{feed_id}, #{contents_img} )
+    </insert>
+
+
+</mapper>
