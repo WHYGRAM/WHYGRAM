@@ -13,7 +13,7 @@ CREATE TABLE users (
     users_name VARCHAR(20),
     users_gender TINYINT(1) UNSIGNED,
     users_date_birth DATE,
-    users_nickname VARCHAR(12) UNIQUE,
+    users_nickname VARCHAR(20) UNIQUE,
     users_regdt DATETIME DEFAULT NOW(),
 
     users_img VARCHAR(50) COMMENT '프로필사진',
@@ -26,12 +26,12 @@ CREATE TABLE users (
 ) COMMENT'회원가입 정보';
 
 CREATE TABLE follow (
-    follow_follower INT UNSIGNED AUTO_INCREMENT COMMENT '팔로우를 누른 사람',
-    follow_follow INT UNSIGNED AUTO_INCREMENT COMMENT '팔로우대상',
-    FOREIGN KEY(follow_follower) references users(users_id),
-    FOREIGN KEY(follow_follow) references users(users_id),
-    PRIMARY KEY (follow_follower, follow_follow)
-) COMMENT '팔로우와 팔로워';
+    follow_hisFollower INT UNSIGNED COMMENT '팔로우를 누른 사람',
+    follow_him INT UNSIGNED COMMENT '팔로우대상',
+    FOREIGN KEY(follow_hisFollower) references users(users_id),
+    FOREIGN KEY(follow_him) references users(users_id),
+    PRIMARY KEY (follow_hisFollower, follow_him)
+) COMMENT '팔로우 정보';
 
 CREATE TABLE feed (
     feed_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -56,7 +56,7 @@ CREATE TABLE cmt (
     cmt_cmt VARCHAR(50) NOT NULL comment'댓글',
     cmt_regdt DATETIME DEFAULT NOW(),
     FOREIGN KEY(feed_id) references feed(feed_id),
-    FOREIGN KEY(users_id) references users(users_id
+    FOREIGN KEY(users_id) references users(users_id)
 ) COMMENT'게시물 댓글';
 
 CREATE TABLE feed_fav (

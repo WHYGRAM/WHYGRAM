@@ -19,6 +19,8 @@ public class ProfileService {
     ProfileMapper mapper;
     @Autowired
     private IAuthenticationFacade auth;
+    private int loginUserPk = auth.getLoginUserPk();
+
     @Autowired
     private FileUtils fileUtils;
 
