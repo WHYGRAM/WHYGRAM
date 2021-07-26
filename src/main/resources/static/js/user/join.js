@@ -1,4 +1,4 @@
-//msg와 form과 input elem
+//msg, form, input, span elem
 const warnMsgDiv = document.querySelector('.warnMsg');
 
 const joinFrmElem = document.querySelector('#joinFrm');
@@ -7,9 +7,11 @@ const joinBtnElem = joinFrmElem.joinBtn;
 const joinEmailElem = document.querySelector('#joinEmail');
 const emailIdElem = joinFrmElem.emailId;
 const emailAdrsElem = joinFrmElem.emailAdrs;
+const emSpanElem = document.querySelector('.chkSpan.emSpan');
 
 const nmElem = joinFrmElem.nm;
 const nickNmElem = joinFrmElem.nickNm;
+const nickNmSpanElem = document.querySelector('.chkSpan.nickNmSpan');
 const pwElem = joinFrmElem.pw;
 const pw2Elem = joinFrmElem.pw2;
 
@@ -17,6 +19,10 @@ const birthElem = document.querySelector('#users_date_birth');
 const yearSelElem = joinFrmElem.yearSel;
 const monSelElem = joinFrmElem.monSel;
 const daySelElem = joinFrmElem.daySel;
+
+//이메일, 닉네임 중복여부
+let isEmailChk = false;
+let isNickChk = false;
 
 //input 색깔
 function ok(strElem, strMsg) {
@@ -39,7 +45,7 @@ const nickNmMsg = "닉네임은 영문대소문자, 한글로 2~12자 이내로 
 const pwMsg = "비밀번호는 영문대소문자, 특수문자(!@#$%^&*)로 8~16자 이내로 입력해주세요.";
 
 function isvalid(strElem, strExp) {
-    let exp = new RegExp(strExp, "g");
+    const exp = new RegExp(strExp, "g");
     if (exp.exec(strElem.value) !== null && isNotEmpty(strElem)) {
         return true;
     }
@@ -47,7 +53,7 @@ function isvalid(strElem, strExp) {
 }
 
 function isvalid2(strElem, strExp, strMsg, okMsg) {   // +ok()+warn()-boolean
-    let exp = new RegExp(strExp, "g");
+    const exp = new RegExp(strExp, "g");
     if (exp.exec(strElem.value) !== null && isNotEmpty(strElem)) {
         ok(strElem, okMsg);
     } else {
@@ -57,9 +63,9 @@ function isvalid2(strElem, strExp, strMsg, okMsg) {   // +ok()+warn()-boolean
 
 //email 완성 함수 AJAX 중복 검사
 function completeEmail() {
-    let emailId = emailIdElem.value;
-    let emailAdrs = emailAdrsElem.value;
-    let users_email = emailId + emailAdrs;
+    const emailId = emailIdElem.value;
+    const emailAdrs = emailAdrsElem.value;
+    const users_email = emailId + emailAdrs;
     return users_email;
 }
 
@@ -75,8 +81,14 @@ function emailCheck() {
         .then(myJson => {
             console.log(myJson);
           if(myJson.result == 0) { //중복검사 통과
+              emSpanElem.innerHTML = '<i class="fas fa-check-circle"></i>';
+              isEmailChk = true;
+              pushJoinBtn();
               ok(emailIdElem, "사용가능한 이메일입니다. 이메일 인증이 필요한 점 유의해 주세요.");
           } else { //아이디 중복됨
+              emSpanElem.innerHTML='<i class="fas fa-exclamation-triangle"></i>';
+              isEmailChk = false;
+              pushJoinBtn();
               warn(emailIdElem, "중복된 이메일입니다.");
           }
     });
@@ -95,9 +107,15 @@ function nickNmCheck() {
         .then(myJson => {
             console.log(myJson);
             if(myJson.result == 0) { //중복검사 통과
-                ok(emailIdElem, "사용가능한 닉네임입니다.");
-            } else { //아이디 중복됨
-                warn(emailIdElem, "중복된 닉네임입니다.");
+                nickNmSpanElem.innerHTML = '<i class="fas fa-check-circle"></i>';
+                isNickChk = true;
+                pushJoinBtn();
+                ok(nickNmElem, "사용가능한 닉네임입니다.");
+            } else { //닉네임 중복됨
+                nickNmSpanElem.innerHTML='<i class="fas fa-exclamation-triangle"></i>';
+                isNickChk = false;
+                pushJoinBtn();
+                warn(nickNmElem, "중복된 닉네임입니다.");
             }
         });
 }
@@ -148,7 +166,11 @@ function pushJoinBtn() {
     if (isvalid(emailIdElem, emailExp) && isNotEmpty(emailAdrsElem) && isvalid(nmElem, nmExp)
     && isNotEmpty(yearSelElem) && isNotEmpty(monSelElem) && isNotEmpty(daySelElem) && isvalid(nickNmElem, nickNmExp)
     && pwCheck2(pwElem, pw2Elem, pwExp)) {
-        joinBtnElem.disabled = false;
+        if (!isEmailChk || !isNickChk) {
+            joinBtnElem.disabled = true;
+        } else {
+            joinBtnElem.disabled = false;
+        }
     } else {
         joinBtnElem.disabled = true;
     }
