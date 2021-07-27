@@ -19,12 +19,7 @@ feedSelectImgElem.addEventListener('change', () => {
 
 feedInputBtnElem.addEventListener('click', () => {
    const data = new FormData();
-   console.log(feedCtntElem.value);
-   console.log(feedCtntElem.value.length);
-   console.log(feedCtntElem.className);
-   console.log(feedCtntElem.id);
-   console.log(feedCtntElem.classList);
-   if(feedCtntElem.value.length > 0) { data.append(feedCtntElem.className, feedCtntElem.value); }
+   if(feedCtntElem.value.length > 0) { data.append(feedCtntElem.id, feedCtntElem.value); }
    if(feedList.length > 0) {
       for(let i = 0; i < feedList.length; i++) {
          data.append('contents_img', feedList[i]);
