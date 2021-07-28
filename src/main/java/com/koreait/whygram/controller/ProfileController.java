@@ -27,11 +27,9 @@ public class ProfileController {
         return res;
     }
 
-
     @GetMapping("/mypage")
     public void getMypage(Model model, UserEntity param) {
-
-        model.addAttribute("profile", service.selUserImg(param));
+        model.addAttribute("profile", service.selUserProfile(param));
     }
 
 }

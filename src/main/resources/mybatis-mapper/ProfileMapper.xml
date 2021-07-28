@@ -26,10 +26,18 @@
         WHERE users_id = #{users_id}
     </update>
 
-    <!-- 이미지 띄우기 -->
-    <select id="selUserImg" resultType="UserEntity">
-        SELECT users_img, users_id FROM users
-        WHERE users_id = #{users_id}
+    <!-- 이미지 띄우기 + 프로필 -->
+    <select id="selUserProfile" resultType="UserDomain">
+        SELECT U.users_id, U.users_name, U.users_nickname, U.users_img, U.users_ctnt,
+               U.users_feed_count, U.users_follower_count, U.users_follow_count,
+               (SELECT COUNT(follow_him) FROM follow
+                WHERE follow_hisFollower = ${hisFollower} AND follow_him = ${him})
+                   AS isYourFollower,
+               (SELECT COUNT(follow_him) FROM follow
+                WHERE follow_hisFollower = ${him} AND follow_him = ${hisFollower})
+                   AS isMyFollower
+        FROM users U
+        WHERE U.users_id = ${him}
     </select>
 
     <!-- 프로필 이미지 변경 -->
