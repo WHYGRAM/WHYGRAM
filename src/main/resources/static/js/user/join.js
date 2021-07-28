@@ -46,7 +46,7 @@ const pwMsg = "비밀번호는 영문대소문자, 특수문자(!@#$%^&*)로 8~1
 
 function isvalid(strElem, strExp) {
     const exp = new RegExp(strExp, "g");
-    if (exp.exec(strElem.value) !== null && isNotEmpty(strElem)) {
+    if (exp.exec(strElem.value) && isNotEmpty(strElem)) {
         return true;
     }
     return false;
@@ -54,7 +54,7 @@ function isvalid(strElem, strExp) {
 
 function isvalid2(strElem, strExp, strMsg, okMsg) {   // +ok()+warn()-boolean
     const exp = new RegExp(strExp, "g");
-    if (exp.exec(strElem.value) !== null && isNotEmpty(strElem)) {
+    if (exp.exec(strElem.value) && isNotEmpty(strElem)) {
         ok(strElem, okMsg);
     } else {
         warn(strElem, strMsg);

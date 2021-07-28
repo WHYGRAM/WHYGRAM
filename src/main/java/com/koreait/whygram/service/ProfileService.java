@@ -6,12 +6,16 @@ import com.koreait.whygram.common.MySecurityUtils;
 import com.koreait.whygram.mapper.ProfileMapper;
 import com.koreait.whygram.mapper.UserMapper;
 import com.koreait.whygram.model.profile.FollowDTO;
+import com.koreait.whygram.model.profile.FollowEntity;
 import com.koreait.whygram.model.user.UserEntity;
 import com.koreait.whygram.security.IAuthenticationFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class ProfileService {
@@ -57,5 +61,19 @@ public class ProfileService {
         dto.setHisFollower(loginUserPk);
 
         return mapper.selUserProfile(dto);
+    }
+
+    public Map<String, Integer> insFollow(FollowEntity param) {
+        param.setFollow_hisFollower(auth.getLoginUserPk());
+        Map<String, Integer> res = new HashMap();
+        res.put("result", mapper.insFollow(param));
+        return res;
+    }
+
+    public Map<String, Integer> delFollow(FollowEntity param) {
+        param.setFollow_hisFollower(auth.getLoginUserPk());
+        Map<String, Integer> res = new HashMap();
+        res.put("result", mapper.delFollow(param));
+        return res;
     }
 }

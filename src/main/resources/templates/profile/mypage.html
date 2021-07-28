@@ -29,18 +29,18 @@
     <div th:unless="${auth.users_id eq profile.users_id}">
         <th:block th:if="${profile.isMyFollower eq 1}">
             <th:block th:if="${profile.isYourFollower eq 1}"> <!--- 검정/팔로잉/취소/혼자--->
-                <div id="btnFollow" data-follow="unfollow2"><i class="profile-icon bi bi-person-check-fill"></i></div>
+                <div id="btnFollow" data-follow="unfollow2" class="pointer"><i class="profile-icon bi bi-person-check-fill"></i></div>
             </th:block>
             <th:block th:unless="${profile.isYourFollower eq 1}"> <!--- 검정/혼자/추가/팔로잉--->
-                <div id="btnFollow" data-follow="follow2"><i class="profile-icon bi bi-person-fill"></i></div>
+                <div id="btnFollow" data-follow="follow2" class="pointer"><i class="profile-icon bi bi-person-fill"></i></div>
             </th:block>
         </th:block>
         <th:block th:unless="${profile.isMyFollower eq 1}">
             <th:block th:if="${profile.isYourFollower eq 1}"> <!--- 하양/팔로잉/취소/혼자--->
-                <div id="btnFollow" data-follow="unfollow1"><i class="profile-icon bi bi-person-check"></i></div>
+                <div id="btnFollow" data-follow="unfollow1" class="pointer"><i class="profile-icon bi bi-person-check"></i></div>
             </th:block>
             <th:block th:unless="${profile.isYourFollower eq 1}"> <!--- 하양/혼자/추가/팔로잉--->
-                <div id="btnFollow" data-follow="follow1"><i class="profile-icon bi bi-person"></i></div>
+                <div id="btnFollow" data-follow="follow1" class="pointer"><i class="profile-icon bi bi-person"></i></div>
             </th:block>
         </th:block>
     </div>

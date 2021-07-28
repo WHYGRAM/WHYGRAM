@@ -1,5 +1,6 @@
 package com.koreait.whygram.controller;
 
+import com.koreait.whygram.model.profile.FollowEntity;
 import com.koreait.whygram.model.user.UserEntity;
 import com.koreait.whygram.security.IAuthenticationFacade;
 import com.koreait.whygram.service.ProfileService;
@@ -30,6 +31,18 @@ public class ProfileController {
     @GetMapping("/mypage")
     public void getMypage(Model model, UserEntity param) {
         model.addAttribute("profile", service.selUserProfile(param));
+    }
+
+    @ResponseBody
+    @PostMapping("/follow")
+    public Map<String, Integer> doFollow(@RequestBody FollowEntity param) {
+        return service.insFollow(param);
+    }
+
+    @ResponseBody
+    @DeleteMapping("/follow")
+    public Map<String, Integer> cancelFollow(@RequestBody FollowEntity param) {
+        return service.delFollow(param);
     }
 
 }
