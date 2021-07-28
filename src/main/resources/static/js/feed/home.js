@@ -42,6 +42,29 @@ feedInputBtnElem.addEventListener('click', () => {
        });
 });
 
+// data 기능
+function getDateTimeInfo(date) {
+   const nowDate = new Date();
+   const targetDate = new Date(date);
+   const nowDateSec = parseInt(nowDate.getTime() / 1000);
+   const targetDateSec = parseInt(targetDate.getTime() / 1000);
+
+   const differentSec = nowDateSec - targetDate;
+   if(differentSec < 120) {
+      return '1분 전';
+   } else if(differentSec < 3600) {
+      return `${parseInt(differentSec / 60)}분 전`;
+   } else if(differentSec < 86400) { //시간 단위
+      return `${parseInt(differentSec / 3600)}시간 전`;
+   } else if(differentSec < 604800) { //일 단위
+      return `${parseInt(differentSec / 86400)}일 전`;
+   }
+   return targetDate.toLocaleString();
+}
+
+const infiniteScroll = new IntersectionObserver(() => {
+
+});
 
 
 

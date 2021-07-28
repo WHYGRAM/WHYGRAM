@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header th:fragment="header">
-    <nav>
+    <nav th:with="auth=${#authentication.getPrincipal().getUser()}">
         <span class="siteLogo">
             <a th:href="@{/feed/home}">
                 <i class="header-icon bi bi-instagram"></i>
@@ -17,7 +18,8 @@
                     <i class="header-icon bi bi-house-fill"></i>
                 </a>
                 <a th:href="@{/profile/mypage}">
-                    <i class="header-icon bi bi-person-circle"></i>
+                    <img th:if="${auth.users_img == null}"  class="pointer wh50" th:src="@{/img/profile/defaultProfile.png}">
+                    <img th:unless="${auth.users_img == null}" class="pointer wh50 profileRadius" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${auth.users_id}, users_img=${auth.users_img})}">
                 </a>
                 <a th:href="@{/user/logout}" class="logout">
                     <i class="header-icon bi bi-door-closed-fill"></i>

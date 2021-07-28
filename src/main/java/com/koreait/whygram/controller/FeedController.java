@@ -1,14 +1,15 @@
 package com.koreait.whygram.controller;
 
+import com.koreait.whygram.model.feed.FeedDomain;
 import com.koreait.whygram.model.feed.FeedEntity;
 import com.koreait.whygram.service.FeedService;
-import com.koreait.whygram.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -29,4 +30,8 @@ public class FeedController {
         System.out.println(param.getFeed_ctnt());
         return res;
     }
+
+    @ResponseBody
+    @GetMapping("/list")
+    public List<FeedDomain> selFeedList() {  return service.selFeedList(); }
 }
