@@ -5,6 +5,7 @@ import com.koreait.whygram.common.FileUtils;
 import com.koreait.whygram.common.MySecurityUtils;
 import com.koreait.whygram.mapper.ProfileMapper;
 import com.koreait.whygram.mapper.UserMapper;
+import com.koreait.whygram.model.profile.FollowDTO;
 import com.koreait.whygram.model.user.UserEntity;
 import com.koreait.whygram.security.IAuthenticationFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +44,18 @@ public class ProfileService {
         return 0;
     }
 
+    public UserEntity selUserProfile(UserEntity param) {
+        int loginUserPk = auth.getLoginUserPk();
+        int him = param.getUsers_id();
+        FollowDTO dto = new FollowDTO();
 
+        if (him == 0) {
+            dto.setHim(loginUserPk);
+        } else {
+            dto.setHim(him);
+        }
+        dto.setHisFollower(loginUserPk);
 
-    public UserEntity selUserImg(UserEntity param) {
-        return mapper.selUserImg(param);
+        return mapper.selUserProfile(dto);
     }
 }
