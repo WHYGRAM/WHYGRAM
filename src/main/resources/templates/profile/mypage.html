@@ -6,8 +6,8 @@
 <head>
     <title>mypage</title>
 </head>
-<th:block layout:fragment="js">
-    <script defer th:src="@{/css/profile/mypage.css}"></script>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/profile/mypage.css}">
 </th:block>
 <th:block layout:fragment="js">
     <script defer th:src="@{/js/profile/mypageImg.js}"></script>
@@ -22,7 +22,7 @@
     <img th:unless="${auth.users_img == null}" class="profileImg pointer" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${profile.users_id}, users_img=${profile.users_img})}">
     <input class="profileInput" type="file" accept="image/**" style="display: none">
 
-    <div>${profile.users_nickname}</div>
+    <div th:text="${profile.users_nickname}"></div>
 
     <div th:if="${auth.users_id eq profile.users_id}"><input type="button" value="프로필 편집"></div>
     <!---isMyFollower : 로그인유저의 팔로워인가, isYourFollower : 프로필유저의 팔로워인가 --->
@@ -46,12 +46,12 @@
     </div>
 
     <div>
-        <span>게시물 : ${profile.users_feed_count}</span>
-        <span id="spnFollower">팔로워 : ${profile.users_follower_count}</span>
-        <span id="spnFollow">팔로우 : ${profile.users_follow_count}</span>
+        게시물 : <span th:text="${profile.users_feed_count}"></span>
+        <span class="followerCnt">팔로워 : </span><span class="followerCnt" th:text="${profile.users_follower_count}"></span>
+        <span class="followCnt">팔로우 : </span><span class="followCnt" th:text="${profile.users_follow_count}"></span>
     </div>
-    <div>${profile.users_name}</div>
-    <div>${profile.users_ctnt}</div>
+    <div th:text="${profile.users_name}"></div>
+    <div th:text="${profile.users_ctnt}"></div>
 
 </th:block>
 
