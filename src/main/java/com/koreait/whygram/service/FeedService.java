@@ -3,11 +3,14 @@ package com.koreait.whygram.service;
 import com.koreait.whygram.common.FileUtils;
 import com.koreait.whygram.mapper.FeedMapper;
 import com.koreait.whygram.model.feed.ContentsEntity;
+import com.koreait.whygram.model.feed.FeedDomain;
 import com.koreait.whygram.model.feed.FeedEntity;
 import com.koreait.whygram.security.IAuthenticationFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Service
 public class FeedService {
@@ -24,7 +27,7 @@ public class FeedService {
             ContentsEntity contentsEntity = new ContentsEntity();
             contentsEntity.setFeed_id(param.getFeed_id());
 
-            String target = "feed" + param.getFeed_id();
+            String target = "feed/" + param.getFeed_id();
             for(MultipartFile img : contents_img) {
                 String saveFileName = fileUtils.transferTo(img, target);
                 if(saveFileName != null) {
@@ -35,4 +38,6 @@ public class FeedService {
         }
         return result;
     }
+
+    public List<FeedDomain> selFeedList() {  return mapper.selFeedList(); }
 }

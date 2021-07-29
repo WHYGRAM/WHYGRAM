@@ -17,5 +17,17 @@
         ( #{feed_id}, #{contents_img} )
     </insert>
 
-
+    <!-- DB에 저장된 값 mapper interface로 전달 -->
+    <select id="selFeedList" resultType="FeedDomain">
+        SELECT
+            A.feed_id, A.users_id, A.feed_ctnt, A.feed_regdt
+            , B.contents_id, B.contents_img, B.contents_video
+            , C.users_nickname AS writer, C.users_img
+            FROM feed A
+            LEFT JOIN contents B
+            ON A.feed_id = B.feed_id
+            INNER JOIN users C
+            ON A.users_id = C.users_id
+            ORDER BY A.feed_id DESC
+    </select>
 </mapper>
