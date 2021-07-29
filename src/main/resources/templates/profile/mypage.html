@@ -6,18 +6,57 @@
 <head>
     <title>mypage</title>
 </head>
-<th:block layout:fragment="js">
-    <script defer th:src="@{/css/profile/mypage.css}"></script>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/profile/mypage.css}">
 </th:block>
 <th:block layout:fragment="js">
     <script defer th:src="@{/js/profile/mypageImg.js}"></script>
     <script defer th:src="@{/js/profile/mypageFollow.js}"></script>
+    <script defer th:src="@{/js/profile/mypageFollowModal.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content" th:with="auth=${#authentication.getPrincipal().getUser()}">
-    <img th:if="${auth.users_img == null}"  class="profileImg pointer wh150" th:src="@{/img/profile/defaultProfile.png}">
-    <img th:unless="${auth.users_img == null}" class="profileImg pointer wh150 profileRadius" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${auth.users_id}, users_img=${auth.users_img})}">
+    <span id="mypageConst" th:attr="data-uId = ${auth.users_id}, data-pId = ${profile.users_id}"></span>
+
+    <!-- 프로필 사진 -->
+    <img th:if="${profile.users_img == null}"  class="profileImg pointer" th:src="@{/img/profile/defaultProfile.png}">
+    <img th:unless="${profile.users_img == null}" class="profileImg pointer" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${profile.users_id}, users_img=${profile.users_img})}">
     <input class="profileInput" type="file" accept="image/**" style="display: none">
+
+    <div th:text="${profile.users_nickname}"></div>
+
+    <th:block th:if="${auth.users_id eq profile.users_id}"><input type="button" value="프로필 편집"></th:block>
+    <div th:unless="${auth.users_id eq profile.users_id}" id="followContainer">
+        <div id="btnFollow" th:attr="data-follow=${profile.datasetFollow}" class="pointer">
+            <i class="follow-icon" th:classappend="${profile.followIcon}"></i>
+        </div>
+    </div>
+
+    <div>
+        게시물 : <span th:text="${profile.users_feed_count}"></span>
+        <span class="followerCnt" data-bs-toggle="modal" data-bs-target="#followModal">팔로워 : </span>
+        <span class="followerCnt" th:text="${profile.users_follower_count}" data-bs-toggle="modal" data-bs-target="#followModal"></span>
+        <span class="followCnt" data-bs-toggle="modal" data-bs-target="#followModal">팔로우 : </span>
+        <span class="followCnt" th:text="${profile.users_follow_count}" data-bs-toggle="modal" data-bs-target="#followModal"></span>
+    </div>
+    <div th:text="${profile.users_name}"></div>
+    <div th:text="${profile.users_ctnt}"></div>
+
+    <!---팔로우 모달-->
+    <div class="modal" id="followModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalList">
+                    <p>12345678</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </th:block>
 
 </html>
