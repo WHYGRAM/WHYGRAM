@@ -15,8 +15,8 @@ if(followerElemArr) {
                 .then(myJson => {
                     if(myJson.length > 0) {
                         myJson.forEach(item => {
-                            const cont = makeFollowItem(item);
-                            modalFollowItemConElem.append(cont);
+                            const list = makeFollowItem(item);
+                            modalListElem.append(list);
                         });
                     }
                 });
