@@ -12,6 +12,7 @@
 <th:block layout:fragment="js">
     <script defer th:src="@{/js/profile/mypageImg.js}"></script>
     <script defer th:src="@{/js/profile/mypageFollow.js}"></script>
+    <script defer th:src="@{/js/profile/mypageFollowModal.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content" th:with="auth=${#authentication.getPrincipal().getUser()}">
@@ -25,41 +26,36 @@
     <div th:text="${profile.users_nickname}"></div>
 
     <th:block th:if="${auth.users_id eq profile.users_id}"><input type="button" value="프로필 편집"></th:block>
-    <th:block th:unless="${auth.users_id eq profile.users_id}">
-        <div id="containerFollow">
-            <div id="btnFollow" th:attr="data-follow=${profile.datasetFollow}" class="pointer">
-                <i class="follow-icon" th:classappend="${profile.followIcon}"></i>
-            </div>
+    <div th:unless="${auth.users_id eq profile.users_id}" id="followContainer">
+        <div id="btnFollow" th:attr="data-follow=${profile.datasetFollow}" class="pointer">
+            <i class="follow-icon" th:classappend="${profile.followIcon}"></i>
         </div>
-    </th:block>
-
-    <!---
-            //isMyFollower : 로그인유저의 팔로워인가, isYourFollower : 프로필유저의 팔로워인가
-            <th:block th:if="${profile.isMyFollower eq 1}">
-                <th:block th:if="${profile.isYourFollower eq 1}">  //검정/팔로잉/취소/혼자
-                    <div id="btnFollow" data-follow="unfollow2" class="pointer"><i class="follow-icon bi bi-person-check-fill"></i></div>
-                </th:block>
-                <th:block th:unless="${profile.isYourFollower eq 1}">  //검정/혼자/추가/팔로잉
-                    <div id="btnFollow" data-follow="follow2" class="pointer"><i class="follow-icon bi bi-person-fill"></i></div>
-                </th:block>
-            </th:block>
-            <th:block th:unless="${profile.isMyFollower eq 1}">
-                <th:block th:if="${profile.isYourFollower eq 1}">  //하양/팔로잉/취소/혼자
-                    <div id="btnFollow" data-follow="unfollow1" class="pointer"><i class="follow-icon bi bi-person-check"></i></div>
-                </th:block>
-                <th:block th:unless="${profile.isYourFollower eq 1}">  //하양/혼자/추가/팔로잉
-                    <div id="btnFollow" data-follow="follow1" class="pointer"><i class="follow-icon bi bi-person"></i></div>
-                </th:block>
-            </th:block>
-    --->
+    </div>
 
     <div>
         게시물 : <span th:text="${profile.users_feed_count}"></span>
-        <span class="followerCnt">팔로워 : </span><span class="followerCnt" th:text="${profile.users_follower_count}"></span>
-        <span class="followCnt">팔로우 : </span><span class="followCnt" th:text="${profile.users_follow_count}"></span>
+        <span class="followerCnt" data-bs-toggle="modal" data-bs-target="#followModal">팔로워 : </span>
+        <span class="followerCnt" th:text="${profile.users_follower_count}" data-bs-toggle="modal" data-bs-target="#followModal"></span>
+        <span class="followCnt" data-bs-toggle="modal" data-bs-target="#followModal">팔로우 : </span>
+        <span class="followCnt" th:text="${profile.users_follow_count}" data-bs-toggle="modal" data-bs-target="#followModal"></span>
     </div>
     <div th:text="${profile.users_name}"></div>
     <div th:text="${profile.users_ctnt}"></div>
+
+    <!---팔로우 모달-->
+    <div class="modal" id="followModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalList">
+                    <p>12345678</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </th:block>
 

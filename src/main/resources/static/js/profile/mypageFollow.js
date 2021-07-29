@@ -1,20 +1,20 @@
+const followContainerElem = document.querySelector('#followContainer');
 const mypageConstElem = document.querySelector('#mypageConst');
-const containerFollowElem = document.querySelector('#mcontainerFollow');
 let btnFollowElem = document.querySelector('#btnFollow');
 
 function folllowOver(follow) {
     switch(follow) {
         case "unfollow2":
-            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-dash-fill"></i>';
+            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-dash-fill"></i>';
             break;
         case "unfollow1":
-            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-dash"></i>';
+            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-dash"></i>';
             break;
         case "follow2":
-            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-plus-fill"></i>';
+            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-plus-fill"></i>';
             break;
         case "follow1":
-            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-plus"></i>';
+            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-plus"></i>';
             break;
     }
 }
@@ -22,16 +22,16 @@ function folllowOver(follow) {
 function folllowOut(follow) {
     switch(follow) {
         case "unfollow2":
-            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-check-fill"></i>';
+            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-check-fill"></i>';
             break;
         case "unfollow1":
-            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-check"></i>';
+            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-check"></i>';
             break;
         case "follow2":
-            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-fill"></i>';
+            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-fill"></i>';
             break;
         case "follow1":
-            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person"></i>';
+            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person"></i>';
             break;
     }
 }
@@ -39,19 +39,19 @@ function folllowOut(follow) {
 function followClick(follow) {
     switch(follow) {
         case "unfollow2":
-            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-fill"></i>';
+            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-fill"></i>';
             btnFollowElem.dataset.follow = 'follow2';
             break;
         case "unfollow1":
-            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person"></i>';
+            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person"></i>';
             btnFollowElem.dataset.follow = 'follow1';
             break;
         case "follow2":
-            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-check-fill"></i>';
+            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-check-fill"></i>';
             btnFollowElem.dataset.follow = 'unfollow2';
             break;
         case "follow1":
-            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-check"></i>';
+            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-check"></i>';
             btnFollowElem.dataset.follow = 'unfollow1';
             break;
     }
@@ -80,16 +80,19 @@ function followProc(follow, him, elem) {
         .then(res => res.json())
         .then(myJson => {
             if(myJson.result === 1) {
-                containerFollowElem.innerHTML = '';
+                btnFollowElem.remove();
                 btnFollowElem = document.createElement("div");
                 btnFollowElem.id = 'btnFollow';
                 btnFollowElem.className = 'pointer';
                 followClick(follow);
+                followContainerElem.append(btnFollowElem);
+                events();
             } else { alert('에러가 발생하였습니다.'); }
         });
 }
 
-if (containerFollowElem) {
+function events() {
+    if (!btnFollowElem) {return;}
     const follow = btnFollowElem.dataset.follow;
     const him = mypageConstElem.dataset.pid;
     
@@ -103,3 +106,5 @@ if (containerFollowElem) {
         followProc(follow, him);
     });
 }
+
+events();
