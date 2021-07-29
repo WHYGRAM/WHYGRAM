@@ -1,21 +1,20 @@
 const mypageConstElem = document.querySelector('#mypageConst');
-
-// 팔로우 기능
-const btnFollowElem = document.querySelector('#btnFollow');
+const containerFollowElem = document.querySelector('#mcontainerFollow');
+let btnFollowElem = document.querySelector('#btnFollow');
 
 function folllowOver(follow) {
     switch(follow) {
         case "unfollow2":
-            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-dash-fill"></i>';
+            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-dash-fill"></i>';
             break;
         case "unfollow1":
-            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-dash"></i>';
+            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-dash"></i>';
             break;
         case "follow2":
-            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-plus-fill"></i>';
+            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-plus-fill"></i>';
             break;
         case "follow1":
-            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-plus"></i>';
+            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-plus"></i>';
             break;
     }
 }
@@ -23,37 +22,37 @@ function folllowOver(follow) {
 function folllowOut(follow) {
     switch(follow) {
         case "unfollow2":
-            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-check-fill"></i>';
+            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-check-fill"></i>';
             break;
         case "unfollow1":
-            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-check"></i>';
+            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-check"></i>';
             break;
         case "follow2":
-            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-fill"></i>';
+            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-fill"></i>';
             break;
         case "follow1":
-            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person"></i>';
+            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person"></i>';
             break;
     }
 }
 
-function followClick(follow, elem) {
+function followClick(follow) {
     switch(follow) {
         case "unfollow2":
-            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-fill"></i>';
-            elem.dataset.follow = 'follow2';
+            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-fill"></i>';
+            btnFollowElem.dataset.follow = 'follow2';
             break;
         case "unfollow1":
-            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person"></i>';
-            elem.dataset.follow = 'follow1';
+            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person"></i>';
+            btnFollowElem.dataset.follow = 'follow1';
             break;
         case "follow2":
-            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-check-fill"></i>';
-            elem.dataset.follow = 'unfollow2';
+            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-check-fill"></i>';
+            btnFollowElem.dataset.follow = 'unfollow2';
             break;
         case "follow1":
-            btnFollowElem.innerHTML='<i class="follow-icon bi bi-person-check"></i>';
-            elem.dataset.follow = 'unfollow1';
+            btnFollowElem.innerHTML='<i class="profile-icon bi bi-person-check"></i>';
+            btnFollowElem.dataset.follow = 'unfollow1';
             break;
     }
 }
@@ -81,14 +80,18 @@ function followProc(follow, him, elem) {
         .then(res => res.json())
         .then(myJson => {
             if(myJson.result === 1) {
-                followClick(follow, elem);
+                containerFollowElem.innerHTML = '';
+                btnFollowElem = document.createElement("div");
+                btnFollowElem.id = 'btnFollow';
+                btnFollowElem.className = 'pointer';
+                followClick(follow);
             } else { alert('에러가 발생하였습니다.'); }
         });
 }
 
-if (btnFollowElem) {
+if (containerFollowElem) {
     const follow = btnFollowElem.dataset.follow;
-    const him = mypageConstElem.dataset.pid;
+    const him = mypageConstElem.dataset.pId;
     
     btnFollowElem.addEventListener('mouseover', () => {
         folllowOver(follow);
@@ -97,6 +100,6 @@ if (btnFollowElem) {
         folllowOut(follow);
     });
     btnFollowElem.addEventListener('click', () => {
-        followProc(follow, him, btnFollowElem);
+        followProc(follow, him);
     });
 }
