@@ -1,6 +1,7 @@
 package com.koreait.whygram.controller;
 
 import com.koreait.whygram.model.profile.FollowEntity;
+import com.koreait.whygram.model.user.UserDomain;
 import com.koreait.whygram.model.user.UserEntity;
 import com.koreait.whygram.security.IAuthenticationFacade;
 import com.koreait.whygram.service.ProfileService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -21,7 +23,7 @@ public class ProfileController {
     @Autowired private ProfileService service;
 
     @ResponseBody
-    @PostMapping("/mypage")
+    @PostMapping("/mypage")  // 프로필 이미지 업데이트
     public Map<String, Integer> postMypage(MultipartFile users_img) {
         Map<String, Integer> res = new HashMap();
         res.put("result", service.profileImg(users_img));
@@ -45,4 +47,15 @@ public class ProfileController {
         return service.delFollow(param);
     }
 
+    @ResponseBody
+    @GetMapping("/followerList")
+    public List<UserDomain> followerList(FollowEntity param) {
+        return service.selFollowerList(param);
+    }
+
+    @ResponseBody
+    @GetMapping("/followList")
+    public List<UserDomain> followList(FollowEntity param) {
+        return service.selFollowList(param);
+    }
 }

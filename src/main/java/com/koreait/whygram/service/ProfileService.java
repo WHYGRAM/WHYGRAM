@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -97,5 +98,15 @@ public class ProfileService {
         Map<String, Integer> res = new HashMap();
         res.put("result", mapper.delFollow(param));
         return res;
+    }
+
+    public List<UserDomain> selFollowerList(FollowEntity param) {
+        param.setFollow_hisFollower(auth.getLoginUserPk()); //hisFollower : 나, him : 그사람
+        return mapper.selFollowerList(param);
+    }
+
+    public List<UserDomain> selFollowList(FollowEntity param) {
+        param.setFollow_him(auth.getLoginUserPk()); //hisFollower : 그사람 , him : 나
+        return mapper.selFollowList(param);
     }
 }

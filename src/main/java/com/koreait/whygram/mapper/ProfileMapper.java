@@ -6,6 +6,8 @@ import com.koreait.whygram.model.user.UserDomain;
 import com.koreait.whygram.model.user.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ProfileMapper {
     int insUserImg(UserEntity param);
@@ -14,5 +16,7 @@ public interface ProfileMapper {
     //UserEntity selUserImg(UserEntity param);
     //int updUsers(UserEntity param);
     UserDomain selUserProfile(FollowDTO param);
+    List<UserDomain> selFollowerList(FollowEntity param);
+    List<UserDomain> selFollowList(FollowEntity param);
     int delFollow(FollowEntity param);
 }

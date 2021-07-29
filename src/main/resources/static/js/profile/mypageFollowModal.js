@@ -23,3 +23,26 @@ if(followerElemArr) {
         });
     });
 }
+
+if(followElemArr) {
+    followElemArr.forEach(item => {
+        item.addEventListener('click', () => {
+            modalTitleElem.innerText = '팔로우';
+
+            fetch(`followList?follow_hisFollower=${mypageConstElem.dataset.pid}`)
+                .then(res => res.json())
+                .then(myJson => {
+                    if(myJson.length > 0) {
+                        myJson.forEach(item => {
+                            const list = makeFollowItem(item);
+                            modalListElem.append(list);
+                        });
+                    }
+                });
+        });
+    });
+}
+
+function makeFollowItem() {
+    
+}
