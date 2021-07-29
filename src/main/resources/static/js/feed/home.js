@@ -49,7 +49,7 @@ function getDateTimeInfo(date) {
    const nowDateSec = parseInt(nowDate.getTime() / 1000);
    const targetDateSec = parseInt(targetDate.getTime() / 1000);
 
-   const differentSec = nowDateSec - targetDate;
+   const differentSec = nowDateSec - targetDateSec;
    if(differentSec < 120) {
       return '1분 전';
    } else if(differentSec < 3600) {
@@ -62,7 +62,7 @@ function getDateTimeInfo(date) {
    return targetDate.toLocaleString();
 }
 
-function moveToProfile(iuser) {
+function moveToProfile(users_id) {
    location.href = `/profile/mypage?profilePage=${users_id}`;
 }
 
@@ -86,14 +86,59 @@ const feedObj = {
 
          let profileImg = '';
          if(item.users_img != null) {
-            profileImg = `<img src="pic/feed/${item.users_id}/${item.users_img}" class="pointer wh30">`
-
+            profileImg = `<img src="pic/feed/${item.users_id}/${item.users_img}" class="pointer wh30"
+            onclick="moveToProfile(${item.users_id})">`
          }
-      }
-   }
+         const regdtInfo = getDateTimeInfo(item.feed_regdt);
+         const feedUserInfo = document.createElement('div');
+         feedUserInfo.classList.add('userInfo')
+         feedUserInfo.innerHTML = `
+         <div class="userProfile">${profileImg}</div>
+         <div><span class="pointer" onclick="moveToProfile(${item.users_id})">${item.writer}</span>- ${regdtInfo}</div>
+         `;
 
+         const feedImgDiv = document.createElement('div');
+         feedImgDiv.classList.add('feedImg');
+
+
+      }
+   },
+
+   // 인피니티 스크롤
+   setScrollInfinity: function(target) {
+      target.addEventListener('scroll', () => {
+         const {
+            scrollTop,
+            scrollHeight,
+            clientHeight
+         } = document.documentElement;
+         if (scrollTop + clientHeight >= scrollHeight - 5 && this.itemLength === this.limit) {
+            this.itemLength = 0;
+            this.getFeedList(++this.currentPage);
+         }
+      }, {passive: true});
+   },
+   getFeedList: function (page) {
+
+      this.showLoading();
+      fetch(`${this.url}?feedListnum=${this.users_id}&page=${page}&limit=${this.limit}`)
+         .then(res => res.json())
+         .then(myJson => {
+            this.itemLength = myJson.length;
+            this.makeFeedList(myJson);
+         }).catch(err => {
+            console.log(err);
+      }).then(() => {
+        this.hideLoading();
+      });
+   },
+   hideLoading: function() { this.loadingElem.classList.add('hide');},
+   showLoading: function() { this.loadingElem.classList.remove('hide'); }
 }
 
+feedObj.url = '/user/home';
+feedObj.setScrollInfinity(window);
+feedObj.getFeedList(1);
 
 
 
