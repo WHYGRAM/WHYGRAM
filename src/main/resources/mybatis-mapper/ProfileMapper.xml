@@ -63,7 +63,7 @@
         -- F.follow_him = 그 사람 , F.hisFollower = 그사람을 팔로우하는 사람들 = U.users_id = W.him
         LEFT JOIN follow W
         -- 그사람을 팔로우하는 사람들을 내가 팔로우 하는지 구하기 위해 LEFT JOIN
-        ON W.follow_him = F.hisFollower AND W.follow_hisFollower=${follow_hisFollower}
+        ON W.follow_him = F.follow_hisFollower AND W.follow_hisFollower=${follow_hisFollower}
         WHERE  F.follow_him = ${follow_him}
     </select>
 
@@ -80,7 +80,7 @@
         LEFT JOIN follow W
         -- 그 사람이 팔로우하는 사람들을 내가 팔로우 하는지
         -- 👉 W.him = F.him = U.users_id , W.hisFollower = 나
-        ON W.follow_him=F.follow_him AND W.follow_hisFollower=${follow_him}
+        ON W.follow_him=F.follow_follow_him AND W.follow_hisFollower=${follow_him}
         WHERE F.follow_hisFollower=${follow_hisFollower}
     </select>
 
