@@ -7,6 +7,7 @@ import com.koreait.whygram.mapper.ProfileMapper;
 import com.koreait.whygram.mapper.UserMapper;
 import com.koreait.whygram.model.profile.FollowDTO;
 import com.koreait.whygram.model.profile.FollowEntity;
+import com.koreait.whygram.model.user.UserDomain;
 import com.koreait.whygram.model.user.UserEntity;
 import com.koreait.whygram.security.IAuthenticationFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class ProfileService {
         return 0;
     }
 
-    public UserEntity selUserProfile(UserEntity param) {
+    public UserDomain selUserProfile(UserEntity param) {
         int loginUserPk = auth.getLoginUserPk();
         int him = param.getUsers_id();
         FollowDTO dto = new FollowDTO();
@@ -60,7 +61,28 @@ public class ProfileService {
         }
         dto.setHisFollower(loginUserPk);
 
-        return mapper.selUserProfile(dto);
+        UserDomain profile = mapper.selUserProfile(dto);
+
+        if (profile.getIsMyFollower() == 1) {
+            if (profile.getIsYourFollower() == 1) {
+                profile.setDatasetFollow("unfollow2");
+                profile.setFollowIcon("follow-icon bi bi-person-check-fill");
+            } else {
+                profile.setDatasetFollow("follow2");
+                profile.setFollowIcon("follow-icon bi bi-person-fill");
+            }
+        } else {
+            if (profile.getIsYourFollower() == 1) {
+                profile.setDatasetFollow("unfollow1");
+                profile.setFollowIcon("follow-icon bi bi-person-check");
+            } else {
+                profile.setDatasetFollow("follow1");
+                profile.setFollowIcon("follow-icon bi bi-person");
+            }
+        }
+
+        System.out.println(profile);
+        return profile;
     }
 
     public Map<String, Integer> insFollow(FollowEntity param) {
