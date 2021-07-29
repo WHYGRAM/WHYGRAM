@@ -91,7 +91,7 @@ function followProc(follow, him, elem) {
 
 if (containerFollowElem) {
     const follow = btnFollowElem.dataset.follow;
-    const him = mypageConstElem.dataset.pId;
+    const him = mypageConstElem.dataset.pid;
     
     btnFollowElem.addEventListener('mouseover', () => {
         folllowOver(follow);
