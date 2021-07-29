@@ -27,7 +27,7 @@ public class FeedService {
             ContentsEntity contentsEntity = new ContentsEntity();
             contentsEntity.setFeed_id(param.getFeed_id());
 
-            String target = "feed" + param.getFeed_id();
+            String target = "feed/" + param.getFeed_id();
             for(MultipartFile img : contents_img) {
                 String saveFileName = fileUtils.transferTo(img, target);
                 if(saveFileName != null) {

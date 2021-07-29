@@ -62,9 +62,37 @@ function getDateTimeInfo(date) {
    return targetDate.toLocaleString();
 }
 
-const infiniteScroll = new IntersectionObserver(() => {
+function moveToProfile(iuser) {
+   location.href = `/profile/mypage?profilePage=${users_id}`;
+}
 
-});
+const feedObj = {
+   limit: 5,
+   itemLength: 0,
+   currentPage: 1,
+   url: '',
+   users_id: 0,
+   containerElem: document.querySelector('#feedContainer'),
+   loadingElem: document.querySelector('.loading'),
+
+   makeFeedList: function (data) {
+      if(data.length == 0) { return; }
+
+      for(let i = 0; i < data.length; i++) {
+         const item = data[i];
+
+         const feedItemContainer = document.createElement('div');
+         feedItemContainer.classList.add('feedItem');
+
+         let profileImg = '';
+         if(item.users_img != null) {
+            profileImg = `<img src="pic/feed/${item.users_id}/${item.users_img}" class="pointer wh30">`
+
+         }
+      }
+   }
+
+}
 
 
 
