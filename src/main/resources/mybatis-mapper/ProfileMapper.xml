@@ -3,6 +3,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.koreait.whygram.mapper.ProfileMapper">
+    <insert id="insFollow">
+        INSERT INTO follow
+            ( follow_hisFollower, follow_him )
+        VALUES
+            ( ${follow_hisFollower}, ${follow_him} )
+    </insert>
+
     <!-- 프로필 수정 -->
     <update id="updUsers">
         UPDATE users
@@ -46,4 +53,10 @@
         SET users_img = #{users_img}
         WHERE users_id = #{users_id}
     </update>
+
+    <delete id="delFollow">
+        DELETE FROM follow
+        WHERE follow_hisFollower = ${follow_hisFollower}
+          AND  follow_him = ${follow_him}
+    </delete>
 </mapper>
