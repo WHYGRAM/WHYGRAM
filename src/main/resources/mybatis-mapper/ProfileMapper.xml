@@ -80,7 +80,7 @@
         LEFT JOIN follow W
         -- 그 사람이 팔로우하는 사람들을 내가 팔로우 하는지
         -- 👉 W.him = F.him = U.users_id , W.hisFollower = 나
-        ON W.follow_him=F.follow_follow_him AND W.follow_hisFollower=${follow_him}
+        ON W.follow_him=F.follow_him AND W.follow_hisFollower=${follow_him}
         WHERE F.follow_hisFollower=${follow_hisFollower}
     </select>
 

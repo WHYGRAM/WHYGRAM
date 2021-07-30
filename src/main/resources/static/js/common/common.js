@@ -8,7 +8,7 @@ function onError(img, wh) {
 const imgIcon = document.createElement('i');
 imgIcon.className = 'bi bi-person-circle';
 
-const headerImg = document.querySelector('pointer.wh50.profileRadius.header-img');
+const headerImg = document.querySelector('#headerImg');
 headerImg.onerror = () => { onError(headerImg, "wh50") }
 
 const logoutElem = document.querySelector('.header__right>.right__icon>.logout');

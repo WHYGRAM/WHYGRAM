@@ -1,7 +1,6 @@
 const followerElemArr = document.querySelectorAll('.followerCnt');
 const followElemArr = document.querySelectorAll('.followCnt');
 
-const followModalElem = document.querySelector('#followModal');
 const modalTitleElem = document.querySelector('#modalTitle');
 const modalListElem = document.querySelector('#modalList')
 
@@ -36,6 +35,7 @@ if(followElemArr) {
                         myJson.forEach(item => {
                             const list = makeFollowItem(item);
                             modalListElem.append(list);
+                            events();
                         });
                     }
                 });
@@ -61,14 +61,14 @@ function makeFollowItem(item) {
     const imgTg = document.createElement('img');
     const nmSpn = document.createElement('span');
     const nickNmSpn = document.createElement('span');
-    const followBtn = document.createElement('button');
+    const btnFollow = document.createElement('div');
     const followIcn = document.createElement('i');
     
     profileImgTd.append(imgTg);
     profileNmTd.append(nmSpn);
     profileNmTd.append(nickNmSpn);
-    profileFollowTd.append(followBtn);
-    followBtn.append(followIcn);
+    profileFollowTd.append(btnFollow);
+    btnFollow.append(followIcn);
     
     imgTg.className = 'pointer wh30 profileRadius';
     if (`${item.users_img}`) {
@@ -77,9 +77,22 @@ function makeFollowItem(item) {
         imgTg.src = '/img/profile/defaultProfile.png';
     }
     imgTg.onerror = () => { onError(imgTg, "wh30"); }
-    imgTg.addEventListener('click', () => {moveToMypage(item.users_id);})
+    imgTg.addEventListener('click', () => { moveToMypage(item.users_id); })
     
-    followBtn.className = 'pointer';
-    // i 정하기
+    profileFollowTd.className = 'pointer';
+    btnFollow.id = 'btnFollow';
     
+    if (`${item.isYourFollower}`) {
+        btnFollow.dataset.follow = 'unfollow1';
+        followIcn.className = 'follow-icon bi bi-person-check';
+    } else {
+        btnFollow.dataset.follow = 'follow1';
+        followIcn.className = 'follow-icon bi bi-person';
+    }
+    
+    profileFollowTd.addEventListener('click' , () => {
+        followProc(btnFollow.dataset.follow, item.users_id)
+    });
+    
+    return profileTable;
 }
