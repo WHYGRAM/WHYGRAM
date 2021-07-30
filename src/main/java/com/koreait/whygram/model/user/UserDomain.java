@@ -12,4 +12,10 @@ public class UserDomain extends UserEntity{
     private int isMyFollower;
     private String datasetFollow;
     private String followIcon;
+
+    // 좋아요
+    private int isFav;
+
+
+
 }
