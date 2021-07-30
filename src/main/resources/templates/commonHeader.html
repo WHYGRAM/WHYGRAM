@@ -4,8 +4,10 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header th:fragment="header">
     <nav th:with="auth=${#authentication.getPrincipal().getUser()}">
+        <!--
         <span id="globalConst" sec:authorize="isAuthenticated()" th:with="auth=${#authentication.getPrincipal().getUser()}"
               th:attr="data-iuser=${auth.iuser}, data-writer=${auth.nm}, data-writer-profile=${auth.mainProfile}"></span>
+            -->
             <a th:href="@{/feed/home}">
                 <img class="wh50" th:src="@{/img/logo/logo.png}">
             </a>

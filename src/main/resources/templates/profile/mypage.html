@@ -19,13 +19,13 @@
     <span id="mypageConst" th:attr="data-uId = ${auth.users_id}, data-pId = ${profile.users_id}"></span>
 
     <!-- 프로필 사진 -->
-    <img th:if="${profile.users_img == null}"  class="profileImg pointer" th:src="@{/img/profile/defaultProfile.png}">
-    <img th:unless="${profile.users_img == null}" class="profileImg pointer" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${profile.users_id}, users_img=${profile.users_img})}">
+    <img th:if="${profile.users_img == null}"  class="profileImg pointer wh150" th:src="@{/img/profile/defaultProfile.png}">
+    <img th:unless="${profile.users_img == null}" class="profileImg pointer wh150" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${profile.users_id}, users_img=${profile.users_img})}">
     <input class="profileInput" type="file" accept="image/**" style="display: none">
 
     <div th:text="${profile.users_nickname}"></div>
 
-    <th:block th:if="${auth.users_id eq profile.users_id}"><input type="button" value="프로필 편집"></th:block>
+    <th:block th:if="${auth.users_id eq profile.users_id}"><input class="hide" type="button" value="프로필 편집"></th:block>
     <div th:unless="${auth.users_id eq profile.users_id}" id="followContainer">
         <div id="btnFollow" th:attr="data-follow=${profile.datasetFollow}" class="pointer">
             <i class="follow-icon" th:classappend="${profile.followIcon}"></i>

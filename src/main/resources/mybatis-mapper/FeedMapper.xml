@@ -3,6 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.koreait.whygram.mapper.FeedMapper">
+
+    <resultMap id="FeedDomainMap" type="FeedDomain">
+        <result property="ifeed" column="ifeed"></result>
+        <collection property="imgList" column="ifeed" select="selFeedImgList"></collection>
+    </resultMap>
+
     <!-- 글, 사진 등록 -->
     <insert id="insFeed" useGeneratedKeys="true" keyProperty="feed_id">
         INSERT INTO feed
@@ -18,6 +24,7 @@
     </insert>
 
     <!-- DB에 저장된 값 mapper interface로 전달 -->
+    <!--
     <select id="selFeedList" resultType="FeedDomain">
         SELECT
             A.feed_id, A.users_id, A.feed_ctnt, A.feed_regdt
@@ -29,5 +36,50 @@
             INNER JOIN users C
             ON A.users_id = C.users_id
             ORDER BY A.feed_id DESC
+    </select>
+    -->
+    <!-- 좋아요 -->
+    <insert id="insFeedFav">
+        INSERT INTO feed_fav
+            ( feed_id, users_id )
+        VALUES
+            ( #{feed_id}, #{users_id} )
+    </insert>
+    <delete id="delFeedFav">
+        DELETE FROM feed_fav
+        WHERE feed_id = #{feed_id}
+        AND users_id = #{users_id}
+    </delete>
+    
+    <!-- home게시글 -->
+    <select id="selFeedHome">
+        SELECT
+            A.feed_id, A.feed_ctnt, A.feed_regdt, A.users_id,
+            B.contents_id, B.contents_img, B.contents_video,
+            C.users_nickname AS writer, C.users_img
+        <if test="userIdForFav > 0">
+            , CASE WHEN D.feed_id IS NULL THEN 0 ELSE 1 END AS isFav
+        </if>
+        FROM feed A
+        INNER JOIN users C
+        ON A.users_id = C.users_id
+        <if test="userIdForMyFeed > 0">
+            AND C.users_id = ${userIdForMyFeed}
+        </if>
+        LEFT JOIN(
+            SELECT feed_id
+            FROM feed_fav
+            GROUP BY feed_id
+        ) E
+        ON A.feed_id = E.feed_id
+        <if test="userIdForFav > 0">
+            LEFT JOIN feed_fav D
+            ON D.users_id = ${userIdForFav}
+            AND A.feed_id = D.feed_id
+        </if>
+        LEFT JOIN contents B
+        ON A.feed_id = B.feed_id
+        ORDER BY A.feed_id DESC
+        LIMIT #{startIdx}, #{limit}
     </select>
 </mapper>
