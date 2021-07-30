@@ -16,7 +16,7 @@
 </th:block>
 
 <th:block layout:fragment="content" th:with="auth=${#authentication.getPrincipal().getUser()}">
-    <span id="mypageConst" th:attr="data-uId = ${auth.users_id}, data-pId = ${profile.users_id}"></span>
+    <span id="mypageConst" th:attr="data-uid = ${auth.users_id}, data-pid = ${profile.users_id}"></span>
 
     <!-- 프로필 사진 -->
     <img th:if="${profile.users_img == null}"  class="profileImg pointer" th:src="@{/img/profile/defaultProfile.png}">
