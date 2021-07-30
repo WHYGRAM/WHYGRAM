@@ -4,6 +4,7 @@ const followElemArr = document.querySelectorAll('.followCnt');
 const modalTitleElem = document.querySelector('#modalTitle');
 const modalListElem = document.querySelector('#modalList')
 
+
 if(followerElemArr) {
     followerElemArr.forEach(item => {
         item.addEventListener('click', () => {
@@ -96,3 +97,4 @@ function makeFollowItem(item) {
     
     return profileTable;
 }
+
