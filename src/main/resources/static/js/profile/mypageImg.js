@@ -6,6 +6,8 @@ profileImgElem.addEventListener('click', () => {
     profileInputElem.click();
 });
 
+profileImgElem.onerror = () => { onError(profileImgElem, "wh200"); }
+
 // 이미지가 선택되면 추가
 profileInputElem.addEventListener('change', ()=> {
     const imgData = profileInputElem.value.substring('C:\\fakepath\\'.length);

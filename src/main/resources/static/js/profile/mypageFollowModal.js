@@ -43,6 +43,43 @@ if(followElemArr) {
     });
 }
 
-function makeFollowItem() {
+function makeFollowItem(item) {
+    //테이블
+    const profileTable = document.createElement('tr');
+    const profileImgTd = document.createElement('td');
+    const profileNmTd = document.createElement('td');
+    const profileFollowTd = document.createElement('td');
+    
+    profileTable.append(profileImgTd);
+    profileTable.append(profileNmTd);
+    profileTable.append(profileFollowTd);
+    
+    profileNmTd.className = 'pointer';
+    profileNmTd.addEventListener('click', () => { moveToMypage(item.users_id); });
+    
+    //내용
+    const imgTg = document.createElement('img');
+    const nmSpn = document.createElement('span');
+    const nickNmSpn = document.createElement('span');
+    const followBtn = document.createElement('button');
+    const followIcn = document.createElement('i');
+    
+    profileImgTd.append(imgTg);
+    profileNmTd.append(nmSpn);
+    profileNmTd.append(nickNmSpn);
+    profileFollowTd.append(followBtn);
+    followBtn.append(followIcn);
+    
+    imgTg.className = 'pointer wh30 profileRadius';
+    if (`${item.users_img}`) {
+        imgTg.src = `/pic/profile/${item.users_id}/${item.users_img}`;
+    } else {
+        imgTg.src = '/img/profile/defaultProfile.png';
+    }
+    imgTg.onerror = () => { onError(imgTg, "wh30"); }
+    imgTg.addEventListener('click', () => {moveToMypage(item.users_id);})
+    
+    followBtn.className = 'pointer';
+    // i 정하기
     
 }

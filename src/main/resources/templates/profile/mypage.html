@@ -19,8 +19,8 @@
     <span id="mypageConst" th:attr="data-uid = ${auth.users_id}, data-pid = ${profile.users_id}"></span>
 
     <!-- 프로필 사진 -->
-    <img th:if="${profile.users_img == null}"  class="profileImg pointer" th:src="@{/img/profile/defaultProfile.png}">
-    <img th:unless="${profile.users_img == null}" class="profileImg pointer" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${profile.users_id}, users_img=${profile.users_img})}">
+    <img th:if="${profile.users_img == null}"  class="profileRadius wh200 profileImg pointer" th:src="@{/img/profile/defaultProfile.png}">
+    <img th:unless="${profile.users_img == null}" class="profileRadius wh200 profileImg pointer" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${profile.users_id}, users_img=${profile.users_img})}">
     <input class="profileInput" type="file" accept="image/**" style="display: none">
 
     <div th:text="${profile.users_nickname}"></div>
