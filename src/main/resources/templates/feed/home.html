@@ -26,10 +26,9 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-body">
-                    <img class="feedImg pointer" th:src="@{/img/feed/feedDefaultImg.png}">
-                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                        <div id="displayImgList"></div>
-                    </div>
+                    <img class="feedImg pointer" th:src="@{/img/feed/feedDefaultImg.png}" >
+                    <div class="displayImgList" style="flex:  text-align: center;"></div>
+                    <br>
                     <div><input class="feedSelectImg" name="contents_img" type="file" multiple accept="image/**" style="display: none"></div>
                     <textarea class="feedCtnt form-control" aria-label="With textarea" th:field="*{feed_ctnt}" rows="5" style="resize: none"></textarea>
                 </div>

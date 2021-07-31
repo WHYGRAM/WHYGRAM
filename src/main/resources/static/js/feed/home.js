@@ -3,6 +3,7 @@ const feedImgElem = document.querySelector('.feedImg');
 const feedCtntElem = document.querySelector('.feedCtnt');
 const feedInputBtnElem = document.querySelector('.feedInputBtn');
 const feedSelectImgElem = document.querySelector('.feedSelectImg');
+const displayImgListElem = document.querySelector('.displayImgList');
 
 // 이미지 클릭시 file 열기
 feedImgElem.addEventListener('click', () => {
@@ -15,7 +16,30 @@ feedSelectImgElem.addEventListener('change', () => {
    for(let i = 0; i < imgFiles.length; i++) {
       feedList.push(imgFiles[i]);
    }
+   displaySelectedImgArr()
 });
+
+function displaySelectedImgArr() {
+   displayImgListElem.innerHTML = '';
+
+   for(let i = 0; i < feedList.length; i++) {
+      const item = feedList[i];
+      const reader = new FileReader();
+      reader.readAsDataURL(item);
+
+      reader.onload = () => {
+         const img = document.createElement('img');
+         img.addEventListener('click', () => {
+            feedList.splice(i, 1);
+            displaySelectedImgArr();
+         });
+         img.src = reader.result;
+         img.classList.add('wh90')
+         displayImgListElem.append(img);
+      };
+   }
+
+}
 
 feedInputBtnElem.addEventListener('click', () => {
    const data = new FormData();
@@ -41,6 +65,8 @@ feedInputBtnElem.addEventListener('click', () => {
           }
        });
 });
+
+
 
 // data 기능
 function getDateTimeInfo(date) {

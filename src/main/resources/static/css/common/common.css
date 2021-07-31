@@ -6,6 +6,7 @@ ul, ol, li { list-style: none; }
 .follow-icon { font-size: 1.5rem; color: black; pointer-events: none;}
 
 header {
+    /*
     padding-left: 20px;
     padding-right: 20px;
     z-index: 10;
@@ -16,8 +17,9 @@ header {
     top: 0;
     width: 100%;
     box-shadow: 0 4px 4px -4px #dfe6e9;
+     */
 }
-
+/*
 nav {
     display: flex;
     height: 100%;
@@ -25,12 +27,11 @@ nav {
     padding-bottom: 10px;
 }
 
-right__icon {
-    height: 20px;
-}
-
+ */
+/*
 section {margin-top: 80px}
 
+ */
 .pointer { cursor: pointer; }
 /* 모달창 */
 .hide { display: none !important; }
@@ -41,8 +42,12 @@ section {margin-top: 80px}
 .w70 { width: 70px; }
 .w90 { width: 90px; }
 
+.wh22 { width: 22px; height: 22px; }
+.wh25 { width: 25px; height: 25px; }
 .wh30 { width: 30px; height: 30px; }
+.wh40 { width: 40px; height: 40px; }
 .wh50 { width: 50px; height: 50px; }
+.wh60 { width: 60px; height: 60px; }
 .wh70 { width: 70px; height: 70px; }
 .wh90 { width: 90px; height: 90px; }
 .wh120 { width: 120px; height: 120px; }
@@ -52,6 +57,45 @@ section {margin-top: 80px}
 .wh300 { width: 300px; height: 300px; }
 .wh400 { width: 400px; height: 400px; }
 
+.rem_wh3 { width: 3rem; height: 3rem; }
+
 .profileRadius { object-fit: cover; border-radius: 50%; }
+
+
+/* commonHeader */
+.mainLogo { width: 140px; height: 40px;}
+.navbar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 0px 25px;
+    box-shadow: 0 3px 3px -3px #BDBDBD;
+    height: 80px;
+}
+
+.navbar__menu {
+    display: flex;
+
+    padding-left: 0;
+}
+
+.navbar__menu li {
+    padding: 20px 1px 1px 18px;
+}
+
+#container {
+    height: 100vh ;
+    background-color: #F2F2F2;
+
+}
+
+
+
+
+
+
+
+
 
 
