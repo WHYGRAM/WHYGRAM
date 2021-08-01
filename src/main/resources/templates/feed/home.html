@@ -12,11 +12,11 @@
 </th:block>
 
 <th:block layout:fragment="js">
-    <script defer th:src="@{/js/feed/home.js}"></script>
+    <script defer th:src="@{/js/feed/homeT.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content" th:object="${feedEntity}">
-    <!-- Button trigger modal -->
+    <!-- 글쓰기 모달 Button trigger modal -->
     <div class="btn text-center" data-bs-toggle="modal" data-target="#myModal" data-bs-target="#staticBackdrop">
         <i class="bi bi-plus-circle pointer" style="font-size: 2rem;"></i>
     </div>
@@ -40,6 +40,8 @@
             </div>
         </div>
     </div>
+
+    <-- 피드 -->
 
 
 </th:block>

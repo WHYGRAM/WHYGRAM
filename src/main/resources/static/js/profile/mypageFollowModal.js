@@ -77,7 +77,6 @@ function makeFollowItem(item) {
     } else {
         imgTg.src = '/img/profile/defaultProfile.png';
     }
-    imgTg.onerror = () => { onError(imgTg, "wh30"); }
     imgTg.addEventListener('click', () => { moveToMypage(item.users_id); })
     
     profileFollowTd.className = 'pointer';
