@@ -1,3 +1,4 @@
+body h1 { margin: 0; padding: 0; }
 .pointer:hover { background-color: yellow; }
 .pointer { cursor: pointer; }
 
@@ -7,3 +8,4 @@
 .modal { height: 100%; width: 100%; position: fixed; left:0; top: 0; z-index: 100; background-color: rgba(128, 128, 128, 0.87); }
 .modal > div { height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; }
 .modal .modal_child { height: 200px; width: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center;  background-color: white; border-radius: 10px; }
+
