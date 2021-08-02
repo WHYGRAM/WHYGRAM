@@ -76,7 +76,6 @@ section {margin-top: 80px}
 
 .navbar__menu {
     display: flex;
-
     padding-left: 0;
 }
 
@@ -88,6 +87,11 @@ section {margin-top: 80px}
     height: 100vh ;
     background-color: #F2F2F2;
 
+}
+
+#center__alignment {
+    height: 100vh ;
+    background-color: #F2F2F2;
 }
 
 

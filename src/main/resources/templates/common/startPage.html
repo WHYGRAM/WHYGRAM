@@ -5,115 +5,126 @@
 <head>
     <meta charset="UTF-8">
     <title>WHYGRAM - start page</title>
-
+    <link rel="stylesheet" th:href="@{/css/common/common.css}">
     <link rel="stylesheet" th:href="@{/css/startPage.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <h1>WHYGRAM 로고</h1>
+    <div id="center__alignment">
 
-    <section>
-        <p> 왜 그램? <br>  무슨 일이램? <br>  너의 일상이야기를 보여줄램~?! </p>
-    </section>
+        <h1>WHYGRAM 로고</h1>
 
-    <section>
-        <span class="loginSpn pointer">로그인</span>  |  <span class="joinSpn pointer">회원가입</span>
-    </section>
+        <section>
+            <p> 왜 그램? <br>  무슨 일이램? <br>  너의 일상이야기를 보여줄램~?! </p>
+        </section>
 
-    <p th:text="${errMsg}"></p>
-    <div th:if="${param.error}">로그인에 실패하였습니다.</div>
+        <section>
+            <span class="loginSpn pointer">로그인</span>  |  <span class="joinSpn pointer">회원가입</span>
+        </section>
 
-    <!-------로그인------------>
+        <p th:text="${errMsg}"></p>
+        <div th:if="${param.error}">로그인에 실패하였습니다.</div>
 
-    <section class="loginSectn" style="display: none">
-        <h1>LOGIN</h1>
+        <!-------로그인------------>
 
-        <form th:action="@{/whygram}" method="post" th:object="${userEntity}" id="loginFrm">
-            <div><input type="email" th:field="*{users_email}" placeholder="email"  autofocus required></div>
-            <div><input type="password" th:field="*{users_password}" placeholder="password"  required></div>
-            <div><input type="submit" value="로그인" id="loginBtn" disabled></div>
-        </form>
-        <div>
-            <a th:href="@{/oauth2/authorization/naver}">네이버</a>
-            <a th:href="@{/oauth2/authorization/kakao}">카카오</a>
-            <a th:href="@{/oauth2/authorization/google}">구글</a>
-            <a th:href="@{/oauth2/authorization/facebook}">페이스북</a>
-        </div>
+        <section class="loginSectn" style="display: none">
+            <h1>LOGIN</h1>
 
-        <!-------비밀번호 모달창------------>
-
-        <span id="findPw" class="pointer">비밀번호 찾기</span>
-
-        <div class="modal hide">
+            <form th:action="@{/whygram}" method="post" th:object="${userEntity}" id="loginFrm">
+                <div><input type="email" th:field="*{users_email}" placeholder="email"  autofocus required></div>
+                <div><input type="password" th:field="*{users_password}" placeholder="password"  required></div>
+                <div><input type="submit" value="로그인" id="loginBtn" disabled></div>
+            </form>
             <div>
-                <div class="modal_child">
-                    <div class="modal_close_icon"><i class=" pointer fas fa-times"></i></div>
-                    <form class="findPwFrm">
-                        <div><input type="email" placeholder="이메일" id="findPwEmail"></div>
-                        <div><input type="text" placeholder="닉네임" id="findPwNickNm"></div>
-                        <div><input id="chkbtn" type="button" value="비밀번호 찾기" disabled></div>
-                    </form>
+                <a th:href="@{/oauth2/authorization/naver}">
+                    네이버
+                </a>
+                <a th:href="@{/oauth2/authorization/kakao}">
+                    카카오
+                </a>
+                <a th:href="@{/oauth2/authorization/google}">
+                    구글
+                </a>
+                <a th:href="@{/oauth2/authorization/facebook}">
+                    페이스북
+                </a>
+            </div>
+
+            <!-------비밀번호 모달창------------>
+
+            <span id="findPw" class="pointer">비밀번호 찾기</span>
+
+            <div class="modal hide">
+                <div>
+                    <div class="modal_child">
+                        <div class="modal_close_icon"><i class=" pointer fas fa-times"></i></div>
+                        <form class="findPwFrm">
+                            <div><input type="email" placeholder="이메일" id="findPwEmail"></div>
+                            <div><input type="text" placeholder="닉네임" id="findPwNickNm"></div>
+                            <div><input id="chkbtn" type="button" value="비밀번호 찾기" disabled></div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </section>
+        </section>
 
-    <!-------회원가입------------>
+        <!-------회원가입------------>
 
-    <section class="joinSectn" style="display: none">
-        <h1>JOIN</h1>
+        <section class="joinSectn" style="display: none">
+            <h1>JOIN</h1>
 
-        <div class="warnMsg"></div>
+            <div class="warnMsg"></div>
 
-        <form th:action="@{/user/join}" method="post" th:object="${userEntity}" id="joinFrm">
-            <input type="hidden" th:field="*{users_email}" id="joinEmail">
-            <input type="hidden" th:field="*{users_date_birth}">
+            <form th:action="@{/user/join}" method="post" th:object="${userEntity}" id="joinFrm">
+                <input type="hidden" th:field="*{users_email}" id="joinEmail">
+                <input type="hidden" th:field="*{users_date_birth}">
 
-            <div>
-                <input type="text" placeholder="이메일" id="emailId" autofocus required> @
-                <select id="emailAdrs">
-                    <option value="">주소 선택</option>
-                    <option value="@naver.com">naver.com</option>
-                    <option value="@gmail.com">gmail.com</option>
-                    <option value="@daum.net">daum.net</option>
-                </select>
-                <span class="chkSpan emSpan"></span>
-            </div>
+                <div>
+                    <input type="text" placeholder="이메일" id="emailId" autofocus required> @
+                    <select id="emailAdrs">
+                        <option value="">주소 선택</option>
+                        <option value="@naver.com">naver.com</option>
+                        <option value="@gmail.com">gmail.com</option>
+                        <option value="@daum.net">daum.net</option>
+                    </select>
+                    <span class="chkSpan emSpan"></span>
+                </div>
 
-            <div><input type="text" th:field="*{users_name}" placeholder="이름" id="nm" required></div>
+                <div><input type="text" th:field="*{users_name}" placeholder="이름" id="nm" required></div>
 
-            <div>
-                <label><input type="radio" th:field="*{users_gender}" value="0" checked>남자</label>
-                <label><input type="radio"th:field="*{users_gender}" value="1" >여자</label>
-                <label><input type="radio" th:field="*{users_gender}" value="2">비공개</label>
-            </div>
+                <div>
+                    <label><input type="radio" th:field="*{users_gender}" value="0" checked>남자</label>
+                    <label><input type="radio"th:field="*{users_gender}" value="1" >여자</label>
+                    <label><input type="radio" th:field="*{users_gender}" value="2">비공개</label>
+                </div>
 
-            <div>
-                <select id="yearSel">
-                    <option value="">년</option>
-                    <option th:each="num : ${#numbers.sequence(1960, 2020)}" th:text="${num}" th:value="${num}"></option>
-                </select>
-                <select id="monSel">
-                    <option value="">월</option>
-                    <option th:each="num : ${#numbers.sequence(1, 12)}" th:text="${num}" th:value="${num}"></option>
-                </select>
-                <select id="daySel">
-                    <option value="">일</option>
-                    <option th:each="num : ${#numbers.sequence(1, 31)}" th:text="${num}" th:value="${num}"></option>
-                </select>
-            </div>
+                <div>
+                    <select id="yearSel">
+                        <option value="">년</option>
+                        <option th:each="num : ${#numbers.sequence(1960, 2020)}" th:text="${num}" th:value="${num}"></option>
+                    </select>
+                    <select id="monSel">
+                        <option value="">월</option>
+                        <option th:each="num : ${#numbers.sequence(1, 12)}" th:text="${num}" th:value="${num}"></option>
+                    </select>
+                    <select id="daySel">
+                        <option value="">일</option>
+                        <option th:each="num : ${#numbers.sequence(1, 31)}" th:text="${num}" th:value="${num}"></option>
+                    </select>
+                </div>
 
-            <div><input type="text" th:field="*{users_nickname}" placeholder="닉네임" id="nickNm" required><span class="chkSpan nickNmSpan"></span></div>
-            <div><input type="password" th:field="*{users_password}" placeholder="비밀번호" id="pw" required></div>
-            <div><input type="password" name="pwchk" placeholder="비밀번호 확인" id="pw2" required></div>
-            <div>
-                <input type="submit" value="회원가입" id="joinBtn" disabled>
-            </div>
-        </form>
+                <div><input type="text" th:field="*{users_nickname}" placeholder="닉네임" id="nickNm" required><span class="chkSpan nickNmSpan"></span></div>
+                <div><input type="password" th:field="*{users_password}" placeholder="비밀번호" id="pw" required></div>
+                <div><input type="password" name="pwchk" placeholder="비밀번호 확인" id="pw2" required></div>
+                <div>
+                    <input type="submit" value="회원가입" id="joinBtn" disabled>
+                </div>
+            </form>
 
 
-    </section>
+        </section>
+    </div>
 
     <script defer th:src="@{/js/startPage.js}"></script>
     <script defer th:src="@{/js/user/login.js}"></script>
