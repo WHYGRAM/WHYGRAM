@@ -19,10 +19,7 @@ CREATE TABLE users (
     users_img VARCHAR(50) COMMENT '프로필사진',
     users_ctnt VARCHAR(150) COMMENT '소개글',
     users_auth_code CHAR(5) comment '회원가입 인증코드, null이면 인증받은 상태, 값이 있으면 인증해야 되는 상태',
-    users_is_quit TINYINT(1) UNSIGNED DEFAULT 0 comment'회원탈퇴 여부 0-회원 ,  1-탈퇴',
-    users_feed_count INT UNSIGNED COMMENT '피드글 개수',
-    users_follower_count INT UNSIGNED COMMENT '피드글 개수',
-    users_follow_count INT UNSIGNED COMMENT '피드글 개수'
+    users_is_quit TINYINT(1) UNSIGNED DEFAULT 0 comment'회원탈퇴 여부 0-회원 ,  1-탈퇴'
 ) COMMENT'회원가입 정보';
 
 CREATE TABLE follow (
