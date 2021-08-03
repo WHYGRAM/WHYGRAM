@@ -5,9 +5,9 @@
 <header th:fragment="header">
     <div th:with="auth=${#authentication.getPrincipal().getUser()}">
         <nav class="navbar__container">
-            <div class="site_Icon">
+            <div>
                 <a th:href="@{/feed/home}">
-                    <img class="mainLogo" th:src="@{/img/logo/logo.png}">
+                    <img class="mainLogo" th:src="@{/img/logo/logo.jpg}">
                 </a>
             </div>
             <ul class="navbar__menu">

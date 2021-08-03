@@ -10,16 +10,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <div id="center__alignment">
+    <div id="center__background">
 
-        <h1>WHYGRAM 로고</h1>
+        <h1 class="center__alignment">WHYGRAM 로고</h1>
 
         <section>
-            <p> 왜 그램? <br>  무슨 일이램? <br>  너의 일상이야기를 보여줄램~?! </p>
+            <p class="center__alignment"> 왜 그램? <br>  무슨 일이램? <br>  너의 일상이야기를 보여줄램~?! </p>
         </section>
 
-        <section>
-            <span class="loginSpn pointer">로그인</span>  |  <span class="joinSpn pointer">회원가입</span>
+        <section class="center__alignment">
+            <span class="loginSpn pointer center__alignment">로그인</span>  |  <span class="joinSpn pointer center__alignment">회원가입</span>
         </section>
 
         <p th:text="${errMsg}"></p>
@@ -27,15 +27,15 @@
 
         <!-------로그인------------>
 
-        <section class="loginSectn" style="display: none">
+        <section class="loginSectn center__alignment" style="display: none">
             <h1>LOGIN</h1>
 
-            <form th:action="@{/whygram}" method="post" th:object="${userEntity}" id="loginFrm">
+            <form th:action="@{/whygram}" method="post" th:object="${userEntity}" id="loginFrm" class="center__alignment">
                 <div><input type="email" th:field="*{users_email}" placeholder="email"  autofocus required></div>
                 <div><input type="password" th:field="*{users_password}" placeholder="password"  required></div>
                 <div><input type="submit" value="로그인" id="loginBtn" disabled></div>
             </form>
-            <div>
+            <div class="center__alignment">
                 <a th:href="@{/oauth2/authorization/naver}">
                     네이버
                 </a>
@@ -71,12 +71,12 @@
 
         <!-------회원가입------------>
 
-        <section class="joinSectn" style="display: none">
-            <h1>JOIN</h1>
+        <section class="joinSectn center__alignment" style="display: none">
+            <h1 class="center__alignment">JOIN</h1>
 
-            <div class="warnMsg"></div>
+            <div class="warnMsg center__alignment"></div>
 
-            <form th:action="@{/user/join}" method="post" th:object="${userEntity}" id="joinFrm">
+            <form th:action="@{/user/join}" method="post" th:object="${userEntity}" id="joinFrm" class="center__alignment">
                 <input type="hidden" th:field="*{users_email}" id="joinEmail">
                 <input type="hidden" th:field="*{users_date_birth}">
 

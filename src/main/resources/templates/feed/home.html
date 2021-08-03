@@ -18,7 +18,7 @@
 </th:block>
 
 <th:block layout:fragment="content" th:object="${feedEntity}">
-    <div class="btn text-center" data-bs-toggle="modal" data-target="#myModal" data-bs-target="#staticBackdrop">
+    <div class="btn" data-bs-toggle="modal" data-target="#myModal" data-bs-target="#staticBackdrop">
         <i class="bi bi-plus-circle pointer text-center" style="font-size: 2rem;"></i>
     </div>
 
@@ -27,7 +27,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <img class="feedImg pointer" th:src="@{/img/feed/feedDefaultImg.png}" >
-                    <div class="displayImgList" style="flex:  text-align: center;"></div>
+                    <div class="displayImgList"></div>
                     <br>
                     <div><input class="feedSelectImg" name="contents_img" type="file" multiple accept="image/**" style="display: none"></div>
                     <textarea class="feedCtnt form-control" aria-label="With textarea" th:field="*{feed_ctnt}" rows="5" style="resize: none"></textarea>

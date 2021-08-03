@@ -10,14 +10,14 @@
             users_email, users_password,
             users_name, users_gender,
             users_date_birth, users_auth_code,
-            users_nickname
+            users_nickname, users_provider
         )
         VALUES
         (
             #{users_email}, #{users_password},
             #{users_name}, #{users_gender},
             #{users_date_birth}, #{users_auth_code},
-            #{users_nickname}
+            #{users_nickname}, #{users_provider}
         )
     </insert>
 
