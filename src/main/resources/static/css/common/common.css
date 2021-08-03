@@ -89,9 +89,18 @@ section {margin-top: 80px}
 
 }
 
-#center__alignment {
+#center__background {
     height: 100vh ;
     background-color: #F2F2F2;
+}
+
+.center__alignment {
+    align-items: center;
+    text-align: center;
+}
+
+startPage__input__wh {
+    width: 120px;
 }
 
 
