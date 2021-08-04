@@ -30,4 +30,35 @@
             ON A.users_id = C.users_id
             ORDER BY A.feed_id DESC
     </select>
+
+    <select id="selMypageList" resultMap="FeedDomainMap">
+        SELECT
+            A.feed_id, IF NULL(B.cnt, 0) AS favCnt, IF NULL(D.cnt, 0) AS cmtCnt
+            <if test="user4FavCmt > 0">
+                , CASE WHEN E.feed_id IS NULL THEN 0 ELSE 1 END AS isFav
+                , CASE WHEN F.feed_id IS NULL THEN 0 ELSE 1 END AS isCmt
+            </if>
+        FROM feed A
+        LEFT JOIN (
+            SELECT COUNT(feed_id) AS cnt
+            FROM feed_fav
+            GROUP BY feed_id
+        ) B
+        ON A.feed_id = B.feed_id
+        LEFT JOIN (
+            SELECT COUNT(feed_id) AS cnt
+            FROM cmt
+            GROUP BY feed_id
+        ) D
+        ON A.feed_id = D.feed_id
+        <if test="user4FavCmt > 0">
+            LEFT JOIN feed_fav E
+            ON E.users_id = ${user4FavCmt} AMD A.feed_id = E.feed_id
+            LEFT JOIN cmt F
+            ON F.users_id = ${user4FavCmt} AMD A.feed_id = F.feed_id
+        </if>
+        WHERE A.users_id = ${mypage_id}
+        ORDER BY A.feed_id DESC
+        LIMIT ${startIdx} , ${limit}
+    </select>
 </mapper>
