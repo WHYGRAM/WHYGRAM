@@ -1,5 +1,7 @@
 package com.koreait.whygram.controller;
 
+import com.koreait.whygram.model.feed.FeedDTO;
+import com.koreait.whygram.model.feed.FeedDomain;
 import com.koreait.whygram.model.profile.FollowEntity;
 import com.koreait.whygram.model.user.UserDomain;
 import com.koreait.whygram.model.user.UserEntity;
@@ -58,4 +60,9 @@ public class ProfileController {
     public List<UserDomain> followList(FollowEntity param) {
         return service.selFollowList(param);
     }
+
+    @ResponseBody
+    @GetMapping("/mypageList")
+    public List<FeedDomain> mypageList(FeedDTO param) {return service.selMypageList(param);}
+
 }

@@ -1,5 +1,6 @@
 package com.koreait.whygram.controller;
 
+import com.koreait.whygram.model.feed.FeedDTO;
 import com.koreait.whygram.model.feed.FeedDomain;
 import com.koreait.whygram.model.feed.FeedEntity;
 import com.koreait.whygram.service.FeedService;

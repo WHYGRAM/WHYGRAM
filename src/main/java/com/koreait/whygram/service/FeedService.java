@@ -40,4 +40,5 @@ public class FeedService {
     }
 
     public List<FeedDomain> selFeedList() {  return mapper.selFeedList(); }
+
 }

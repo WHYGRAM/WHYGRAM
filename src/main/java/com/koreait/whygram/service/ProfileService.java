@@ -5,6 +5,8 @@ import com.koreait.whygram.common.FileUtils;
 import com.koreait.whygram.common.MySecurityUtils;
 import com.koreait.whygram.mapper.ProfileMapper;
 import com.koreait.whygram.mapper.UserMapper;
+import com.koreait.whygram.model.feed.FeedDTO;
+import com.koreait.whygram.model.feed.FeedDomain;
 import com.koreait.whygram.model.profile.FollowDTO;
 import com.koreait.whygram.model.profile.FollowEntity;
 import com.koreait.whygram.model.user.UserDomain;
@@ -108,5 +110,10 @@ public class ProfileService {
     public List<UserDomain> selFollowList(FollowEntity param) {
         param.setFollow_him(auth.getLoginUserPk()); //hisFollower : 그사람 , him : 나
         return mapper.selFollowList(param);
+    }
+
+    public List<FeedDomain> selMypageList(FeedDTO param) {
+        param.setUser4FavCmt(auth.getLoginUserPk());
+        return mapper.selMypageList(param);
     }
 }

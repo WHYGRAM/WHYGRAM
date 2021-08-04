@@ -1,5 +1,7 @@
 package com.koreait.whygram.mapper;
 
+import com.koreait.whygram.model.feed.FeedDTO;
+import com.koreait.whygram.model.feed.FeedDomain;
 import com.koreait.whygram.model.profile.FollowDTO;
 import com.koreait.whygram.model.profile.FollowEntity;
 import com.koreait.whygram.model.user.UserDomain;
@@ -18,5 +20,6 @@ public interface ProfileMapper {
     UserDomain selUserProfile(FollowDTO param);
     List<UserDomain> selFollowerList(FollowEntity param);
     List<UserDomain> selFollowList(FollowEntity param);
+    List<FeedDomain> selMypageList(FeedDTO param);
     int delFollow(FollowEntity param);
 }

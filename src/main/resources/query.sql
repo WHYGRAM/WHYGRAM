@@ -41,7 +41,7 @@ CREATE TABLE feed (
 CREATE TABLE contents (
     contents_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     feed_id INT UNSIGNED,
-    contents_img VARCHAR(36) comment'사진',
+    contents_img VARCHAR(36) NOT NULL comment'사진',
     -- contents_video VARCHAR(36) comment'영상',
     FOREIGN KEY(feed_id) references feed(feed_id)
 ) COMMENT'게시물 컨텐츠';

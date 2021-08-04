@@ -13,6 +13,7 @@
     <script defer th:src="@{/js/profile/mypageImg.js}"></script>
     <script defer th:src="@{/js/profile/mypageFollow.js}"></script>
     <script defer th:src="@{/js/profile/mypageFollowModal.js}"></script>
+    <script defer th:src="@{/js/profile/mypageFeed.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content" th:with="auth=${#authentication.getPrincipal().getUser()}">
@@ -58,6 +59,25 @@
     </div>
 
     <!--- 게시물 리스트 --->
+    <div id="mypageFeed">
+        <!---
+        <div class="container" id="mypageFeedContainer" th:attr="data-fid=${feed_id}"> 🔸 🔄* 반복 출력
+          <div class="row row-cols-1">
+            <div class="col">
+                <img src="/pic/feed/{feed_id}/{contents_img}" class="img-thumbnail"
+                onerror="this.src=/img/feed/error.png">
+            </div>
+          </div>
+        </div>
+        -->
+    </div>
+
+    <div class="hide m-5 d-flex justify-content-center" id="loading">
+        <button class="btn btn-primary" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+        </button>
+    </div>
 
 </th:block>
 
