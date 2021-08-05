@@ -25,9 +25,11 @@ FeedObj = {
         for(let i=0; i<data.length; i++) {
             const item = data[i];
             feedElem.dataset.fid = `${item.feed_id}`;
+            feedElem.dataset.isfav = `${item.isFav}`;
+            feedElem.dataset.iscmt = `${item.isCmt}`;
             feedElem.innerHTML = `
                 <div id="mypageFeedContainer"> 
-                    <img src="/pic/feed/${item.feed_id}/${item.contents_img}" className="img-thumbnail"
+                    <img src="/pic/feed/${item.feed_id}/${item.contents_img}" class="img-thumbnail wh70"
                          onError="this.src=/img/feed/error.png">
                 </div>
             `;
@@ -53,3 +55,6 @@ FeedObj = {
 
 feedObj.setScrollInfinity(window);
 feedObj.getFeedList(1);
+
+feedElem.addEventListener('mouseout', () => {show()});
+feedElem.addEventListener('mouseover', () => {undo()});
