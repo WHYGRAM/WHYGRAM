@@ -1,10 +1,4 @@
-.btn > .text-center  {
-    display: flex;
-    text-align: center;
-    justify-content: center;
-}
-
-.btn > .iconSize {
+.btn { margin: 20px}
+.btn > .plus__icon  {
     font-size: 36px;
 }
-

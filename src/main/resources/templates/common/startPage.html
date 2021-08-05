@@ -11,17 +11,15 @@
 </head>
 <body>
     <div id="center__background">
-
-        <img class="center__alignment login__form__logo" th:src="@{/img/logo/whygramLogo.png}"></img>
-
+        <div id="logo__center">
+            <img class="login__form__logo" th:src="@{/img/logo/whygramLogo.png}"></img>
+        </div>
         <section>
             <p class="center__alignment"> 왜 그램? <br>  무슨 일이램? <br>  너의 일상이야기를 보여줄램~?! </p>
         </section>
-
         <section class="center__alignment">
             <span class="loginSpn pointer center__alignment">로그인</span>  |  <span class="joinSpn pointer center__alignment">회원가입</span>
         </section>
-
         <p th:text="${errMsg}"></p>
         <div th:if="${param.error}">로그인에 실패하였습니다.</div>
 
@@ -32,8 +30,8 @@
 
             <form th:action="@{/whygram}" method="post" th:object="${userEntity}" id="loginFrm" class="center__alignment">
                 <div><input type="email" th:field="*{users_email}" placeholder="email" class="startPage__input__wh" autofocus required></div>
-                <div><input type="password" th:field="*{users_password}" placeholder="password"  required></div>
-                <div><input type="submit" value="로그인" id="loginBtn" disabled></div>
+                <div><input type="password" th:field="*{users_password}" placeholder="password" class="startPage__input__wh" required></div>
+                <div><input type="submit" value="로그인" id="loginBtn" class="startPage__input__wh button__color" disabled></div>
             </form>
             <div class="center__alignment">
                 <a th:href="@{/oauth2/authorization/naver}">
