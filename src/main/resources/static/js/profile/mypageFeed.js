@@ -1,5 +1,5 @@
+const feedElem = document.querySelector('#mypageFeed');
 FeedObj = {
-    feedElem : document.querySelector('#mypageFeed'),
     loadingElem : document.querySelector('#loading'),
     mypage_id : mypageConstElem.dataset.pid,
     limit : 12,
@@ -14,7 +14,7 @@ FeedObj = {
                 this.makeFeedList(myJson);
             }).catch(err => {
                 console.log(err);
-                feedElem.innerHTML(`<img src="/img/feed/error.png" class="img-thumbnail wh400">`);
+                feedElem.innerHTML = "<img src=\"/img/feed/error.png\" class=\"img-thumbnail wh400\">";
             }).then(() => {
                 this.hideLoading();
             });
@@ -24,6 +24,13 @@ FeedObj = {
 
         for(let i=0; i<data.length; i++) {
             const item = data[i];
+            feedElem.dataset.fid = `${item.feed_id}`;
+            feedElem.innerHTML = `
+                <div id="mypageFeedContainer"> 
+                    <img src="/pic/feed/${item.feed_id}/${item.contents_img}" className="img-thumbnail"
+                         onError="this.src=/img/feed/error.png">
+                </div>
+            `;
         }
     },
     setScrollInfinity: function(target) {

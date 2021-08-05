@@ -31,6 +31,18 @@
             ORDER BY A.feed_id DESC
     </select>
 
+    <resultMap id="FeedDomainMap" type="FeedDomain">
+        <result property="feed_id" column="feed_id"></result>
+        <association property="contents" column="feed_id" select="selContents"></association>
+    </resultMap>
+
+    <select id="selContents" resultType="ContentsEntity">
+        SELECT contents_id, contents_img
+        FROM contents
+        WHERE feed_id = ${feed_id}
+        LIMIT 1
+    </select>
+
     <select id="selMypageList" resultMap="FeedDomainMap">
         SELECT
             A.feed_id, IF NULL(B.cnt, 0) AS favCnt, IF NULL(D.cnt, 0) AS cmtCnt
