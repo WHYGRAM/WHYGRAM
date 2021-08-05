@@ -47,6 +47,43 @@
         WHERE U.users_id = ${him}
     </select>
 
+    <!-- 팔로워, 팔로우 리스트 -->
+    <!--hisFollower : 나, him : 그사람-->
+    <select id="selFollowerList" resultType="UserDomain">
+        SELECT U.users_id, U.users_img, U.users_name, U.users_nickname,
+        -- 그사람을 팔로우하는 사람들
+        CASE WHEN W.follow_hisFollower IS NULL THEN 0 ELSE 1 END AS isYourFollower
+        -- 그사람을 팔로우한 사람을 내가 팔로우 하는가 👉 W.hisFollower = 나 , W.him = 그사람을 팔로우하는 사람들
+        FROM follow F
+        -- F.follow_him = 그 사람 , F.hisFollower = 그사람을 팔로우하는 사람들을
+        -- 설정(WHERE)해주기 위해서 FROM은 follow에서
+        INNER JOIN  users U
+        -- 그사람을 팔로우하는 사람들을 구하기 위해 INNER JOIN
+        ON  F.follow_hisFollower=U.users_id
+        -- F.follow_him = 그 사람 , F.hisFollower = 그사람을 팔로우하는 사람들 = U.users_id = W.him
+        LEFT JOIN follow W
+        -- 그사람을 팔로우하는 사람들을 내가 팔로우 하는지 구하기 위해 LEFT JOIN
+        ON W.follow_him = F.follow_hisFollower AND W.follow_hisFollower=${follow_hisFollower}
+        WHERE  F.follow_him = ${follow_him}
+    </select>
+
+    <!--hisFollower : 그사람, him : 나-->
+    <select id="selFollowList" resultType="UserDomain">
+        SELECT U.users_id, U.users_img, U.users_name, U.users_nickname,
+        CASE WHEN W.follow_hisFollower IS NULL THEN 0 ELSE 1 END AS isYourFollower
+        FROM follow F
+        -- 그 사람이 팔로우 하는 사람들 = F.him , 그사람 = F.hisFollower
+        -- 설정(WHERE)해주기 위해서 FROM은 follow에서
+        INNER JOIN users U
+        -- U.users_id = F.him = 그 사람이 팔로우하는 사람들
+        ON F.follow_him=U.users_id
+        LEFT JOIN follow W
+        -- 그 사람이 팔로우하는 사람들을 내가 팔로우 하는지
+        -- 👉 W.him = F.him = U.users_id , W.hisFollower = 나
+        ON W.follow_him=F.follow_him AND W.follow_hisFollower=${follow_him}
+        WHERE F.follow_hisFollower=${follow_hisFollower}
+    </select>
+
     <!-- 프로필 이미지 변경 -->
     <update id="updUserImg">
         UPDATE users

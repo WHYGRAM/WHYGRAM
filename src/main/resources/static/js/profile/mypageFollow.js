@@ -57,7 +57,7 @@ function followClick(follow) {
     }
 }
 
-function followProc(follow, him, elem) {
+function followProc(follow, him) {
     const init = {};
     const param = {'follow_him' : him};
     

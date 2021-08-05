@@ -4,12 +4,10 @@ import lombok.Data;
 
 @Data
 public class FeedDTO {
+    private int mypage_id;
     private int page;
     private int limit;
-    private int userIdForMyFeed; // 내 게시글
-    private int userIdForFav; // 내가 좋아요한 사람 게시글
+    private int user4FavCmt;
 
-    public int getStartIdx() {
-        return (page - 1) * limit;
-    }
+    public int getStarIdx() {return (page - 1) * limit;}
 }
