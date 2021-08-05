@@ -12,7 +12,7 @@
 <body>
     <div id="center__background">
 
-        <h1 class="center__alignment">WHYGRAM 로고</h1>
+        <img class="center__alignment login__form__logo" th:src="@{/img/logo/whygramLogo.png}"></img>
 
         <section>
             <p class="center__alignment"> 왜 그램? <br>  무슨 일이램? <br>  너의 일상이야기를 보여줄램~?! </p>
@@ -31,7 +31,7 @@
             <h1>LOGIN</h1>
 
             <form th:action="@{/whygram}" method="post" th:object="${userEntity}" id="loginFrm" class="center__alignment">
-                <div><input type="email" th:field="*{users_email}" placeholder="email"  autofocus required></div>
+                <div><input type="email" th:field="*{users_email}" placeholder="email" class="startPage__input__wh" autofocus required></div>
                 <div><input type="password" th:field="*{users_password}" placeholder="password"  required></div>
                 <div><input type="submit" value="로그인" id="loginBtn" disabled></div>
             </form>
@@ -90,9 +90,7 @@
                     </select>
                     <span class="chkSpan emSpan"></span>
                 </div>
-
                 <div><input type="text" th:field="*{users_name}" placeholder="이름" id="nm" required></div>
-
                 <div>
                     <label><input type="radio" th:field="*{users_gender}" value="0" checked>남자</label>
                     <label><input type="radio"th:field="*{users_gender}" value="1" >여자</label>
