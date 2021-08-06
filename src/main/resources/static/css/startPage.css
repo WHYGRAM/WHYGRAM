@@ -1,6 +1,12 @@
 body h1 { margin: 0; padding: 0; }
-.pointer:hover { background-color: yellow; }
+.pointer:hover {
+    text-decoration: underline;
+    text-decoration-color : #0d6efd;
+    text-underline-position: under;
+}
 .pointer { cursor: pointer; }
+.pointer:after { line-height: 20px; }
+
 
 /* 모달창 */
 .hide { display: none !important; }
@@ -8,4 +14,39 @@ body h1 { margin: 0; padding: 0; }
 .modal { height: 100%; width: 100%; position: fixed; left:0; top: 0; z-index: 100; background-color: rgba(128, 128, 128, 0.87); }
 .modal > div { height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; }
 .modal .modal_child { height: 200px; width: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center;  background-color: white; border-radius: 10px; }
+.login__form__logo {
+    width: 500px;
+    height: 200px;
+}
+#logo__center {
+    text-align: center;
+}
+.center__alignment > div > .startPage__input__wh {
+    width: 250px;
+    height: 30px;
+    margin: 5px;
+}
+.center__alignment > div > .button__color {
+    background-color: #0d6efd;
+    color: #fff;
+}
+section > .center__alignment > a { padding: 6px 8px; }
+section > .center__alignment > .email__form > #emailId { width: 150px; height: 30px; margin: 5px; }
+section > .center__alignment > .email__form > #emailAdrs { width: 150px; height: 30px; margin: 5px; }
+section > .center__alignment > div > #nm { width: 340px; height: 30px; margin: 5px; }
+section > .center__alignment > div > label > input { width: 45px; height: 20px; margin: 5px; }
+section > .center__alignment > div > #yearSel { width: 105px; height: 30px; margin: 5px; }
+section > .center__alignment > div > #monSel { width: 100px; height: 30px; margin: 5px; }
+section > .center__alignment > div > #daySel { width: 105px; height: 30px; margin: 5px; }
+section > .center__alignment > div > #nickNm { width: 340px; height: 30px; margin: 5px; }
+section > .center__alignment > div > #pw { width: 340px; height: 30px; margin: 5px; }
+section > .center__alignment > div > #pw2 { width: 340px; height: 30px; margin: 5px; }
+section > .center__alignment > div > #joinBtn { width: 340px; height: 40px; margin: 5px; background-color: #0d6efd; color: #fff; }
+
+
+
+
+
+
+
 

@@ -5,33 +5,6 @@ ul, ol, li { list-style: none; }
 .header-icon { font-size: 2.5rem; color: black; pointer-events: none;}
 .follow-icon { font-size: 1.5rem; color: black; pointer-events: none;}
 
-header {
-    /*
-    padding-left: 20px;
-    padding-right: 20px;
-    z-index: 10;
-    background-color: white;
-    height: 80px;
-    left: 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    box-shadow: 0 4px 4px -4px #dfe6e9;
-     */
-}
-/*
-nav {
-    display: flex;
-    height: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
- */
-/*
-section {margin-top: 80px}
-
- */
 .pointer { cursor: pointer; }
 /* 모달창 */
 .hide { display: none !important; }
@@ -64,11 +37,7 @@ section {margin-top: 80px}
 
 /* commonHeader */
 .mainLogo { width: 180px; height: 65px;}
-.login__form__logo {
-    width: 500px;
-    height: 200px;
-    text-align: center;
-}
+
 .navbar__container {
     display: flex;
     justify-content: space-between;
@@ -103,6 +72,8 @@ section {margin-top: 80px}
     align-items: center;
     text-align: center;
 }
+
+
 
 
 

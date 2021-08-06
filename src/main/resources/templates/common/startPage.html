@@ -11,17 +11,15 @@
 </head>
 <body>
     <div id="center__background">
-
-        <img class="center__alignment login__form__logo" th:src="@{/img/logo/whygramLogo.png}"></img>
-
+        <div id="logo__center">
+            <img class="login__form__logo" th:src="@{/img/logo/whygramLogo.png}"></img>
+        </div>
         <section>
             <p class="center__alignment"> 왜 그램? <br>  무슨 일이램? <br>  너의 일상이야기를 보여줄램~?! </p>
         </section>
-
         <section class="center__alignment">
             <span class="loginSpn pointer center__alignment">로그인</span>  |  <span class="joinSpn pointer center__alignment">회원가입</span>
         </section>
-
         <p th:text="${errMsg}"></p>
         <div th:if="${param.error}">로그인에 실패하였습니다.</div>
 
@@ -32,20 +30,20 @@
 
             <form th:action="@{/whygram}" method="post" th:object="${userEntity}" id="loginFrm" class="center__alignment">
                 <div><input type="email" th:field="*{users_email}" placeholder="email" class="startPage__input__wh" autofocus required></div>
-                <div><input type="password" th:field="*{users_password}" placeholder="password"  required></div>
-                <div><input type="submit" value="로그인" id="loginBtn" disabled></div>
+                <div><input type="password" th:field="*{users_password}" placeholder="password" class="startPage__input__wh" required></div>
+                <div><input type="submit" value="로그인" id="loginBtn" class="startPage__input__wh button__color pointer" disabled></div>
             </form>
             <div class="center__alignment">
-                <a th:href="@{/oauth2/authorization/naver}">
+                <a class="pointer" th:href="@{/oauth2/authorization/naver}">
                     네이버
                 </a>
-                <a th:href="@{/oauth2/authorization/kakao}">
+                <a class="pointer" th:href="@{/oauth2/authorization/kakao}">
                     카카오
                 </a>
-                <a th:href="@{/oauth2/authorization/google}">
+                <a class="pointer" th:href="@{/oauth2/authorization/google}">
                     구글
                 </a>
-                <a th:href="@{/oauth2/authorization/facebook}">
+                <a class="pointer" th:href="@{/oauth2/authorization/facebook}">
                     페이스북
                 </a>
             </div>
@@ -80,8 +78,9 @@
                 <input type="hidden" th:field="*{users_email}" id="joinEmail">
                 <input type="hidden" th:field="*{users_date_birth}">
 
-                <div>
-                    <input type="text" placeholder="이메일" id="emailId" autofocus required> @
+                <div class="email__form">
+                    <input type="text" placeholder="이메일" id="emailId" autofocus required>
+                    <span>@</span>
                     <select id="emailAdrs">
                         <option value="">주소 선택</option>
                         <option value="@naver.com">naver.com</option>
@@ -116,7 +115,7 @@
                 <div><input type="password" th:field="*{users_password}" placeholder="비밀번호" id="pw" required></div>
                 <div><input type="password" name="pwchk" placeholder="비밀번호 확인" id="pw2" required></div>
                 <div>
-                    <input type="submit" value="회원가입" id="joinBtn" disabled>
+                    <input type="submit" value="회원가입" id="joinBtn" class="pointer" disabled>
                 </div>
             </form>
 
