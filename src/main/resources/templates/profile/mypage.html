@@ -34,11 +34,11 @@
     </div>
 
     <div>
-        게시물 : <span th:text="${profile.users_feed_count}"></span>
+        게시물 : <span>?</span>
         <span class="pointer followerCnt" data-bs-toggle="modal" data-bs-target="#followModal">팔로워 : </span>
-        <span class="pointer followerCnt" th:text="${profile.users_follower_count}" data-bs-toggle="modal" data-bs-target="#followModal"></span>
+        <span class="pointer followerCnt" data-bs-toggle="modal" data-bs-target="#followModal">?</span>
         <span class="pointer followCnt" data-bs-toggle="modal" data-bs-target="#followModal">팔로우 : </span>
-        <span class="pointer followCnt" th:text="${profile.users_follow_count}" data-bs-toggle="modal" data-bs-target="#followModal"></span>
+        <span class="pointer followCnt"  data-bs-toggle="modal" data-bs-target="#followModal">?</span>
     </div>
     <div th:text="${profile.users_name}"></div>
     <div th:text="${profile.users_ctnt}"></div>

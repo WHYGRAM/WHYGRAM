@@ -36,7 +36,6 @@
     <!-- 이미지 띄우기 + 프로필 -->
     <select id="selUserProfile" resultType="UserDomain">
         SELECT U.users_id, U.users_name, U.users_nickname, U.users_img, U.users_ctnt,
-               U.users_feed_count, U.users_follower_count, U.users_follow_count,
                (SELECT COUNT(follow_him) FROM follow
                 WHERE follow_hisFollower = ${hisFollower} AND follow_him = ${him})
                    AS isYourFollower,
@@ -88,6 +87,13 @@
         <result property="feed_id" column="feed_id"></result>
         <association property="contents" column="feed_id" select="selContents"></association>
     </resultMap>
+
+    <select id="selContents" resultType="ContentsEntity">
+        SELECT contents_id, contents_img
+        FROM contents
+        WHERE feed_id = ${feed_id}
+            LIMIT 1
+    </select>
 
     <select id="selMypageList" resultMap="FeedDomainMap">
         SELECT

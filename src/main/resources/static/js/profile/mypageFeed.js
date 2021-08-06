@@ -33,15 +33,19 @@ const feedObj = {
 
         for(let i=0; i<data.length; i++) {
             const item = data[i];
-            feedElem.dataset.fid = `${item.feed_id}`;
-            feedElem.dataset.isfav = `${item.isFav}`;
-            feedElem.dataset.iscmt = `${item.isCmt}`;
-            feedElem.innerHTML = `
+            const divId = 'container' + i;
+            const containerElem = document.createElement('div');
+            containerElem.id = divId;
+            containerElem.dataset.fid = `${item.feed_id}`;
+            containerElem.dataset.isfav = `${item.isFav}`;
+            containerElem.dataset.iscmt = `${item.isCmt}`;
+            containerElem.innerHTML = `
                 <div id="mypageFeedContainer"> 
-                    <img src="/pic/feed/${item.feed_id}/${item.contents_img}" class="img-thumbnail wh70"
+                    <img src="/pic/feed/${item.feed_id}/${item.contents.contents_img}" class="img-thumbnail wh400"
                          onError="this.src=/img/feed/error.png">
                 </div>
             `;
+            feedElem.append(containerElem);
         }
     },
     setScrollInfinity: function(target) {
@@ -65,5 +69,5 @@ const feedObj = {
 feedObj.setScrollInfinity(window);
 feedObj.getFeedList(1);
 
-feedElem.addEventListener('mouseout', () => {show()});
-feedElem.addEventListener('mouseover', () => {undo()});
+feedElem.addEventListener('mouseout', () => {});
+feedElem.addEventListener('mouseover', () => {});
