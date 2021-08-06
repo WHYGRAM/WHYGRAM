@@ -66,6 +66,7 @@ public class UserService {
         // UserEntity 설정
         param.setUsers_password(hashedPw);
         param.setUsers_auth_code(authCd);
+        param.setUsers_provider("local");
 
         //회원가입 처리
         int result = mapper.insUsers(param);

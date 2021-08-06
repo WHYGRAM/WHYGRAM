@@ -33,12 +33,7 @@
 
 
 
-    <select id="selContents" resultType="ContentsEntity">
-        SELECT contents_id, contents_img
-        FROM contents
-        WHERE feed_id = ${feed_id}
-        LIMIT 1
-    </select>
+
 
 
 </mapper>

@@ -4,7 +4,6 @@ a { text-decoration: none; color: black; }
 ul, ol, li { list-style: none; }
 .header-icon { font-size: 2.5rem; color: black; pointer-events: none;}
 .follow-icon { font-size: 1.5rem; color: black; pointer-events: none;}
-i {pointer-events: none;}
 
 .pointer { cursor: pointer; }
 /* 모달창 */
