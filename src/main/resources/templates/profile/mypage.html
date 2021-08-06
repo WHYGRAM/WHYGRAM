@@ -25,7 +25,6 @@
             <img th:unless="${profile.users_img == null}" class="profileImg pointer wh150" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${profile.users_id}, users_img=${profile.users_img})}">
             <input class="profileInput" type="file" accept="image/**" style="display: none">
 
-
             <th:block th:if="${auth.users_id eq profile.users_id}"><input class="hide" type="button" value="프로필 편집"></th:block>
             <div th:unless="${auth.users_id eq profile.users_id}" id="followContainer">
                 <div id="btnFollow" th:attr="data-follow=${profile.datasetFollow}" class="pointer">
