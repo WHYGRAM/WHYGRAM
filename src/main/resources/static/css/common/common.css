@@ -4,6 +4,7 @@ a { text-decoration: none; color: black; }
 ul, ol, li { list-style: none; }
 .header-icon { font-size: 2.5rem; color: black; pointer-events: none;}
 .follow-icon { font-size: 1.5rem; color: black; pointer-events: none;}
+i {pointer-events: none;}
 
 .pointer { cursor: pointer; }
 /* 모달창 */
@@ -33,6 +34,15 @@ ul, ol, li { list-style: none; }
 .rem_wh3 { width: 3rem; height: 3rem; }
 
 .profileRadius { object-fit: cover; border-radius: 50%; }
+
+.blurImg {
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+    opacity: 0.5;
+}
 
 
 /* commonHeader */
