@@ -1,20 +1,29 @@
 const feedElem = document.querySelector('#mypageFeed');
-FeedObj = {
+const feedObj = {
     loadingElem : document.querySelector('#loading'),
     mypage_id : mypageConstElem.dataset.pid,
     limit : 12,
     itemLength : 0,
     getFeedList : function(page) {
         this.showLoading();
-        fetch(`/profile/mypageList?mypage_id=${this.users_id}&page=${page}&limit=${this.limit}`)
-            .then(res => res.json())
-            .then(myJson => {
+        fetch(`/profile/mypageList?mypage_id=${this.mypage_id}&page=${page}&limit=${this.limit}`)
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+                throw new Error(`${res.status}`);
+            }).then(myJson => {
                 console.log(myJson);
-                this.itemLength = myJson.length;
-                this.makeFeedList(myJson);
+                if (myJson.length) {
+                    this.itemLength = myJson.length;
+                    this.makeFeedList(myJson);
+                } else {
+                    console.log('게시물 없음');
+                    feedElem.innerHTML = '<img src="/img/feed/empty.jpg" class="img-thumbnail wh400">';
+                }
             }).catch(err => {
-                console.log(err);
-                feedElem.innerHTML = "<img src=\"/img/feed/error.png\" class=\"img-thumbnail wh400\">";
+                console.log('!  ' + err);
+            feedElem.innerHTML = '<img src="/img/feed/error.jpg" class="img-thumbnail wh400">';
             }).then(() => {
                 this.hideLoading();
             });
@@ -25,9 +34,11 @@ FeedObj = {
         for(let i=0; i<data.length; i++) {
             const item = data[i];
             feedElem.dataset.fid = `${item.feed_id}`;
+            feedElem.dataset.isfav = `${item.isFav}`;
+            feedElem.dataset.iscmt = `${item.isCmt}`;
             feedElem.innerHTML = `
                 <div id="mypageFeedContainer"> 
-                    <img src="/pic/feed/${item.feed_id}/${item.contents_img}" className="img-thumbnail"
+                    <img src="/pic/feed/${item.feed_id}/${item.contents_img}" class="img-thumbnail wh70"
                          onError="this.src=/img/feed/error.png">
                 </div>
             `;
@@ -47,9 +58,12 @@ FeedObj = {
             }
         }, { passive: true });
     },
-    hideLoading: function() { this.loadingElem.classList.add('hide');},
-    showLoading: function() { this.loadingElem.classList.remove('hide'); }
+    hideLoading: function() { this.loadingElem.classList.add('visually-hidden');},
+    showLoading: function() { this.loadingElem.classList.remove('visually-hidden'); }
 }
 
 feedObj.setScrollInfinity(window);
 feedObj.getFeedList(1);
+
+feedElem.addEventListener('mouseout', () => {show()});
+feedElem.addEventListener('mouseover', () => {undo()});
