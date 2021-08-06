@@ -13,7 +13,7 @@ public class FeedDTO {
     private int feed_id;
 
     //마이페이지 리스트
-    public int getStarIdx() {return (page - 1) * limit;}
+    public int getStartIdx() {return (page - 1) * limit;}
 
 
 }
