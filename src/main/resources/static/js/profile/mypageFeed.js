@@ -36,15 +36,21 @@ const feedObj = {
             const divId = 'container' + i;
             const containerElem = document.createElement('div');
             containerElem.id = divId;
+            containerElem.classList.add('pointer');
+            containerElem.classList.add('d-flex');
+            containerElem.classList.add('justify-content-center');
+            containerElem.classList.add('align-items-center');
+            containerElem.style.position = 'relative';
             containerElem.dataset.fid = `${item.feed_id}`;
             containerElem.dataset.isfav = `${item.isFav}`;
             containerElem.dataset.iscmt = `${item.isCmt}`;
             containerElem.innerHTML = `
-                <div id="mypageFeedContainer"> 
-                    <img src="/pic/feed/${item.feed_id}/${item.contents.contents_img}" class="img-thumbnail wh400"
-                         onError="this.src=/img/feed/error.png">
-                </div>
+                    <img src="/pic/feed/${item.feed_id}/${item.contents.contents_img}" 
+                    class="img-thumbnail wh400"
+                    onError="this.src=/img/feed/error.png">
             `;
+
+            this.addEvent(containerElem);
             feedElem.append(containerElem);
         }
     },
@@ -63,11 +69,60 @@ const feedObj = {
         }, { passive: true });
     },
     hideLoading: function() { this.loadingElem.classList.add('visually-hidden');},
-    showLoading: function() { this.loadingElem.classList.remove('visually-hidden'); }
+    showLoading: function() { this.loadingElem.classList.remove('visually-hidden'); },
+    addEvent : function (elem) {
+        const imgElem = elem.firstElementChild;
+        elem.addEventListener('mouseover', () => {
+            imgElem.classList.add('blurImg');
+            this.showIcn(elem);
+        });
+        elem.addEventListener('mouseout', () => {
+            imgElem.classList.remove('blurImg');
+            this.hideIcn(elem);
+        });
+    },
+    favIcn : function (isFav) {
+        const icn = document.createElement('i');
+        icn.classList.add('bi');
+
+        if(isFav > 0) {
+            icn.classList.add('bi-heart-fill');
+        } else {
+            icn.classList.add('bi-heart');
+        }
+        return  icn;
+    },
+    cmtIcn : function (isCmt) {
+        const icn = document.createElement('i');
+        icn.classList.add('bi');
+
+        if(isCmt > 0) {
+            icn.classList.add('bi-chat-left-quote-fill');
+        } else {
+            icn.classList.add('bi-chat-left-quote');
+        }
+        return icn;
+    },
+    showIcn : function (elem) {
+        const favIcn = this.favIcn(elem.dataset.isfav);
+        const cmtIcn = this.cmtIcn(elem.dataset.iscmt);
+
+        const icnElem = document.createElement('div');
+        icnElem.id = 'icn';
+        icnElem.append(favIcn);
+        icnElem.append(cmtIcn);
+        icnElem.style.position = 'absolute';
+
+        elem.append(icnElem);
+    },
+    hideIcn : function (elem) {
+        if(elem.childElementCount>1) {
+            elem.lastElementChild.remove();
+        }
+    }
 }
 
 feedObj.setScrollInfinity(window);
 feedObj.getFeedList(1);
 
-feedElem.addEventListener('mouseout', () => {});
-feedElem.addEventListener('mouseover', () => {});
+
