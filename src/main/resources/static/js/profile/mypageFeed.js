@@ -18,11 +18,11 @@ const feedObj = {
                     this.itemLength = myJson.length;
                     this.makeFeedList(myJson);
                 } else {
-                    console.log('게시물 없음');
+                    console.log('!  게시물 없음');
                     feedElem.innerHTML = '<img src="/img/feed/empty.jpg" class="img-thumbnail wh400">';
                 }
             }).catch(err => {
-                console.log('!  ' + err);
+                console.log('! fetch() 오류 - ' + err);
             feedElem.innerHTML = '<img src="/img/feed/error.jpg" class="img-thumbnail wh400">';
             }).then(() => {
                 this.hideLoading();
