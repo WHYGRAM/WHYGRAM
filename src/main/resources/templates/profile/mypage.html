@@ -14,6 +14,7 @@
     <script defer th:src="@{/js/profile/mypageFollow.js}"></script>
     <script defer th:src="@{/js/profile/mypageFollowModal.js}"></script>
     <script defer th:src="@{/js/profile/mypageFeed.js}"></script>
+    <script defer th:src="@{/js/profile/mypageDetail.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content" th:with="auth=${#authentication.getPrincipal().getUser()}">
@@ -75,17 +76,9 @@
     </div>
 
     <!--- 게시물 리스트 --->
-    <div id="mypageFeed">
-        <!---
-        <div class="container" id="mypageFeedContainer" th:attr="data-fid=${feed_id}"> 🔸 🔄* 반복 출력
-          <div class="row row-cols-1">
-            <div class="col">
-                <img src="/pic/feed/{feed_id}/{contents_img}" class="img-thumbnail"
-                onerror="this.src=/img/feed/error.png">
-            </div>
-          </div>
+    <div class="container">
+        <div id="mypageFeedContainer" class="row row-cols-3">
         </div>
-        -->
     </div>
 
     <div class="hide m-5 d-flex justify-content-center" id="loading">
@@ -95,6 +88,85 @@
         </button>
     </div>
 
+
+
+
+
+    <!--- 게시물 디테일 모달--->
+    <div class="modal fade" tabindex="-1" id="mypageDetailModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg ">
+            <div class="modal-content container">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body row row-cols-2 d-flex align-items-center" id="modalList" >
+
+                    <!---1. 이미지 --->
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                        <!--이미지 바-->
+                        <div class="carousel-indicators" id="imgBtnDiv">
+                            <!--반복
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            -->
+                        </div>
+                        <!--이미지-->
+                        <div class="carousel-inner"  id="imgDiv">
+                            <!--반복
+                            <div class="carousel-item active">
+                              <img th:src="@{/img/feed/error.jpg}" class="d-block w-100">
+                            </div>
+                            -->
+                        </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+                    <!--2. 댓글리스트 -->
+                    <div class="overflow-auto" style="max-height: 500px">
+                        <table class="table align-middle table-borderless table-hover"  id="cmtDiv">
+                            <!--반복
+                            <tr>
+                              <td>ㄲㄲㄲㄲ</td>
+                              <td>ㄲㄲㄲㄲ</td>
+                              <td>ㄲㄲㄲㄲ</td>
+                              <td>ㄲㄲㄲㄲ</td>
+                            </tr>
+                            -->
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer" style="display: block">
+                    <!---댓글 쓰기--->
+                    <div class="form-floating d-flex justify-content-end align-items-center">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                        <label for="floatingTextarea">댓글을 남겨보세요</label>
+                        <button type="button" class="btn btn-primary" id="cntBtn"><i class="bi bi-vector-pen"></i></button>
+                    </div>
+                    <!--- 아이콘 --->
+                    <div  id="icnDiv">
+                    <!--JS작업
+                    <i class="bi bi-heart-fill follow-icon"></i>
+                    <span>00000</span>
+                    <i class="bi bi-chat-left-quote-fill follow-icon"></i>
+                    <span>00000</span>
+                    -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 </th:block>
 
 </html>

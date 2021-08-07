@@ -22,3 +22,11 @@
 #profile__form > .board__form > .div__follow {
     padding: 3px;
 }
+
+.mypageImg {
+    object-fit: contain;
+    background-color: lightsteelblue;
+}
+
+#cntBtn { margin-left: 1rem; }
+

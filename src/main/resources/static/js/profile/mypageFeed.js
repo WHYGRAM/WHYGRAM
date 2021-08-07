@@ -1,4 +1,4 @@
-const feedElem = document.querySelector('#mypageFeed');
+const feedElem = document.querySelector('#mypageFeedContainer');
 const feedObj = {
     loadingElem : document.querySelector('#loading'),
     mypage_id : mypageConstElem.dataset.pid,
@@ -33,25 +33,27 @@ const feedObj = {
 
         for(let i=0; i<data.length; i++) {
             const item = data[i];
-            const divId = 'container' + i;
-            const containerElem = document.createElement('div');
-            containerElem.id = divId;
-            containerElem.classList.add('pointer');
-            containerElem.classList.add('d-flex');
-            containerElem.classList.add('justify-content-center');
-            containerElem.classList.add('align-items-center');
-            containerElem.style.position = 'relative';
-            containerElem.dataset.fid = `${item.feed_id}`;
-            containerElem.dataset.isfav = `${item.isFav}`;
-            containerElem.dataset.iscmt = `${item.isCmt}`;
-            containerElem.innerHTML = `
+            const divId = 'mypageFeed' + i;
+            const mypageFeedElem = document.createElement('div');
+            mypageFeedElem.id = divId;
+            mypageFeedElem.classList.add('pointer');
+            mypageFeedElem.classList.add('d-flex');
+            mypageFeedElem.classList.add('justify-content-center');
+            mypageFeedElem.classList.add('align-items-center');
+            mypageFeedElem.style.position = 'relative';
+            mypageFeedElem.dataset.fid = `${item.feed_id}`;
+            mypageFeedElem.dataset.isfav = `${item.isFav}`;
+            mypageFeedElem.dataset.iscmt = `${item.isCmt}`;
+            mypageFeedElem.dataset.bsToggle = "modal";
+            mypageFeedElem.dataset.bsTarget = '#mypageDetailModal';
+            mypageFeedElem.innerHTML = `
                     <img src="/pic/feed/${item.feed_id}/${item.contents.contents_img}" 
-                    class="img-thumbnail wh400"
+                    class="rounded mypageImg wh400"
                     onError="this.src=/img/feed/error.png">
             `;
 
-            this.addEvent(containerElem);
-            feedElem.append(containerElem);
+            this.addEvent(mypageFeedElem, `${item.feed_id}`, `${this.mypage_id}`, `${item.isFav}`, `${item.isCmt}`);
+            feedElem.append(mypageFeedElem);
         }
     },
     setScrollInfinity: function(target) {
@@ -70,7 +72,7 @@ const feedObj = {
     },
     hideLoading: function() { this.loadingElem.classList.add('visually-hidden');},
     showLoading: function() { this.loadingElem.classList.remove('visually-hidden'); },
-    addEvent : function (elem) {
+    addEvent : function (elem, feedId, mypageId, isFav, isCnt) {
         const imgElem = elem.firstElementChild;
         elem.addEventListener('mouseover', () => {
             imgElem.classList.add('blurImg');
@@ -80,6 +82,7 @@ const feedObj = {
             imgElem.classList.remove('blurImg');
             this.hideIcn(elem);
         });
+        elem.addEventListener('click', () => { showMypageDetail(feedId, mypageId, isFav, isCnt); });
     },
     favIcn : function (isFav) {
         const icn = document.createElement('i');
