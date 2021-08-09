@@ -1,4 +1,5 @@
-.btn { margin: 20px}
+.btn { margin: 20px; width: 100%;}
 .btn > .plus__icon  {
     font-size: 36px;
+
 }

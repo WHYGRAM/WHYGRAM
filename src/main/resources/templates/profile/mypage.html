@@ -60,6 +60,19 @@
         </span>
     </span>
 
+    <hr>
+    <div class="menu">
+        <span>
+            <a class="pointer" href="#">게시글</a>
+        </span>
+        <span>
+            <a class="pointer" href="#">좋아요</a>
+        </span>
+        <span>
+            <a class="pointer" href="#">갤린더</a>
+        </span>
+    </div>
+
     <!---팔로우 모달-->
     <div class="modal" tabindex="-1" id="followModal">
         <div class="modal-dialog modal-dialog-centered">
@@ -77,8 +90,7 @@
 
     <!--- 게시물 리스트 --->
     <div class="container">
-        <div id="mypageFeedContainer" class="row row-cols-3">
-        </div>
+        <div id="mypageFeedContainer" class="row row-cols-3"></div>
     </div>
 
     <div class="hide m-5 d-flex justify-content-center" id="loading">
@@ -87,10 +99,6 @@
             Loading...
         </button>
     </div>
-
-
-
-
 
     <!--- 게시물 디테일 모달--->
     <div class="modal fade" tabindex="-1" id="mypageDetailModal">
@@ -149,12 +157,12 @@
                 <div class="modal-footer" style="display: block">
                     <!---댓글 쓰기--->
                     <div class="form-floating d-flex justify-content-end align-items-center">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="resize: none"></textarea>
                         <label for="floatingTextarea">댓글을 남겨보세요</label>
                         <button type="button" class="btn btn-primary" id="cntBtn"><i class="bi bi-vector-pen"></i></button>
                     </div>
                     <!--- 아이콘 --->
-                    <div  id="icnDiv">
+                    <div id="icnDiv">
                     <!--JS작업
                     <i class="bi bi-heart-fill follow-icon"></i>
                     <span>00000</span>
@@ -163,7 +171,6 @@
                     -->
                 </div>
             </div>
-
         </div>
     </div>
 </div>

@@ -66,8 +66,8 @@ ul, ol, li { list-style: none; }
     padding: 20px 1px 1px 18px;
 }
 
-#container {
-    height: 100vh ;
+#container > section {
+    height: 100vmax;
     background-color: #F2F2F2;
 
 }

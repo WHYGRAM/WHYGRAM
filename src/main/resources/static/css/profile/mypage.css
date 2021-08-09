@@ -27,6 +27,12 @@
     object-fit: contain;
     background-color: lightsteelblue;
 }
-
-#cntBtn { margin-left: 1rem; }
-
+.container { padding: 80px }
+#cntBtn { margin-left: 36px; }
+.menu { text-align: center; }
+.menu > span > a { text-decoration: none; color: black; margin: 0px 120px }
+.pointer:hover {
+    text-decoration: underline;
+    text-decoration-color : #0d6efd;
+    text-underline-position: under;
+}
