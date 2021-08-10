@@ -15,6 +15,7 @@
     <script defer th:src="@{/js/profile/mypageFollowModal.js}"></script>
     <script defer th:src="@{/js/profile/mypageFeed.js}"></script>
     <script defer th:src="@{/js/profile/mypageDetail.js}"></script>
+    <script defer th:src="@{/js/profile/editProfile.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content" th:with="auth=${#authentication.getPrincipal().getUser()}">
@@ -27,7 +28,7 @@
             <img th:unless="${profile.users_img == null}" class="profileImg pointer wh200" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${profile.users_id}, users_img=${profile.users_img})}">
             <input class="profileInput" type="file" accept="image/**" style="display: none">
 
-            <th:block th:if="${auth.users_id eq profile.users_id}"><input class="hide" type="button" value="프로필 편집"></th:block>
+
             <div th:unless="${auth.users_id eq profile.users_id}" id="followContainer">
                 <div id="btnFollow" th:attr="data-follow=${profile.datasetFollow}" class="pointer">
                     <i class="follow-icon" th:classappend="${profile.followIcon}"></i>
@@ -38,6 +39,9 @@
             <div class="div__name">
                 <span>이름 : </span>
                 <span th:text="${profile.users_name}"></span>
+                <th:block th:if="${auth.users_id eq profile.users_id}">
+                    <input class="editProfile" onclick="moveToMypage(uid)" type="button" value="프로필 편집"></input>
+                </th:block>
             </div>
             <div class="div__nickname">
                 <span>닉네임 : </span>
@@ -67,9 +71,6 @@
         </span>
         <span>
             <a class="pointer" href="#">좋아요</a>
-        </span>
-        <span>
-            <a class="pointer" href="#">갤린더</a>
         </span>
     </div>
 

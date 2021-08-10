@@ -5,7 +5,6 @@ import com.koreait.whygram.model.feed.FeedDomain;
 import com.koreait.whygram.model.profile.FollowEntity;
 import com.koreait.whygram.model.user.UserDomain;
 import com.koreait.whygram.model.user.UserEntity;
-import com.koreait.whygram.security.IAuthenticationFacade;
 import com.koreait.whygram.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,5 +63,7 @@ public class ProfileController {
     @ResponseBody
     @GetMapping("/mypageList")
     public List<FeedDomain> mypageList(FeedDTO param) {return service.selMypageList(param);}
+
+
 
 }

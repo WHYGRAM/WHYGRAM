@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="pageLayout">
+
+<head>
+    <title>editProfile</title>
+</head>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/profile/editProfile.css}">
+</th:block>
+<th:block layout:fragment="js">
+    <script defer th:src="@{/js/user/editProfile.js}"></script>
+</th:block>
+
+<th:block layout:fragment="content" th:with="auth=${#authentication.getPrincipal().getUser()}" th:object="${userEntity}">
+    <div>
+        <div>
+            <span>
+                <a th:href="@{/user/editProfile}">프로필 편집</a>
+            </span>
+        </div>
+        <div>
+            <span>
+                <img class="profileImg wh30" th:src="@{/img/profile/defaultProfile.png}">
+                <!--
+                <img th:unless="${profile.users_img == null}" class="profileImg pointer wh200" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${profile.users_id}, users_img=${profile.users_img})}">
+                -->
+            </span>
+            <span>사용자명</span>
+        </div>
+        <div>
+            <span>이메일</span>
+        </div>
+        <div>
+            <span>이름</span>
+        </div>
+        <div>
+            <span>생년월일</span>
+        </div>
+        <div>
+            <form th:action="@{#}" method="post">
+                <span>닉네임</span>
+                <span><input type="text" th:field="*{users_nickname}" placeholder="닉네임" required></span>
+                <br>
+                <span>성별</span>
+                <span>
+                    <label><input type="radio" th:field="*{users_gender}" value="0" checked>남자</label>
+                    <label><input type="radio"th:field="*{users_gender}" value="1" >여자</label>
+                    <label><input type="radio" th:field="*{users_gender}" value="2">비공개</label>
+                </span>
+                <br>
+                <span>소개</span>
+                <input type="submit" class="hide">
+            </form>
+        </div>
+        <div>
+            <span>가입일자</span>
+        </div>
+        <div>
+            <button>제출</button>
+       </div>
+    </div>
+</th:block>

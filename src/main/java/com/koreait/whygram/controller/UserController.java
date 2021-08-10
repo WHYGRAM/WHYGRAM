@@ -68,4 +68,9 @@ public class UserController {
     }
 
 
+    @GetMapping("/editProfile")
+    public String getEditProfile(UserEntity param) { return "common/editMypage"; }
+
+    @PutMapping("/editProfile")
+    public String postEditProfile(UserEntity param) {return "redirect:editProfile";}
 }
