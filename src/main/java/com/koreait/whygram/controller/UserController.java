@@ -4,6 +4,7 @@ import com.koreait.whygram.model.user.UserEntity;
 import com.koreait.whygram.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -69,8 +70,14 @@ public class UserController {
 
 
     @GetMapping("/editProfile")
-    public String getEditProfile(UserEntity param) { return "common/editMypage"; }
+    public String getEditProfile(UserEntity param, Model model) {
+        model.addAttribute("edit", service.selProfileUpd(param));
+        return "common/editMypage";
+    }
 
-    @PutMapping("/editProfile")
-    public String postEditProfile(UserEntity param) {return "redirect:editProfile";}
+    @PostMapping("/editProfile")
+    public String postEditProfile(UserEntity param) {
+        service.updProfile(param);
+        return "redirect:editProfile";
+    }
 }

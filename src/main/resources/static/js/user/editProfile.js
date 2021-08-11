@@ -1,5 +1,6 @@
-const editProfileElem = document.querySelector('.editProfile');
+const editInputElem = document.querySelector('.edit__input');
+const editPushElem = document.querySelector('.edit__push');
 
-editProfileElem.addEventListener('click', () => {
-
+editPushElem.addEventListener('click', () => {
+    editInputElem.click();
 });

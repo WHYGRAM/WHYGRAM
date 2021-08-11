@@ -11,11 +11,6 @@
 </th:block>
 <th:block layout:fragment="js">
     <script defer th:src="@{/js/profile/mypageImg.js}"></script>
-    <script defer th:src="@{/js/profile/mypageFollow.js}"></script>
-    <script defer th:src="@{/js/profile/mypageFollowModal.js}"></script>
-    <script defer th:src="@{/js/profile/mypageFeed.js}"></script>
-    <script defer th:src="@{/js/profile/mypageDetail.js}"></script>
-    <script defer th:src="@{/js/profile/editProfile.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content" th:with="auth=${#authentication.getPrincipal().getUser()}">
@@ -40,7 +35,9 @@
                 <span>이름 : </span>
                 <span th:text="${profile.users_name}"></span>
                 <th:block th:if="${auth.users_id eq profile.users_id}">
-                    <input class="editProfile" onclick="moveToMypage(uid)" type="button" value="프로필 편집"></input>
+                    <button class="edit__btn">
+                        <a th:href="@{/user/editProfile}">프로필 편집</a>
+                    </button>
                 </th:block>
             </div>
             <div class="div__nickname">

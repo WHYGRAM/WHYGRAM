@@ -1,0 +1,52 @@
+#profile__container {
+    position: absolute;
+    display: flex;
+    top: 25%;
+    left: 35%;
+    margin-left: -265px;
+    border: 1px solid darkgray;
+    background-color: white;
+    width: 1000px;
+    height: 800px;
+
+}
+#profile__container > .edit__menu > span > a {
+    position: relative;
+    text-decoration: none;
+    color: black;
+
+}
+#profile__container > .edit__menu {
+    border-right: 1px solid darkgray;
+    width: 180px;
+    padding: 30px 42px 30px;
+}
+
+#profile__container > .edit__group {
+    padding-left: 250px;
+}
+
+#profile__container > .edit__group > .profile__name {
+    margin: 42px 0px 0px 0px;
+}
+#profile__container > .edit__group > div {
+    margin: 30px 0px 0px;
+}
+#profile__container > .edit__group > div > form > div {
+    margin: 30px 0px 0px;
+}
+#profile__container > .edit__group > div > .edit__push {
+    color: #fff;
+    background-color: #0d6efd;
+    border-radius: 5px;
+}
+
+#profile__container > .edit__group > div > .editLine {
+    padding-left: 20px;
+}
+
+#profile__container > .edit__group > div > form > .box__nickname, .box__gender, .box__ctnt{ display: flex; }
+#profile__container > .edit__group > div > form > .box__nickname > div > #edit__nickname { margin: 0px 60px }
+#profile__container > .edit__group > div > form > .box__gender >  #edit__gender { margin: 0px 70px }
+#profile__container > .edit__group > div > form > .box__ctnt > div > #edit__ctnt { margin: 0px 70px }
+

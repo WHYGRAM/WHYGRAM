@@ -114,4 +114,12 @@ public class UserService {
         //임시비밀번호 설정 실패 또는 이메일과 닉네임이 없다
         return 0;
     }
+
+    public int updProfile(UserEntity param) {
+        return mapper.updProfile(param);
+    }
+
+    public UserEntity selProfileUpd(UserEntity param) {
+        return mapper.selProfileUpd(param);
+    }
 }

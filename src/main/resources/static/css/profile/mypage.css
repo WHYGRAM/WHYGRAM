@@ -37,9 +37,11 @@
     text-underline-position: under;
 }
 
-.editProfile {
+.edit__btn {
     margin: 0px 20px;
     border-radius: 5px;
     background-color: #0d6efd;
-    color: #fff;
+
 }
+
+.edit__btn > a { color: #fff; text-decoration: none; }
