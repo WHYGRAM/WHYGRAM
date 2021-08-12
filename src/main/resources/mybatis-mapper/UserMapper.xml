@@ -67,7 +67,19 @@
     <!-- 프로필 수정 -->
     <update id="updProfile">
         UPDATE users
-        SET users_ctnt = #{users_ctnt}
+            <set>
+                <if test="users_nickname != null and users_nickname != '' ">
+                    users_nickname = #{users_nickname}
+                </if>
+                <!--
+                <if test="users_ctnt != null and users_ctnt != '' ">
+                    users_ctnt = #{users_ctnt}
+                </if>
+                -->
+                <if test="users_gender != null and users_gender != '' ">
+                    users_gender = #{users_gender}
+                </if>
+            </set>
         WHERE users_id = #{users_id}
     </update>
 

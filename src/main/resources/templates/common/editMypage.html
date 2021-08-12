@@ -25,7 +25,7 @@
                 <span>
                     <img class="profileImg wh30" th:src="@{/img/profile/defaultProfile.png}">
                 </span>
-                <span>사용자명</span>
+                <span th:text="${auth.users_nickname}"></span>
             </div>
             <div class="box__email">
                 <aside>
@@ -52,7 +52,7 @@
                             <label for="edit__nickname">닉네임</label>
                         </aside>
                         <div>
-                            <input type="text" id="edit__nickname" th:field="*{users_nickname}">
+                            <input type="text" id="edit__nickname" th:value="${auth.users_nickname}" th:field="*{users_nickname}" >
                         </div>
                     </div>
                     <div class="box__gender">
@@ -70,7 +70,7 @@
                             <label for="edit__ctnt">소개</label>
                         </aside>
                         <div>
-                            <textarea id="edit__ctnt" th:field="*{users_ctnt}" cols="30" rows="5" style="resize: none"></textarea>
+                            <textarea id="edit__ctnt" th:value="${auth.users_ctnt}" th:field="*{users_ctnt}" cols="30" rows="5" style="resize: none"></textarea>
                         </div>
                     </div>
                     <input type="submit" class="hide edit__input">
