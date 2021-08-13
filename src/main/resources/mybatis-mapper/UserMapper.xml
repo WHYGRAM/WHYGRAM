@@ -67,27 +67,28 @@
     <!-- 프로필 수정 -->
     <update id="updProfile">
         UPDATE users
-            <set>
-                <if test="users_nickname != null and users_nickname != '' ">
-                    users_nickname = #{users_nickname}
-                </if>
-                <!--
-                <if test="users_ctnt != null and users_ctnt != '' ">
-                    users_ctnt = #{users_ctnt}
-                </if>
-                -->
-                <if test="users_gender != null and users_gender != '' ">
-                    users_gender = #{users_gender}
-                </if>
-            </set>
+        <set>
+            <if test="users_nickname != null and users_nickname != '' ">
+                users_nickname = #{users_nickname},
+            </if>
+            <if test="users_ctnt != null and users_ctnt != '' ">
+                users_ctnt = #{users_ctnt},
+            </if>
+            <if test="users_gender != null and users_gender != '' ">
+                users_gender = #{users_gender}
+            </if>
+        </set>
         WHERE users_id = #{users_id}
+        AND users_is_quit = 0
     </update>
 
     <select id="selProfileUpd" resultType="UserEntity">
         SELECT users_email, users_name, users_nickname,
-               users_gender, users_date_birth, users_ctnt, users_regdt
+               users_gender, users_date_birth, users_ctnt,
+               users_regdt
         FROM users
         WHERE users_id = #{users_id}
+        AND users_is_quit = 0
     </select>
 
     <!-- 이미지 띄우기 -->

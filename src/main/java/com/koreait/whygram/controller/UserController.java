@@ -26,8 +26,9 @@ public class UserController {
     @ResponseBody
     @GetMapping("/emailCheck/{users_email}")
     public Map<String, Integer> emailCheck(UserEntity param, @PathVariable String users_email) {
+        /*
         System.out.println(users_email);
-
+        */
         param.setUsers_email(users_email);
         int result = service.selEmail(param);
 
@@ -39,8 +40,9 @@ public class UserController {
     @ResponseBody
     @GetMapping("/nickNmCheck/{users_nickname}")
     public Map<String, Integer> nickNmCheck(UserEntity param, @PathVariable String users_nickname) {
+        /*
         System.out.println(users_nickname);
-
+        */
         param.setUsers_nickname(users_nickname);
         int result = service.selNickNm(param);
 
@@ -59,9 +61,10 @@ public class UserController {
     @ResponseBody
     @PostMapping("/findPw")
     public Map<String, Integer> findPw(@RequestBody UserEntity param) {
+        /*
         System.out.println(param.getUsers_email());
         System.out.println(param.getUsers_nickname());
-
+        */
         int result = service.findPw(param);
         Map<String, Integer> data = new HashMap();
         data.put("result", result);

@@ -49,4 +49,12 @@
 #profile__container > .edit__group > div > form > .box__nickname > div > #edit__nickname { margin: 0px 60px }
 #profile__container > .edit__group > div > form > .box__gender >  #edit__gender { margin: 0px 70px }
 #profile__container > .edit__group > div > form > .box__ctnt > div > #edit__ctnt { margin: 0px 70px }
+#profile__container > .edit__group > .profile__name { display: flex; }
+#profile__container > .edit__group > .profile__name > .text__nick { margin: 5px 80px; }
+#profile__container > .edit__group > .box__email { display: flex; }
+#profile__container > .edit__group > .box__email > #text__email { margin: 0px 60px; }
 
+#profile__container > .edit__group > .box__name { display: flex; }
+#profile__container > .edit__group > .box__name > #text__name { margin: 0px 70px; }
+#profile__container > .edit__group > .box__birth { display: flex; }
+#profile__container > .edit__group > .box__birth > #text__birth { margin: 0px 42px; }

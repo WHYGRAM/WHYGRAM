@@ -113,13 +113,14 @@ public class UserService {
     }
 
     public int updProfile(UserEntity param) {
-        System.out.println(param);
         UserEntity idData = auth.getLoginUser();
         param.setUsers_id(idData.getUsers_id());
         return mapper.updProfile(param);
     }
 
     public UserEntity selProfileUpd(UserEntity param) {
-        return mapper.selProfileUpd(param);
+        UserEntity idData = auth.getLoginUser();
+        param.setUsers_id(idData.getUsers_id());
+        return mapper.selProfileUpd(idData);
     }
 }
