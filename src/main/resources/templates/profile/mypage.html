@@ -93,7 +93,7 @@
         <div id="mypageFeedContainer" class="row row-cols-3"></div>
     </div>
 
-    <div class="hide m-5 d-flex justify-content-center" id="loading">
+    <div class="m-5 d-flex justify-content-center" id="loading">
         <button class="btn btn-primary" type="button" disabled>
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             Loading...
@@ -111,16 +111,23 @@
 
                 <div class="modal-body row row-cols-2 d-flex align-items-center" id="modalList" >
 
+                    <div class="m-5 d-flex justify-content-center" id="loading">
+                        <button class="btn btn-primary" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+                    </div>
+
                     <!---1. 이미지 --->
                     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                         <!--이미지 바-->
-                        <div class="carousel-indicators" id="imgBtnDiv">
+                        <div class="carousel-indicators" id="imgBtnList">
                             <!--반복
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                             -->
                         </div>
                         <!--이미지-->
-                        <div class="carousel-inner"  id="imgDiv">
+                        <div class="carousel-inner"  id="imgList">
                             <!--반복
                             <div class="carousel-item active">
                               <img th:src="@{/img/feed/error.jpg}" class="d-block w-100">
@@ -141,14 +148,19 @@
                     <!--2-1. 내용 + 댓글리스트 -->
                     <section>
                         <!--내용-->
-                        <p class="overflow-auto" style="max-height: 250px">
-
-                        </p>
+                        <p class="overflow-auto" style="max-height: 250px" id="ctnt"></p>
                         <!--댓글-->
-                        <div class="overflow-auto" style="max-height: 250px">
-                            <table class="table align-middle table-borderless table-hover"  id="cmtDiv">
+                        <div class="overflow-auto" id="tableDiv" style="max-height: 250px"> <!--무한스크롤-->
+                            <div class="m-5 d-flex justify-content-center" id="tableLoading">
+                                <button class="btn btn-primary" type="button" disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Loading...
+                                </button>
+                            </div>
+
+                            <table class="table align-middle table-borderless table-hover"  id="cmtList">
                                 <!--반복
-                                <tr>
+                                <tr class="animate__animated animate__tada">
                                   <td>ㄲㄲㄲㄲ</td>
                                   <td>ㄲㄲㄲㄲ</td>
                                   <td>ㄲㄲㄲㄲ</td>
@@ -169,18 +181,18 @@
                         <button type="button" class="btn btn-primary" id="cntBtn"><i class="bi bi-vector-pen"></i></button>
                     </div>
                     <!--- 아이콘 --->
-                    <div id="icnDiv">
+                    <div id="icnList">
                     <!--JS작업
                     <i class="bi bi-heart-fill follow-icon"></i>
                     <span>00000</span>
                     <i class="bi bi-chat-left-quote-fill follow-icon"></i>
                     <span>00000</span>
                     -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </th:block>
 
 </html>

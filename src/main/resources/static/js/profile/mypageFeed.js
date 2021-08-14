@@ -4,6 +4,7 @@ const feedObj = {
     mypage_id : mypageConstElem.dataset.pid,
     limit : 12,
     itemLength : 0,
+    currentPage : 1,
     getFeedList : function(page) {
         this.showLoading();
         fetch(`/profile/mypageList?mypage_id=${this.mypage_id}&page=${page}&limit=${this.limit}`)
@@ -18,11 +19,11 @@ const feedObj = {
                     this.itemLength = myJson.length;
                     this.makeFeedList(myJson);
                 } else {
-                    console.log('!  게시물 없음');
+                    console.log('!  게시물리스트 없음');
                     feedElem.innerHTML = '<img src="/img/feed/empty.jpg" class="img-thumbnail wh400">';
                 }
             }).catch(err => {
-                console.log('! fetch() 오류 - ' + err);
+                console.log('! 게시물리스트 fetch() 오류 - ' + err);
             feedElem.innerHTML = '<img src="/img/feed/error.jpg" class="img-thumbnail wh400">';
             }).then(() => {
                 this.hideLoading();

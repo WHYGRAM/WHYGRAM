@@ -7,14 +7,14 @@
         <nav class="navbar__container">
             <div>
                 <a th:href="@{/feed/home}">
-                    <img class="mainLogo" th:src="@{/img/logo/whygramLogo.png}">
+                    <img class="mainLogo animate__animated animate__bounce" th:src="@{/img/logo/whygramLogo.png}">
                 </a>
             </div>
             <ul class="navbar__menu">
                 <li>
                     <a th:href="@{/profile/mypage}">
-                        <img th:if="${auth.users_img == null}"  class="pointer rem_wh3" th:src="@{/img/profile/defaultProfile.png}">
-                        <img th:unless="${auth.users_img == null}" class="pointer rem_wh3 profileRadius" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${auth.users_id}, users_img=${auth.users_img})}">
+                        <img th:if="${auth.users_img == null}"  class="pointer rem_wh3 animate__animated animate__swing" th:src="@{/img/profile/defaultProfile.png}">
+                        <img th:unless="${auth.users_img == null}" class="pointer rem_wh3 profileRadius animate__animated animate__swing" th:src="@{/pic/profile/{users_id}/{users_img}(users_id=${auth.users_id}, users_img=${auth.users_img})}">
                     </a>
                 </li>
                 <li>

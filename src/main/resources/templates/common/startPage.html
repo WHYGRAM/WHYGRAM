@@ -8,14 +8,15 @@
     <link rel="stylesheet" th:href="@{/css/common/common.css}">
     <link rel="stylesheet" th:href="@{/css/startPage.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
     <div id="center__background">
         <div id="logo__center">
-            <img class="login__form__logo" th:src="@{/img/logo/whygramLogo.png}"></img>
+            <img class="login__form__logo animate__animated animate__bounce" th:src="@{/img/logo/whygramLogo.png}"></img>
         </div>
         <section>
-            <p class="center__alignment"> 왜 그램? <br>  무슨 일이램? <br>  너의 일상이야기를 보여줄램~?! </p>
+            <p class="center__alignment animate__animated animate__bounce"> 왜 그램? <br>  무슨 일이램? <br>  너의 일상이야기를 보여줄램~?! </p>
         </section>
         <section class="center__alignment">
             <span class="loginSpn pointer center__alignment">로그인</span>  |  <span class="joinSpn pointer center__alignment">회원가입</span>
@@ -26,7 +27,7 @@
         <!-------로그인------------>
 
         <section class="loginSectn center__alignment" style="display: none">
-            <h1>LOGIN</h1>
+            <h1 class="animate__animated animate__bounce">LOGIN</h1>
 
             <form th:action="@{/whygram}" method="post" th:object="${userEntity}" id="loginFrm" class="center__alignment">
                 <div><input type="email" th:field="*{users_email}" placeholder="email" class="startPage__input__wh" autofocus required></div>
@@ -70,7 +71,7 @@
         <!-------회원가입------------>
 
         <section class="joinSectn center__alignment" style="display: none">
-            <h1 class="center__alignment">JOIN</h1>
+            <h1 class="center__alignment animate__animated animate__bounce">JOIN</h1>
 
             <div class="warnMsg center__alignment"></div>
 

@@ -18,15 +18,15 @@
 </th:block>
 
 <th:block layout:fragment="content" th:object="${feedEntity}">
-    <div class="btn" data-bs-toggle="modal" data-target="#myModal" data-bs-target="#staticBackdrop">
-        <i class="bi bi-plus-circle pointer plus__icon" ></i>
+    <div class="btn animate__animated animate__shakeX" data-bs-toggle="modal" data-target="#myModal" data-bs-target="#staticBackdrop">
+        <i class="bi bi-plus-circle pointer plus__icon " ></i>
     </div>
 
     <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-body">
-                    <img class="feedImg pointer" th:src="@{/img/feed/feedDefaultImg.png}" >
+                    <img class="feedImg pointer animate__animated animate__swing" th:src="@{/img/feed/feedDefaultImg.png}" >
                     <div class="displayImgList"></div>
                     <br>
                     <div><input class="feedSelectImg" name="contents_img" type="file" multiple accept="image/**" style="display: none"></div>
