@@ -128,7 +128,7 @@
 
     <resultMap id="mypageDetailMap" type="FeedDomain">
         <result property="feed_id" column="feed_id"></result>
-        <collection property="contentsList" column="contents_id" select="selContentsList"></collection>
+        <collection property="contentsList" column="feed_id" select="selContentsList"></collection>
     </resultMap>
 
     <select id="selContentsList" resultType="ContentsEntity">

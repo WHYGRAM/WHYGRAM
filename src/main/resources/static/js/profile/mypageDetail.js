@@ -1,12 +1,11 @@
 const mypageDetailModalElem = document.querySelector('#mypageDetailModal');
-const modalTitleElem = document.querySelector('#mypageDetailModal > #modalTitle');
-const modalBodyElem = document.querySelector('#mypageDetailModal > #modalList');
+const detailProfile = document.querySelector('#detailProfile');
 const imgBtnListElem = document.querySelector('#imgBtnList');
 const imgListElem = document.querySelector('#imgList');
 const ctntElem = document.querySelector('#ctnt');
 const tableDivElem = document.querySelector('#tableDiv');
 const cmtListElem = document.querySelector('#cmtList');
-const icnListElem = document.querySelector('icnList');
+const icnListElem = document.querySelector('#icnList');
 
 function showMypageDetail(feedId, mypageId, isFav, isCmt) {
     detailObj.feedId = feedId;
@@ -51,23 +50,19 @@ const detailObj = {
     getMypageDetail : function () {
         this.showLoading();
         fetch(`/profile/mypageDetail?feed_id=${this.feedId}&mypage_id=${this.mypageId}`)
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                throw new Error(`${res.status}`);
-            }).then(myJson => {
+            .then(res => res.json())
+            .then(myJson => {
                 console.log(myJson);
-                if (myJson.length) {
+                if (myJson) {
                     this.setMypageDetail(myJson);
                 } else {
                     console.log('!  게시물디테일 없음');
-                    modalBodyElem.innerHTML = '<img src="/img/feed/empty.jpg" class="img-thumbnail wh400">';
+                    imgListElem.innerHTML = `<div class="carousel-item active"><img src="/img/feed/empty.jpg" class="d-block w-100"></div>`;
                 }
             }).catch(err => {
-                console.log('! 게시물디테일 fetch() 오류 - ' + err);
-                modalBodyElem.innerHTML = '<img src="/img/feed/error.png" class="img-thumbnail wh400">';
-            }).then(() => {
+                console.log(err);
+                imgListElem.innerHTML = `<div class="carousel-item active"><img src="/img/feed/error.jpg" class="d-block w-100"></div>`;
+        }).then(() => {
                 this.hideLoading();
             });
     },
@@ -77,8 +72,8 @@ const detailObj = {
         mypageDetailModalElem.dataset.uid = `${data.users_id}`;
         mypageDetailModalElem.dataset.regdt = `${data.feed_regdt}`;
 
-        //프로필 [modalTitleElem]
-        modalTitleElem.innerHTML = `
+        //프로필 [detailProfile]
+        detailProfile.innerHTML = `
             <img src="/pic/profile/${data.users_id}/${data.users_img}"
             class="profileRadius rem_wh3"
             onError="this.src=/img/profile/defaultProfile.png">
@@ -87,7 +82,7 @@ const detailObj = {
 
         //사진 [imgBtnListElem] , [imgListElem] , 정보 넣어놓기
         for(let i=0; i<data.contentsList.length; i++) {
-            const item = data[i];
+            const item = data.contentsList[i];
             const btnId = `imgBtn${i}`;
             const divId = `imgDiv${i}`;
 
@@ -110,7 +105,7 @@ const detailObj = {
             if (i===0) {imgDiv.classList.add('active')}
             imgDiv.innerHTML = `
                     <img src="/pic/feed/${item.feed_id}/${item.contents_img}" 
-                    class="mypageImg wh400 d-block w-100"
+                    class="mypageImg mypageImgList d-block w-100"
                     onError="this.src=/img/feed/error.png">
             `;
             imgListElem.append(imgDiv);
@@ -120,7 +115,7 @@ const detailObj = {
         ctntElem.innerText = `${data.feed_ctnt}`;
 
         //댓글 [icnListElem]
-        //this.setTableScrollInfinity();
+        this.setTableScrollInfinity();
         this.getCmtList(1);
 
         //아이콘 [icnListElem]
@@ -128,25 +123,28 @@ const detailObj = {
         favIcn.className = 'bi';
         const cmtIcn = document.createElement('i');
         cmtIcn.className = 'bi';
-        //const favCnt = document.createElement('span');
-        //favCnt.innerText = `${data.favCnt}`;
-        //const cmtCnt = document.createElement('span');
-        //cmtCnt.innerText = `${data.cmtCnt}`;
+        const favCnt = document.createElement('span');
+        favCnt.classList.add('cntBtn', 'follow-icon');
+        favCnt.innerText = `${data.favCnt}`;
+        const cmtCnt = document.createElement('span');
+        cmtCnt.classList.add('cntBtn', 'follow-icon');
+        cmtCnt.innerText = `${data.cmtCnt}`;
 
         if (this.isFav>0) {
-            favIcn.classList.add('bi-heart-fill');
+            favIcn.classList.add('bi-heart-fill','follow-icon');
         } else {
-            favIcn.classList.add('bi-heart');
+            favIcn.classList.add('bi-heart','follow-icon');
         }
         if (this.isCmt>0) {
-            cmtIcn.classList.add('bi-chat-left-quote-fill');
+            cmtIcn.classList.add('bi-chat-left-quote-fill', 'cnwBtn', 'follow-icon');
         } else {
-            cmtIcn.classList.add('bi-chat-left-quote');
+            cmtIcn.classList.add('bi-chat-left-quote', 'cnwBtn', 'follow-icon');
         }
 
-        icnListElem.innerHTML = `
-            ${favIcn}<span>${data.favCnt}</span>${cmtIcn}<span>${data.cmtCnt}</span>
-        `;
+        icnListElem.append(favIcn);
+        icnListElem.append(favCnt);
+        icnListElem.append(cmtIcn);
+        icnListElem.append(cmtCnt);
     },
     getCmtList : function(page) {
         this.showtableLoading();
@@ -158,16 +156,16 @@ const detailObj = {
                 throw new Error(`${res.status}`);
             }).then(myJson => {
                 console.log(myJson);
-                if (myJson.length) {
+                if (myJson) {
                     this.tableItemLength = myJson.length;
                     this.setCmtList(myJson);
                 } else {
                     console.log('!  댓글리스트 없음');
-                    tableDivElem.innerHTML = '<img src="/img/feed/cmtEmpty.jpg" class="img-thumbnail wh120">';
+                    tableDivElem.innerHTML = '<img src="/img/feed/cmtEmpty.jpg" class="img-thumbnail wh400">';
                 }
             }).catch(err => {
-                console.log('! 댓글리스트 fetch() 오류 - ' + err);
-                tableDivElem.innerHTML = '<img src="/img/feed/cmtError.png" class="img-thumbnail wh120">';
+                console.log(err);
+                tableDivElem.innerHTML = '<img src="/img/feed/cmtError.jpg" class="img-thumbnail wh400">';
             }).then(() => {
                 this.hidetableLoading();
             });

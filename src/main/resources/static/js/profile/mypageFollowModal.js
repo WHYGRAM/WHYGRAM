@@ -2,7 +2,7 @@ const followerElemArr = document.querySelectorAll('.followerCnt');
 const followElemArr = document.querySelectorAll('.followCnt');
 
 const modalTitleElem = document.querySelector('#modalTitle');
-const modalListElem = document.querySelector('#modalList')
+const modalListElem = document.querySelector('#modalList');
 
 
 if(followerElemArr) {

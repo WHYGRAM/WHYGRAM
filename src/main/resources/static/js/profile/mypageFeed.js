@@ -24,7 +24,7 @@ const feedObj = {
                 }
             }).catch(err => {
                 console.log('! 게시물리스트 fetch() 오류 - ' + err);
-            feedElem.innerHTML = '<img src="/img/feed/error.jpg" class="img-thumbnail wh400">';
+                feedElem.innerHTML = '<img src="/img/feed/error.jpg" class="img-thumbnail wh400">';
             }).then(() => {
                 this.hideLoading();
             });

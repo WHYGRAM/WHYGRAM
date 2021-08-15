@@ -1,4 +1,5 @@
 .profileImg { border-radius: 50%; }
+.zeroPadding{padding: 0 !important;}
 
 #profile__form {
     display: flex;
@@ -27,8 +28,11 @@
     object-fit: contain;
     background-color: lightsteelblue;
 }
+.mypageImgList {height: 40rem;}
+
 .container { padding: 80px }
-#cntBtn { margin-left: 36px; }
+.cntBtn { margin-left: 5px; }
+.cnwBtn { margin-left: 20px; }
 .menu { text-align: center; }
 .menu > span > a { text-decoration: none; color: black; margin: 0px 120px }
 .pointer:hover {

@@ -44,17 +44,20 @@
                 <span>닉네임 : </span>
                 <span th:text="${profile.users_nickname}"></span>
             </div>
-            <div class="div__board">
+            <div class="div__board pointer">
                 <span>게시물 : </span>
-                <span th:text="${profile.users_feed_count}"></span>
+                <span></span>
+                <!--th:text="${profile.users_feed_count}"
+                // th:text="${profile.users_follower_count}"
+                //th:text="${profile.users_follow_count}"-->
             </div>
-            <div class="div__follower">
+            <div class="div__follower pointer">
                 <span class="followerCnt" data-bs-toggle="modal" data-bs-target="#followModal">팔로워 : </span>
-                <span class="followerCnt" th:text="${profile.users_follower_count}" data-bs-toggle="modal" data-bs-target="#followModal"></span>
+                <span class="followerCnt"  data-bs-toggle="modal" data-bs-target="#followModal"></span>
             </div>
-            <div class="div__follow">
+            <div class="div__follow pointer">
                 <span class="followCnt" data-bs-toggle="modal" data-bs-target="#followModal">팔로우 : </span>
-                <span class="followCnt" th:text="${profile.users_follow_count}" data-bs-toggle="modal" data-bs-target="#followModal"></span>
+                <span class="followCnt" data-bs-toggle="modal" data-bs-target="#followModal"></span>
             </div>
 
             <span th:text="${profile.users_ctnt}"></span>
@@ -103,16 +106,11 @@
 
     <!--- 게시물 디테일 모달--->
     <div class="modal fade" tabindex="-1" id="mypageDetailModal">
-        <div class="modal-dialog modal-dialog-centered modal-lg ">
-            <div class="modal-content container">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body row row-cols-2 d-flex align-items-center" id="modalList" >
-
-                    <div class="m-5 d-flex justify-content-center" id="loading">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content zeroPadding container">
+                <div class="modal-body row row-cols-2" id="modalList">
+                    <!--로딩-->
+                    <div class="m-4 d-flex justify-content-center" id="loading">
                         <button class="btn btn-primary" type="button" disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Loading...
@@ -120,7 +118,7 @@
                     </div>
 
                     <!---1. 이미지 --->
-                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div id="carouselExampleIndicators" class="carousel slide col-8" data-bs-ride="carousel">
                         <!--이미지 바-->
                         <div class="carousel-indicators" id="imgBtnList">
                             <!--반복
@@ -146,8 +144,10 @@
                         </button>
                     </div>
 
-                    <!--2-1. 내용 + 댓글리스트 -->
-                    <section>
+                    <!--2-->
+                    <section class="col-4 d-flex flex-column justify-content-between">
+                        <!--프로필-->
+                        <h5 id="detailProfile"></h5>
                         <!--내용-->
                         <p class="overflow-auto" style="max-height: 250px" id="ctnt"></p>
                         <!--댓글-->
@@ -170,26 +170,25 @@
                                 -->
                             </table>
                         </div>
+
+                        <div>
+                            <!---댓글 쓰기--->
+                            <div class="form-floating d-flex justify-content-end align-items-center">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="resize: none"></textarea>
+                                <label for="floatingTextarea">댓글을 남겨보세요</label>
+                                <button type="button" class="btn btn-primary cntBtn"><i class="bi bi-vector-pen"></i></button>
+                            </div>
+                            <!--- 아이콘 --->
+                            <div id="icnList">
+                                <!--JS작업
+                                <i class="bi bi-heart-fill follow-icon"></i>
+                                <span>00000</span>
+                                <i class="bi bi-chat-left-quote-fill follow-icon"></i>
+                                <span>00000</span>
+                                -->
+                            </div>
+                        </div>
                     </section>
-
-                </div>
-
-                <div class="modal-footer" style="display: block">
-                    <!---댓글 쓰기--->
-                    <div class="form-floating d-flex justify-content-end align-items-center">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="resize: none"></textarea>
-                        <label for="floatingTextarea">댓글을 남겨보세요</label>
-                        <button type="button" class="btn btn-primary" id="cntBtn"><i class="bi bi-vector-pen"></i></button>
-                    </div>
-                    <!--- 아이콘 --->
-                    <div id="icnList">
-                    <!--JS작업
-                    <i class="bi bi-heart-fill follow-icon"></i>
-                    <span>00000</span>
-                    <i class="bi bi-chat-left-quote-fill follow-icon"></i>
-                    <span>00000</span>
-                    -->
-                    </div>
                 </div>
             </div>
         </div>
