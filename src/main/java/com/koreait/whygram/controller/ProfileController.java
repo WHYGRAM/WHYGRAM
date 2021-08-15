@@ -65,4 +65,8 @@ public class ProfileController {
     @GetMapping("/mypageList")
     public List<FeedDomain> mypageList(FeedDTO param) {return service.selMypageList(param);}
 
+    @ResponseBody
+    @GetMapping("/mypageDetail")
+    public FeedDomain mypageDetail(FeedDTO param) {return service.selMypageDetail(param);}
+
 }

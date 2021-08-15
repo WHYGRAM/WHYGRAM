@@ -116,4 +116,6 @@ public class ProfileService {
         param.setUser4FavCmt(auth.getLoginUserPk());
         return mapper.selMypageList(param);
     }
+
+    public FeedDomain selMypageDetail(FeedDTO param) {return mapper.selMypageDetail(param);}
 }

@@ -11,6 +11,7 @@ public class FeedDTO {
     private int user4FavCmt;
     //마이페이지 디테일
     private int feed_id;
+        //mypage_id
 
     //마이페이지 리스트
     public int getStartIdx() {return (page - 1) * limit;}

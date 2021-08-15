@@ -19,4 +19,5 @@ public interface ProfileMapper {
     List<UserDomain> selFollowList(FollowEntity param);
     List<FeedDomain> selMypageList(FeedDTO param);
     int delFollow(FollowEntity param);
+    FeedDomain selMypageDetail(FeedDTO param);
 }

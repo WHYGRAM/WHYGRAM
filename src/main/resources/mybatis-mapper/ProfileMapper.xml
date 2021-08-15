@@ -126,6 +126,28 @@
         LIMIT ${startIdx} , ${limit}
     </select>
 
+    <resultMap id="mypageDetailMap" type="FeedDomain">
+        <result property="feed_id" column="feed_id"></result>
+        <collection property="contentsList" column="contents_id" select="selContentsList"></collection>
+    </resultMap>
+
+    <select id="selContentsList" resultType="ContentsEntity">
+        SELECT contents_id, feed_id, contents_img
+        FROM contents
+        WHERE feed_id = ${feed_id}
+    </select>
+
+    <select id="selMypageDetail" resultMap="mypageDetailMap">
+        SELECT A.feed_id, A.users_id, A.feed_ctnt, A.feed_regdt
+             , B.users_nickname, B.users_img
+             , (SELECT COUNT(C.users_id) FROM feed_fav C WHERE C.feed_id = ${feed_id}) AS favCnt
+             , (SELECT COUNT(D.cmt_id) FROM cmt D WHERE D.feed_id = ${feed_id}) AS cmtCnt
+        FROM feed A
+        LEFT JOIN  users B
+        ON A.users_id = B.users_id
+        WHERE A.users_id = ${mypage_id} AND A.feed_id = ${feed_id}
+    </select>
+
     <!-- 프로필 이미지 변경 -->
     <update id="updUserImg">
         UPDATE users

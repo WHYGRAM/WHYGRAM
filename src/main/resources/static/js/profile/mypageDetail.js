@@ -49,7 +49,7 @@ const detailObj = {
     },
     getMypageDetail : function () {
         this.showLoading();
-        fetch(`/profile/mypageDetail?feed_id=${feed_id}&mypage_id=${mypageId}`)
+        fetch(`/profile/mypageDetail?feed_id=${this.feedId}&mypage_id=${this.mypageId}`)
             .then(res => {
                 if (res.ok) {
                     return res.json();
@@ -71,13 +71,17 @@ const detailObj = {
             });
     },
     setMypageDetail : function (data) {
-        //댓글
+        //프로필 [modalTitleElem]
+        //사진 [imgBtnListElem] , [imgListElem]
+        //글 [ctntElem]
+        //댓글 [icnListElem]
         this.setTableScrollInfinity();
         this.getCmtList(1);
+        //아이콘 [icnListElem]
     },
-    getCmtList : function (page) {
+    getCmtList : function(page) {
         this.showtableLoading();
-        fetch(`/profile/cmtList?feed_id=${feed_id}&mypage_id=${mypageId}&page=${page}`)
+        fetch(`/profile/cmtList?feed_id=${this.feedId}&mypage_id=${this.mypageId}&page=${page}&limit=${this.tableLimit}`)
             .then(res => {
                 if (res.ok) {
                     return res.json();
