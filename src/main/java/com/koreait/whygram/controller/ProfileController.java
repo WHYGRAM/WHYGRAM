@@ -1,5 +1,6 @@
 package com.koreait.whygram.controller;
 
+import com.koreait.whygram.model.feed.CmtDomain;
 import com.koreait.whygram.model.feed.FeedDTO;
 import com.koreait.whygram.model.feed.FeedDomain;
 import com.koreait.whygram.model.profile.FollowEntity;
@@ -68,5 +69,9 @@ public class ProfileController {
     @ResponseBody
     @GetMapping("/mypageDetail")
     public FeedDomain mypageDetail(FeedDTO param) {return service.selMypageDetail(param);}
+
+    @ResponseBody
+    @GetMapping("/cmtList")
+    public List<CmtDomain> cmtList(FeedDTO param) {return service.selCmtList(param);}
 
 }

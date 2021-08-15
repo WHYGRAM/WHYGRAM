@@ -148,7 +148,7 @@ const detailObj = {
     },
     getCmtList : function(page) {
         this.showtableLoading();
-        fetch(`/profile/cmtList?feed_id=${this.feedId}&mypage_id=${this.mypageId}&page=${page}&limit=${this.tableLimit}`)
+        fetch(`/profile/cmtList?feed_id=${this.feedId}&page=${page}&limit=${this.tableLimit}`)
             .then(res => {
                 if (res.ok) {
                     return res.json();

@@ -5,6 +5,7 @@ import com.koreait.whygram.common.FileUtils;
 import com.koreait.whygram.common.MySecurityUtils;
 import com.koreait.whygram.mapper.ProfileMapper;
 import com.koreait.whygram.mapper.UserMapper;
+import com.koreait.whygram.model.feed.CmtDomain;
 import com.koreait.whygram.model.feed.FeedDTO;
 import com.koreait.whygram.model.feed.FeedDomain;
 import com.koreait.whygram.model.profile.FollowDTO;
@@ -118,4 +119,9 @@ public class ProfileService {
     }
 
     public FeedDomain selMypageDetail(FeedDTO param) {return mapper.selMypageDetail(param);}
+
+    public List<CmtDomain> selCmtList(FeedDTO param) {
+        param.setUser4FavCmt(auth.getLoginUserPk());
+        return mapper.selCmtList(param);
+    }
 }
