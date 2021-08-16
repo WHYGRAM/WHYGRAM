@@ -159,16 +159,17 @@
                                 </button>
                             </div>
 
-                            <table class="table align-middle table-borderless table-hover"  id="cmtList">
+                            <div class="container"  id="cmtList" style="padding: 0;">
                                 <!--반복
-                                <tr class="animate__animated animate__tada">
-                                  <td>ㄲㄲㄲㄲ</td>
-                                  <td>ㄲㄲㄲㄲ</td>
-                                  <td>ㄲㄲㄲㄲ</td>
-                                  <td>ㄲㄲㄲㄲ</td>
-                                </tr>
+                                <div class="row row-cols-5 animate__animated animate__tada">
+                                  <div>사진</div>
+                                  <div>닉네임</div>
+                                  <div>댓글내용</div>
+                                  <div>아이콘+수</div>
+                                  <div>작성일자</div>
+                                </div>
                                 -->
-                            </table>
+                            </div>
                         </div>
 
                         <div>
@@ -176,10 +177,10 @@
                             <div class="form-floating d-flex justify-content-end align-items-center">
                                 <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="resize: none"></textarea>
                                 <label for="floatingTextarea">댓글을 남겨보세요</label>
-                                <button type="button" class="btn btn-primary cntBtn"><i class="bi bi-vector-pen"></i></button>
+                                <button type="button" class="btn btn-primary cntBtn" onclick="detailObj.addCmt()"><i class="bi bi-vector-pen"></i></button>
                             </div>
                             <!--- 아이콘 --->
-                            <div id="icnList">
+                            <div id="icnList" class="pointer">
                                 <!--JS작업
                                 <i class="bi bi-heart-fill follow-icon"></i>
                                 <span>00000</span>

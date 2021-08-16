@@ -115,6 +115,7 @@ public class ProfileService {
 
     public List<FeedDomain> selMypageList(FeedDTO param) {
         param.setUser4FavCmt(auth.getLoginUserPk());
+        System.out.println(mapper.selMypageList(param).size());
         return mapper.selMypageList(param);
     }
 
@@ -122,6 +123,7 @@ public class ProfileService {
 
     public List<CmtDomain> selCmtList(FeedDTO param) {
         param.setUser4FavCmt(auth.getLoginUserPk());
+        System.out.println(mapper.selCmtList(param).size());
         return mapper.selCmtList(param);
     }
 }

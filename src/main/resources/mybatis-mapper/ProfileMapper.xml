@@ -116,9 +116,17 @@
         ) D
         ON A.feed_id = D.feed_id
         <if test="user4FavCmt > 0">
-            LEFT JOIN feed_fav E
+            LEFT JOIN (
+            SELECT users_id, feed_id
+            FROM feed_fav
+            GROUP BY feed_id
+            ) E
             ON E.users_id = ${user4FavCmt} AND A.feed_id = E.feed_id
-            LEFT JOIN cmt F
+            LEFT JOIN (
+            SELECT users_id, feed_id
+            FROM cmt
+            GROUP BY feed_id
+            ) F
             ON F.users_id = ${user4FavCmt} AND A.feed_id = F.feed_id
         </if>
         WHERE A.users_id = ${mypage_id}
@@ -152,21 +160,28 @@
         SELECT A.cmt_id, A.feed_id, A.users_id, A.cmt_cmt, A.cmt_regdt
              , B.users_img, B.users_nickname
             <if test="user4FavCmt > 0">
-            , CASE WHEN COUNT(C.users_id) IS NULL THEN 0 END AS cmtFavCnt
+            , IFNULL(C.cnt, 0) AS cmtFavCnt
             , CASE WHEN D.users_id IS NULL THEN 0 ELSE 1 END AS isCmtFav
             </if>
         FROM cmt A
         LEFT JOIN users B
         ON A.users_id = B.users_id
         <if test="user4FavCmt > 0">
-        LEFT JOIN cmt_fav C
-        ON C.cmt_id = A.cmt_id AND C.feed_id = A.feed_id
-        LEFT JOIN cmt_fav D
-        ON D.cmt_id = A.cmt_id AND D.feed_id = A.feed_id AND D.users_id = ${user4FavCmt}
+            LEFT JOIN (
+            SELECT cmt_id, feed_id, COUNT(cmt_id) AS cnt
+            FROM cmt_fav
+            GROUP BY cmt_id
+            ) C
+            ON C.cmt_id = A.cmt_id AND C.feed_id = A.feed_id
+            LEFT JOIN (
+            SELECT cmt_id, feed_id, users_id
+            FROM cmt_fav
+            GROUP BY cmt_id
+            ) D
+            ON D.cmt_id = A.cmt_id AND D.feed_id = A.feed_id AND D.users_id = ${user4FavCmt}
         </if>
         WHERE A.feed_id = ${feed_id}
         ORDER BY A.feed_id DESC
-        LIMIT ${startIdx} , ${limit}
     </select>
 
     <!-- 프로필 이미지 변경 -->

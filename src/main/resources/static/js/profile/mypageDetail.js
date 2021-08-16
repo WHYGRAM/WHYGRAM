@@ -18,35 +18,10 @@ function showMypageDetail(feedId, mypageId, isFav, isCmt) {
 const detailObj = {
     loadingElem : document.querySelector('#modalList > #loading'),
     tableLoadingElem : document.querySelector('#tableLoading'),
-    tableLimit : 5,
-    tableItemLength : 0,
-    currentTablePage : 1,
     hideLoading : function () {this.loadingElem.classList.add('visually-hidden');},
     hidetableLoading : function () {this.tableLoadingElem.classList.add('visually-hidden');},
     showLoading : function () {this.loadingElem.classList.remove('visually-hidden');},
     showtableLoading : function () {this.tableLoadingElem.classList.remove('visually-hidden');},
-    setTableScrollInfinity : function () {
-        tableDivElem.addEventListener('scroll', () => {
-            let $tr = cmtListElem.lastElementChild;
-            const io = new IntersectionObserver((entries, observer) => {
-                const entry = entries[0];
-                const ioTarget = entry.target;
-                if (entry.isIntersecting && this.tableItemLength === this.tableLimit) {
-                    console.log('현재 보이는 타겟 : ', ioTarget);
-                    io.unobserve($tr);
-
-                    this.tableItemLength = 0;
-                    this.getCmtList(++this.currentTablePage);
-                    $tr = cmtListElem.lastElementChild;
-                    io.observe($tr);
-                }
-            }, {
-                root : tableDivElem,
-                threshold : 0.3
-            });
-            io.observe($tr);
-        }, {passive : true});
-    },
     getMypageDetail : function () {
         this.showLoading();
         fetch(`/profile/mypageDetail?feed_id=${this.feedId}&mypage_id=${this.mypageId}`)
@@ -112,11 +87,14 @@ const detailObj = {
         }
 
         //글 [ctntElem]
-        ctntElem.innerText = `${data.feed_ctnt}`;
+        const dt = getDateTimeInfo(`${data.feed_regdt}`);
+        ctntElem.innerHTML = `
+                 ${dt} <br>
+                ${data.feed_ctnt}
+            `;
 
         //댓글 [icnListElem]
-        this.setTableScrollInfinity();
-        this.getCmtList(1);
+        this.getCmtList();
 
         //아이콘 [icnListElem]
         const favIcn = document.createElement('i');
@@ -132,8 +110,10 @@ const detailObj = {
 
         if (this.isFav>0) {
             favIcn.classList.add('bi-heart-fill','follow-icon');
+            favIcn.addEventListener('click', () => {this.delFav(`${data.users_id}`,`${data.feed_id}`,null)});
         } else {
             favIcn.classList.add('bi-heart','follow-icon');
+            favIcn.addEventListener('click', () => {this.addFav(`${data.users_id}`,`${data.feed_id}`,null)});
         }
         if (this.isCmt>0) {
             cmtIcn.classList.add('bi-chat-left-quote-fill', 'cnwBtn', 'follow-icon');
@@ -146,9 +126,9 @@ const detailObj = {
         icnListElem.append(cmtIcn);
         icnListElem.append(cmtCnt);
     },
-    getCmtList : function(page) {
+    getCmtList : function() {
         this.showtableLoading();
-        fetch(`/profile/cmtList?feed_id=${this.feedId}&page=${page}&limit=${this.tableLimit}`)
+        fetch(`/profile/cmtList?feed_id=${this.feedId}`)
             .then(res => {
                 if (res.ok) {
                     return res.json();
@@ -156,8 +136,7 @@ const detailObj = {
                 throw new Error(`${res.status}`);
             }).then(myJson => {
                 console.log(myJson);
-                if (myJson) {
-                    this.tableItemLength = myJson.length;
+                if (myJson[0].users_img !== null) {
                     this.setCmtList(myJson);
                 } else {
                     console.log('!  댓글리스트 없음');
@@ -170,5 +149,65 @@ const detailObj = {
                 this.hidetableLoading();
             });
     },
-    setCmtList : function (data) {}
+    setCmtList : function (data) {
+        for(let i=0; i<data.length; i++) {
+            const item = data[i];
+            const trId = `feed${this.feedId}-cmt${i}`;
+
+            const tr = document.createElement('div');
+            tr.classList.add('animate__animated','animate__tada', 'row', 'row-cols-5');
+            tr.id = trId;
+            tr.dataset.cid = `${item.cmt_id}`;
+            tr.dataset.fid = `${item.feed_id}`;
+            tr.dataset.uid = `${item.users_id}`;
+            tr.dataset.regdt = `${item.cmt_regdt}`;
+
+            const tdImg = document.createElement('div');
+            tdImg.classList.add('col-sm-auto');
+            const tdNicknm = document.createElement('div');
+            tdNicknm.classList.add('col-sm-auto');
+            const tdCmt = document.createElement('div');
+            tdCmt.classList.add('col-sm-auto');
+            const tdIcn = document.createElement('div');
+            tdIcn.classList.add('col-sm-auto', 'pointer');
+            const regdt = document.createElement('div');
+            regdt.classList.add('col-sm-auto');
+
+            tr.append(tdImg);
+            tr.append(tdNicknm);
+            tr.append(tdCmt);
+            tr.append(tdIcn);
+            tr.append(regdt);
+
+            tdImg.innerHTML = `
+                    <img src="/pic/profile/${item.users_id}/${item.users_img}" 
+                    class="rem_wh3 .profileRadius"
+                    onError="this.src='/img/profile/defaultProfile.png'"
+                    onclick="moveToMypage(${item.users_id})">
+            `;
+            tdNicknm.innerText = `${item.users_nickname}`;
+            tdCmt.innerText = `${item.cmt_cmt}`;
+            regdt.innerText = getDateTimeInfo(`${item.cmt_regdt}`);
+
+            const cmtFavCnt = document.createElement('span');
+            cmtFavCnt.classList.add('cntBtn');
+            cmtFavCnt.innerText =`${item.cmtFavCnt}`;
+            const favIcn = document.createElement('i');
+            favIcn.className = 'bi';
+            if (`${item.isCmtFav}` > 0) {
+                favIcn.classList.add('bi-heart-fill');
+                tdIcn.addEventListener('click', () => {this.delFav(`${item.users_id}`, `${item.feed_id}`, `${item.cmt_id}`)});
+            } else {
+                favIcn.classList.add('bi-heart');
+                tdIcn.addEventListener('click', () => {this.addFav(`${item.users_id}`, `${item.feed_id}`, `${item.cmt_id}`)});
+            }
+            tdIcn.append(favIcn);
+            tdIcn.append(cmtFavCnt);
+
+            cmtListElem.append(tr);
+        }
+    },
+    delFav : function (uId, fId, cId) {},
+    addFav : function (uId, fId, cId) {},
+    addCmt : function () {}
 }
