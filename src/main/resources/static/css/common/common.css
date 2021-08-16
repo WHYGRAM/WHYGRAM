@@ -82,6 +82,11 @@ ul, ol, li { list-style: none; }
     text-align: center;
 }
 
+.mypageImg {
+    object-fit: contain;
+    background-color: lightsteelblue;
+}
+.mypageImgList {height: 40rem;}
 
 
 

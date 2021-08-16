@@ -24,11 +24,7 @@
     padding: 3px;
 }
 
-.mypageImg {
-    object-fit: contain;
-    background-color: lightsteelblue;
-}
-.mypageImgList {height: 40rem;}
+
 
 .container { padding: 80px }
 .cntBtn { margin-left: 5px; }

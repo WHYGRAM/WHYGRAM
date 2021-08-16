@@ -3,6 +3,7 @@ package com.koreait.whygram.service;
 import com.koreait.whygram.common.FileUtils;
 import com.koreait.whygram.mapper.FeedMapper;
 import com.koreait.whygram.model.feed.ContentsEntity;
+import com.koreait.whygram.model.feed.FeedDTO;
 import com.koreait.whygram.model.feed.FeedDomain;
 import com.koreait.whygram.model.feed.FeedEntity;
 import com.koreait.whygram.security.IAuthenticationFacade;
@@ -39,6 +40,10 @@ public class FeedService {
         return result;
     }
 
-    public List<FeedDomain> selFeedList() {  return mapper.selFeedList(); }
+    public List<FeedDomain> selFeedList(FeedDTO param) {
+        param.setUser4FavCmt(auth.getLoginUserPk());
+        System.out.println(param.getStartIdx());
+        return mapper.selFeedList(param);
+    }
 
 }

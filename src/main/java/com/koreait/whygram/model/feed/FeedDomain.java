@@ -18,4 +18,9 @@ public class FeedDomain extends FeedEntity{
     private String users_img;
     private List<ContentsEntity> contentsList; //resultMap
         // [feed_id, users_id, feed_ctnt, feed_regdt], favCnt , cmtCnt
+
+    //홈 리스트
+        //isFav, isCmt, favCnt, cmtCnt
+        //contentsList
+        //users_nickname, users_img
 }

@@ -17,18 +17,55 @@
         ( #{feed_id}, #{contents_img} )
     </insert>
 
-    <!-- DB에 저장된 값 mapper interface로 전달 -->
-    <select id="selFeedList" resultType="FeedDomain">
+    <resultMap id="FeedDomainMap" type="FeedDomain">
+        <result property="feed_id" column="feed_id"></result>
+        <collection property="contentsList" column="feed_id" select="selContentsList"></collection>
+    </resultMap>
+
+    <select id="selContentsList" resultType="ContentsEntity">
+        SELECT feed_id, contents_id, contents_img
+        FROM contents
+        WHERE feed_id = ${feed_id}
+    </select>
+
+    <select id="selFeedList" resultMap="FeedDomainMap">
         SELECT
-            A.feed_id, A.users_id, A.feed_ctnt, A.feed_regdt
-            , B.contents_id, B.contents_img, B.contents_video
-            , C.users_nickname AS writer, C.users_img
-            FROM feed A
-            LEFT JOIN contents B
-            ON A.feed_id = B.feed_id
-            INNER JOIN users C
-            ON A.users_id = C.users_id
-            ORDER BY A.feed_id DESC
+        A.feed_id, A.users_id, A.feed_ctnt, A.feed_regdt, G.users_nickname, G.users_img, IFNULL(B.cnt, 0) AS favCnt, IFNULL(D.cnt, 0) AS cmtCnt
+        <if test="user4FavCmt > 0">
+            , CASE WHEN E.feed_id IS NULL THEN 0 ELSE 1 END AS isFav
+            , CASE WHEN F.feed_id IS NULL THEN 0 ELSE 1 END AS isCmt
+        </if>
+        FROM feed A
+        LEFT JOIN users G
+        ON A.users_id = G.users_id
+        LEFT JOIN (
+        SELECT feed_id, COUNT(feed_id) AS cnt
+        FROM feed_fav
+        GROUP BY feed_id
+        ) B
+        ON A.feed_id = B.feed_id
+        LEFT JOIN (
+        SELECT feed_id, COUNT(feed_id) AS cnt
+        FROM cmt
+        GROUP BY feed_id
+        ) D
+        ON A.feed_id = D.feed_id
+        <if test="user4FavCmt > 0">
+            LEFT JOIN (
+            SELECT users_id, feed_id
+            FROM feed_fav
+            GROUP BY feed_id
+            ) E
+            ON E.users_id = ${user4FavCmt} AND A.feed_id = E.feed_id
+            LEFT JOIN (
+            SELECT users_id, feed_id
+            FROM cmt
+            GROUP BY feed_id
+            ) F
+            ON F.users_id = ${user4FavCmt} AND A.feed_id = F.feed_id
+        </if>
+        ORDER BY A.feed_id DESC
+        LIMIT ${startIdx} , ${limit}
     </select>
 
 

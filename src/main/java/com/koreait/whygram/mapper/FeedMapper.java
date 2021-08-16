@@ -10,7 +10,7 @@ public interface FeedMapper {
 
     int insFeed(FeedEntity param);
     int insFeedImg(ContentsEntity param);
-    List<FeedDomain> selFeedList();
+    List<FeedDomain> selFeedList(FeedDTO param);
     List<FeedDomain> selFeedHome(FeedDTO param);
 
     // 좋아요
