@@ -1,18 +1,14 @@
 package com.koreait.whygram.service;
 
 import com.koreait.whygram.common.EmailService;
-import com.koreait.whygram.common.FileUtils;
 import com.koreait.whygram.common.MySecurityUtils;
 import com.koreait.whygram.mapper.UserMapper;
 import com.koreait.whygram.model.user.UserEntity;
 import com.koreait.whygram.security.IAuthenticationFacade;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Map;
 
 @Service
 public class UserService {
@@ -25,6 +21,7 @@ public class UserService {
     private EmailService email;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired private IAuthenticationFacade auth;
 
     // 이메일 중복확인
     public int selEmail(UserEntity param) {
@@ -113,5 +110,17 @@ public class UserService {
 
         //임시비밀번호 설정 실패 또는 이메일과 닉네임이 없다
         return 0;
+    }
+
+    public int updProfile(UserEntity param) {
+        UserEntity idData = auth.getLoginUser();
+        param.setUsers_id(idData.getUsers_id());
+        return mapper.updProfile(param);
+    }
+
+    public UserEntity selProfileUpd(UserEntity param) {
+        UserEntity idData = auth.getLoginUser();
+        param.setUsers_id(idData.getUsers_id());
+        return mapper.selProfileUpd(idData);
     }
 }

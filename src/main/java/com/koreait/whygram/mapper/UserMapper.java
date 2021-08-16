@@ -18,4 +18,8 @@ public interface UserMapper {
 
     //로그인
     UserEntity selUsers(UserEntity param);
+
+    // 프로필 수정
+    int updProfile(UserEntity param);
+    UserEntity selProfileUpd(UserEntity param);
 }

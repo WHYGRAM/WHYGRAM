@@ -4,6 +4,7 @@ import com.koreait.whygram.model.user.UserEntity;
 import com.koreait.whygram.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,8 +26,9 @@ public class UserController {
     @ResponseBody
     @GetMapping("/emailCheck/{users_email}")
     public Map<String, Integer> emailCheck(UserEntity param, @PathVariable String users_email) {
+        /*
         System.out.println(users_email);
-
+        */
         param.setUsers_email(users_email);
         int result = service.selEmail(param);
 
@@ -38,8 +40,9 @@ public class UserController {
     @ResponseBody
     @GetMapping("/nickNmCheck/{users_nickname}")
     public Map<String, Integer> nickNmCheck(UserEntity param, @PathVariable String users_nickname) {
+        /*
         System.out.println(users_nickname);
-
+        */
         param.setUsers_nickname(users_nickname);
         int result = service.selNickNm(param);
 
@@ -58,9 +61,10 @@ public class UserController {
     @ResponseBody
     @PostMapping("/findPw")
     public Map<String, Integer> findPw(@RequestBody UserEntity param) {
+        /*
         System.out.println(param.getUsers_email());
         System.out.println(param.getUsers_nickname());
-
+        */
         int result = service.findPw(param);
         Map<String, Integer> data = new HashMap();
         data.put("result", result);
@@ -68,4 +72,15 @@ public class UserController {
     }
 
 
+    @GetMapping("/editProfile")
+    public String getEditProfile(UserEntity param, Model model) {
+        model.addAttribute("edit", service.selProfileUpd(param));
+        return "common/editMypage";
+    }
+
+    @PostMapping("/editProfile")
+    public String postEditProfile(UserEntity param) {
+        service.updProfile(param);
+        return "redirect:editProfile";
+    }
 }

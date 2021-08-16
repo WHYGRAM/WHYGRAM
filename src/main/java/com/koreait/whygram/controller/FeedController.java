@@ -33,6 +33,8 @@ public class FeedController {
     }
 
     @ResponseBody
-    @GetMapping("/feedList")
-    public List<FeedDomain> selFeedList(FeedDTO param) {return service.selFeedList(param);}
+    @GetMapping("/list")
+    public List<FeedDomain> selFeedList() {  return service.selFeedList(); }
+
+
 }

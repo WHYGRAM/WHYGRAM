@@ -65,27 +65,31 @@
     </select>
 
     <!-- 프로필 수정 -->
-    <update id="updUsers">
+    <update id="updProfile">
         UPDATE users
         <set>
-            <if test="users_img != null and users_img != ''">
-                users_img = #{users_img}
+            <if test="users_nickname != null and users_nickname != '' ">
+                users_nickname = #{users_nickname},
             </if>
-            <if test="users_nickname != null and users_nickname != ''">
-                users_nickname = #{users_nickname}
+            <if test="users_ctnt != null and users_ctnt != '' ">
+                users_ctnt = #{users_ctnt},
             </if>
-            <if test="users_password != null and users_password != ''">
-                users_password = #{users_password}
-            </if>
-            <if test="users_password != null and users_password != ''">
+            <if test="users_gender != null and users_gender != '' ">
                 users_gender = #{users_gender}
-            </if>
-            <if test="users_password != null and users_password != ''">
-                users_ctnt = #{users_ctnt}
             </if>
         </set>
         WHERE users_id = #{users_id}
+        AND users_is_quit = 0
     </update>
+
+    <select id="selProfileUpd" resultType="UserEntity">
+        SELECT users_email, users_name, users_nickname,
+               users_gender, users_date_birth, users_ctnt,
+               users_regdt
+        FROM users
+        WHERE users_id = #{users_id}
+        AND users_is_quit = 0
+    </select>
 
     <!-- 이미지 띄우기 -->
     <select id="selUserImg" resultType="UserEntity">
