@@ -3,14 +3,14 @@
 
 > 목차 
 > - 아래의 목차를 누르면 해당 부분으로 이동합니다. 
-> - <a href="#1"> ◼ 에러와 활동 </a>
-> - <a href="#2"> ◼  계획 </a>
-> - <a href="#3"> ◼ 프로젝트 결과 </a>
-> - <a href="#4"> ◼ 프로젝트 소개 & 느낀점 </a>
+> - <a href="#a"> ◼ 에러와 활동 </a>
+> - <a href="#b"> ◼  계획 </a>
+> - <a href="#c"> ◼ 프로젝트 결과 </a>
+> - <a href="#d"> ◼ 프로젝트 소개 & 느낀점 </a>
 
 
 
-##  <div id="#1"> ◼ 에러와 활동 </div> 
+##  <div id="a"> ◼ 에러와 활동 </div> 
 ### https://github.com/WHYGRAM/WHYGRAM_logs
 ### 위의 링크를 누르시면, 
 ### 그동안 저희 팀이 경험한 에러들과 활동들을 보실 수 있습니다.
@@ -19,7 +19,7 @@
 
 
 
-## ◼  <div id="#2"> 계획 </div>
+## ◼  <div id="b"> 계획 </div>
 ### https://whimsical.com/whygram-original-GMdtFW2mF8Cnr8r3QVLpBg
 ### 위의 링크를 누르시면, 
 ### 저희의 프로젝트 계획을 시각적으로 상세히 보실 수 있습니다.
@@ -38,7 +38,7 @@
 
 
 
-## ◼ <div id="#3"> 프로젝트 결과 </div>
+## ◼ <div id="c"> 프로젝트 결과 </div>
 
 
 
@@ -69,4 +69,4 @@
 ![](https://images.velog.io/images/on-n-on-turtle/post/fc551eb9-b2b0-4840-9845-921e78c71d9c/WHYGRAM-start-page-Chrome-2021-09-16-14-55-11.gif)
 
 
-## <div id="#4"> ◼ 프로젝트 소개 & 느낀점 </div> 
+## <div id="d"> ◼ 프로젝트 소개 & 느낀점 </div> 
