@@ -12,6 +12,10 @@
 </th:block>
 <th:block layout:fragment="js">
     <script defer th:src="@{/js/profile/mypageImg.js}"></script>
+    <script defer th:src="@{/js/profile/mypageFollow.js}"></script>
+    <script defer th:src="@{/js/profile/mypageFollowModal.js}"></script>
+    <script defer th:src="@{/js/profile/mypageFeed.js}"></script>
+    <script defer th:src="@{/js/profile/mypageDetail.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content" th:with="auth=${#authentication.getPrincipal().getUser()}">

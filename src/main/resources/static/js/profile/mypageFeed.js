@@ -14,20 +14,20 @@ const feedObj = {
                 }
                 throw new Error(`${res.status}`);
             }).then(myJson => {
-                console.log(myJson);
-                if (myJson.length) {
-                    this.itemLength = myJson.length;
-                    this.makeFeedList(myJson);
-                } else {
-                    console.log('!  게시물리스트 없음');
-                    feedElem.innerHTML = '<img src="/img/feed/empty.jpg" class="img-thumbnail wh400">';
-                }
-            }).catch(err => {
-                console.log('! 게시물리스트 fetch() 오류 - ' + err);
-                feedElem.innerHTML = '<img src="/img/feed/error.jpg" class="img-thumbnail wh400">';
-            }).then(() => {
-                this.hideLoading();
-            });
+            console.log(myJson);
+            if (myJson.length) {
+                this.itemLength = myJson.length;
+                this.makeFeedList(myJson);
+            } else {
+                console.log('!  게시물리스트 없음');
+                feedElem.innerHTML = '<img src="/img/feed/empty.jpg" class="img-thumbnail wh400">';
+            }
+        }).catch(err => {
+            console.log('! 게시물리스트 fetch() 오류 - ' + err);
+            feedElem.innerHTML = '<img src="/img/feed/error.jpg" class="img-thumbnail wh400">';
+        }).then(() => {
+            this.hideLoading();
+        });
     },
     makeFeedList: function(data) {
         if(data.length == 0) { return; }

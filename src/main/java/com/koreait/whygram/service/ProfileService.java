@@ -54,6 +54,7 @@ public class ProfileService {
     }
 
     public UserDomain selUserProfile(UserEntity param) {
+        System.out.println("selUserProfile"+param);
         int loginUserPk = auth.getLoginUserPk();
         int him = param.getUsers_id();
         FollowDTO dto = new FollowDTO();
@@ -115,6 +116,7 @@ public class ProfileService {
 
     public List<FeedDomain> selMypageList(FeedDTO param) {
         param.setUser4FavCmt(auth.getLoginUserPk());
+        System.out.println("selMypageList");
         System.out.println(mapper.selMypageList(param).size());
         return mapper.selMypageList(param);
     }

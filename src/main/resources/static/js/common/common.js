@@ -1,4 +1,4 @@
-function moveToMypage(uId) { location.href = '/profile/mypage?id=' + uId; }
+function moveToMypage(uId) { location.href = '/profile/mypage?users_id=' + uId; }
 
 
 const logoutElem = document.querySelector('.logout');

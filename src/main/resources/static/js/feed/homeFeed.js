@@ -46,6 +46,7 @@ const homeFeedObj = {
                 onError="this.src=/img/profile/defaultProfile.png">
                 <span>${item.users_nickname}</span>
             `;
+            cardHeader.addEventListener('click', () => { moveToMypage(item.users_id); });
             const cardBody = document.createElement('div');
             cardBody.className = 'card-body';
             cardElem.append(cardHeader);
